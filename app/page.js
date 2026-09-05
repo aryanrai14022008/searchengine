@@ -405,7 +405,7 @@ export default function HomePage() {
                       </div>
 
                       <button type="submit" disabled={isSubmitting} className="submit-waitlist-btn">
-                        <span>{isSubmitting ? 'Submitting...' : 'See My Clean Snack Profile'}</span>
+                        <span>{isSubmitting ? 'Submitting...' : 'Submit'}</span>
                         <ArrowRight size={16} />
                       </button>
                     </form>
