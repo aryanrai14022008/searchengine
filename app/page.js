@@ -232,21 +232,19 @@ export default function HomePage() {
           <div style={{ position: 'relative', width: '100%' }}>
             <div className="cause-story-card">
               
-              {/* Top Section: Full Image with Headline */}
+              {/* Top Section: Full Clean Image */}
               <div className="cause-image-wrapper">
                 <img
                   src="/children_reading.png"
                   alt="Children reading books with big dreams"
                   className="cause-story-photo"
                 />
-                <div className="cause-image-headline-overlay">
-                  <span className="cause-image-badge">HUMBLBAR IMPACT</span>
-                  <h3 className="cause-image-title">Every Bar Gives Back !!</h3>
-                </div>
               </div>
 
               {/* Bottom Section: Light Blue Cause Story Text */}
               <div className="cause-text-container">
+                <h3 className="cause-story-title">Every Bar Gives Back !!</h3>
+
                 <div className="cause-stat-highlight">
                   <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
                 </div>
