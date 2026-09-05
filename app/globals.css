@@ -667,10 +667,10 @@ body {
   background: rgba(0, 0, 0, 0.3);
 }
 
-/* Right Page: Clean Modern Natural Ivory Paper Story Text */
+/* Right Page: Clean White, Brown & Purple HumblBar Palette */
 .book-right-page {
-  background: #FAF9F6;
-  background-image: linear-gradient(180deg, #FFFFFF 0%, #F5F3ED 100%);
+  background: #FFFFFF;
+  background-image: linear-gradient(180deg, #FFFFFF 0%, #FAF5FF 100%);
   padding: 24px 22px;
   display: flex;
   flex-direction: column;
@@ -682,7 +682,7 @@ body {
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 2.2vw, 1.45rem);
   font-weight: 900;
-  color: #111827;
+  color: #4C1D95;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   line-height: 1.2;
@@ -693,9 +693,9 @@ body {
   font-family: var(--font-body);
   font-size: 0.90rem;
   font-weight: 700;
-  color: #1F2937;
-  background: #F3ECE7;
-  border-left: 4px solid #C85A32;
+  color: #2D1406;
+  background: #F5EEFF;
+  border-left: 4px solid #7C3AED;
   padding: 8px 12px;
   border-radius: 0 8px 8px 0;
   line-height: 1.38;
@@ -704,13 +704,13 @@ body {
 .cause-stat-highlight strong {
   font-size: 1.02rem;
   font-weight: 900;
-  color: #B3441D;
+  color: #6D28D9;
 }
 
 .cause-story-body {
   font-family: var(--font-body);
   font-size: clamp(0.85rem, 1.5vw, 0.92rem);
-  color: #374151;
+  color: #2A1810;
   line-height: 1.52;
   display: flex;
   flex-direction: column;
@@ -721,13 +721,13 @@ body {
   margin: 0;
 }
 
-/* Front Vertical Hardbound Book Cover (Fresh Light Theme - Warm Linen & Terracotta Accent) */
+/* Front Vertical Hardbound Book Cover (White, Brown & Purple HumblBar Theme) */
 .book-front-cover {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #FBF6EE 0%, #F5EBE1 50%, #EBDDCF 100%);
+  background: radial-gradient(circle at 40% 30%, #FFFFFF 0%, #FDFBF8 65%, #F4ECE4 100%);
   border-radius: 16px;
   transform-origin: left center;
   transform-style: preserve-3d;
@@ -735,8 +735,8 @@ body {
   z-index: 30;
   box-shadow: 
     -12px 20px 50px rgba(0, 0, 0, 0.45),
-    inset 0 0 0 1.5px rgba(200, 90, 50, 0.22),
-    inset 0 2px 5px rgba(255, 255, 255, 0.85);
+    inset 0 0 0 1.5px rgba(109, 40, 217, 0.25),
+    inset 0 2px 5px rgba(255, 255, 255, 0.95);
   transition: transform 1.3s cubic-bezier(0.2, 0.85, 0.25, 1), opacity 0.6s ease 0.3s, box-shadow 1.3s ease;
   overflow: hidden;
 }
@@ -773,28 +773,30 @@ body {
   box-shadow: -26px 26px 50px rgba(0, 0, 0, 0.6);
 }
 
-/* Book Left Spine Binding Strip (Warm Terracotta Accent) */
+/* Book Left Spine Binding Strip (Royal Humbl Purple) */
 .book-cover-spine {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  width: 34px;
-  background: linear-gradient(to right, #A8421E 0%, #C85A32 70%, #D96A44 100%);
+  width: 36px;
+  background: linear-gradient(to right, #2E0854 0%, #4C1D95 65%, #6D28D9 100%);
   border-right: 2px solid rgba(255, 255, 255, 0.45);
   border-radius: 16px 0 0 16px;
   z-index: 2;
-  box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.15);
+  box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Book Cover Inner Debossed Frame Plate */
 .book-cover-plate {
   position: absolute;
-  inset: 14px 14px 14px 46px;
-  border: 1.5px solid rgba(184, 78, 42, 0.22);
+  inset: 14px 14px 14px 48px;
+  border: 1.5px solid rgba(109, 40, 217, 0.24);
+  outline: 1px dashed rgba(45, 20, 6, 0.18);
+  outline-offset: -5px;
   border-radius: 12px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 238, 228, 0.82) 100%);
-  box-shadow: inset 0 0 22px rgba(184, 78, 42, 0.05), 0 4px 16px rgba(0, 0, 0, 0.06);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(250, 245, 255, 0.85) 100%);
+  box-shadow: inset 0 0 24px rgba(109, 40, 217, 0.04), 0 4px 16px rgba(45, 20, 6, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -802,17 +804,39 @@ body {
   z-index: 3;
 }
 
-.book-cover-title {
+/* Decorative Heading (White, Chocolate Brown & Royal Purple) */
+.book-cover-title.decorative-heading {
   font-family: var(--font-display);
-  font-size: clamp(1.45rem, 5.2vw, 2.05rem);
-  font-weight: 900;
-  color: #8C3415;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  line-height: 1.25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   margin: 0;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(140, 52, 21, 0.12);
+}
+
+.decorative-heading .title-top {
+  display: block;
+  font-size: clamp(1.18rem, 4.2vw, 1.65rem);
+  font-weight: 900;
+  color: #2D1406;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+  line-height: 1.1;
+}
+
+.decorative-heading .title-bottom {
+  display: block;
+  font-size: clamp(1.5rem, 5.6vw, 2.25rem);
+  font-weight: 800;
+  font-style: italic;
+  color: #6D28D9;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(109, 40, 217, 0.25), 0 1px 2px rgba(255, 255, 255, 0.9);
+  line-height: 1.15;
 }
 
 /* Page Edges Preview on Right of Closed Book */
@@ -824,13 +848,13 @@ body {
   width: 6px;
   background: repeating-linear-gradient(
     to bottom,
-    #FAF7F2,
-    #FAF7F2 2px,
-    #E2DACB 2px,
-    #E2DACB 4px
+    #FFFFFF,
+    #FFFFFF 2px,
+    #EADBC8 2px,
+    #EADBC8 4px
   );
   border-radius: 0 4px 4px 0;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.4);
 }
 
 @media (max-width: 640px) {
@@ -846,9 +870,12 @@ body {
     inset: 10px 10px 10px 32px;
     padding: 14px 10px;
   }
-  .book-cover-title {
-    font-size: clamp(1.18rem, 5.4vw, 1.45rem);
-    letter-spacing: 0.02em;
+  .decorative-heading .title-top {
+    font-size: clamp(1rem, 4.6vw, 1.25rem);
+    letter-spacing: 0.08em;
+  }
+  .decorative-heading .title-bottom {
+    font-size: clamp(1.25rem, 5.8vw, 1.6rem);
   }
   .book-pages-spread {
     border-radius: 14px;

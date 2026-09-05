@@ -285,7 +285,10 @@ export default function HomePage() {
                 <div className="book-cover-spine" />
                 
                 <div className="book-cover-plate">
-                  <h3 className="book-cover-title">EVERY BAR GIVES BACK</h3>
+                  <h3 className="book-cover-title decorative-heading">
+                    <span className="title-top">EVERY BAR</span>
+                    <span className="title-bottom">GIVES BACK</span>
+                  </h3>
                 </div>
 
                 {/* Right Paper Edge Layer for Closed Book */}
