@@ -238,14 +238,6 @@ export default function HomePage() {
             <div className="sticky-tag tag-water">Drink 3L water</div>
             <div className="sticky-tag tag-protein">Eating 50g protein</div>
 
-            {/* Custom Brand Stickers */}
-            <div className="sticker-bar-wrap" title="HumblBar Clean Snack">
-              <img src="/sticker_bar.png" alt="HumblBar Snack" className="sticker-bar-img" />
-            </div>
-            <div className="sticker-ingredients-wrap" title="Whole Medjool Dates, Almonds & Peanuts">
-              <img src="/sticker_ingredients.png" alt="Whole Clean Ingredients" className="sticker-ingredients-img" />
-            </div>
-
             <div className="dream-story-card">
               <div className="dream-card-inner">
                 {/* Left: Notebook Sketch */}
@@ -303,6 +295,16 @@ export default function HomePage() {
                     <span className="dream-tag-badge">15G PROTEIN</span>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Symmetrical Product & Ingredients Showcase Dock */}
+            <div className="hero-stickers-dock">
+              <div className="sticker-item sticker-bar-item" title="HumblBar Clean Snack">
+                <img src="/sticker_bar.png" alt="HumblBar Snack" className="sticker-img" />
+              </div>
+              <div className="sticker-item sticker-ingredients-item" title="Whole Medjool Dates, Almonds & Peanuts">
+                <img src="/sticker_ingredients.png" alt="Whole Clean Ingredients" className="sticker-img" />
               </div>
             </div>
           </div>
