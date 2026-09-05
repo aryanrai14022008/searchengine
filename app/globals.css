@@ -134,61 +134,18 @@ body {
   color: var(--color-gold);
 }
 
-.header-center-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  font-size: 0.82rem;
+.header-tagline {
+  font-size: 0.85rem;
   color: var(--color-gold);
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   white-space: nowrap;
 }
 
 @media (max-width: 640px) {
-  .header-center-pill {
-    display: none;
+  .header-tagline {
+    font-size: 0.72rem;
   }
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.btn-nav-quiz {
-  background: #F3B562;
-  color: #1A0F0A;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 0.82rem;
-  letter-spacing: 0.02em;
-  padding: 8px 18px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid #F7C885;
-  box-shadow: 0 3px 0 #C48A3C;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.15s ease;
-  text-decoration: none;
-}
-
-.btn-nav-quiz:hover {
-  background: #FFCA7B;
-  transform: translateY(-1px);
-}
-
-.btn-nav-quiz:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 #C48A3C;
 }
 
 /* Hero Section */
@@ -214,20 +171,14 @@ body {
   }
 }
 
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(243, 181, 98, 0.1);
-  border: 1px solid rgba(243, 181, 98, 0.28);
+.hero-eyebrow {
+  display: inline-block;
   color: var(--color-gold);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  padding: 5px 12px;
-  border-radius: 6px;
-  margin-bottom: 16px;
-  max-width: 100%;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
 }
 
 .hero-headline {
