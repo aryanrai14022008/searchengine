@@ -231,7 +231,7 @@ body {
   width: 100%;
   filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55));
   transition: filter 0.35s ease;
-  animation: continuousBarTilt 3.6s ease-in-out infinite;
+  animation: continuousBarTilt 2.0s ease-in-out infinite;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   will-change: transform;
