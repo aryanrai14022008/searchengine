@@ -235,7 +235,7 @@ export default function HomePage() {
               {/* Top Section: Full Clean Image */}
               <div className="cause-image-wrapper">
                 <img
-                  src="/children_reading.png"
+                  src="/children_reading.png?v=2"
                   alt="Children reading books with big dreams"
                   className="cause-story-photo"
                 />
