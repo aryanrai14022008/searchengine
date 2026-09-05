@@ -25,7 +25,7 @@ export default function HomePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
-  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
+  const [isParcelOpen, setIsParcelOpen] = useState(false);
 
   // Web Audio FX Engine
   const playSound = (type = 'pop') => {
@@ -231,59 +231,92 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story Card (Envelope Opening Animation on Click) */}
-          <div className="envelope-stage">
+          {/* Cause Story (Artisanal Paper Wrapped Parcel that Unfolds in 3D into an Open Storybook) */}
+          <div className="paper-unwrap-stage">
             <div 
-              className={`envelope-box ${isEnvelopeOpen ? 'is-opened' : 'is-closed'}`}
+              className={`paper-parcel-box ${isParcelOpen ? 'is-opened' : 'is-closed'}`}
               onClick={() => {
                 playSound('pop');
-                setIsEnvelopeOpen(prev => !prev);
+                setIsParcelOpen(prev => !prev);
               }}
             >
-              {/* Envelope Back Shell */}
-              <div className="envelope-back-pocket" />
+              {/* Paper Parcel Base / Back Shell */}
+              <div className="paper-back-base" />
 
-              {/* The Inner Story Card Letter */}
-              <div className="envelope-story-letter">
-                {/* Left Side: Child Rocket Sketch */}
-                <div className="cause-card-image-col">
-                  <img
-                    src="/dream_rocket_sketch.png?v=snug_1"
-                    alt="My Dream child rocket drawing"
-                    className="cause-card-photo"
-                  />
-                </div>
-
-                {/* Right Side: Clean Story Text */}
-                <div className="cause-card-text-col">
-                  <div className="cause-stat-highlight">
-                    <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
+              {/* The Inner Storybook (Elevates and expands open as wrapper unfolds) */}
+              <div className="paper-inside-book">
+                <div className="book-pages-spread">
+                  {/* Left Page: Child Rocket Sketch */}
+                  <div className="book-page book-left-page">
+                    <img
+                      src="/dream_rocket_sketch.png?v=snug_1"
+                      alt="My Dream child rocket drawing"
+                      className="cause-card-photo"
+                    />
+                    <div className="book-page-gutter-shadow left-gutter" />
                   </div>
 
-                  <h3 className="cause-story-title">EVERY BAR GIVES BACK !!</h3>
+                  {/* Center Spine Crease */}
+                  <div className="book-center-crease">
+                    <div className="spine-crease-line" />
+                  </div>
 
-                  <div className="cause-story-body">
-                    <p>
-                      A childhood belongs in a classroom, not a cycle of survival.<br />
-                      Your pin code should never decide your potential.
-                    </p>
-                    <p>
-                      Somewhere right now, a brilliant mind faces a closed door.
-                      With every bar you enjoy, you personally open that door.
-                      You bring education to their life and hope to their heart.
-                    </p>
+                  {/* Right Page: Story Text */}
+                  <div className="book-page book-right-page">
+                    <div className="cause-stat-highlight">
+                      <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
+                    </div>
+
+                    <h3 className="cause-story-title">EVERY BAR GIVES BACK !!</h3>
+
+                    <div className="cause-story-body">
+                      <p>
+                        A childhood belongs in a classroom, not a cycle of survival.<br />
+                        Your pin code should never decide your potential.
+                      </p>
+                      <p>
+                        Somewhere right now, a brilliant mind faces a closed door.
+                        With every bar you enjoy, you personally open that door.
+                        You bring education to their life and hope to their heart.
+                      </p>
+                    </div>
+                    <div className="book-page-gutter-shadow right-gutter" />
                   </div>
                 </div>
               </div>
 
-              {/* Envelope Front Flap */}
-              <div className="envelope-front-fold" />
-              <div className="envelope-top-flap" />
+              {/* 4 Multi-Flap 3D Paper Wrapper Folders */}
+              {/* Top Flap */}
+              <div className="paper-flap flap-top">
+                <div className="paper-texture-overlay" />
+                <div className="paper-crease-highlight" />
+              </div>
 
-              {/* Tap Badge Unit */}
-              <div className="envelope-seal-unit">
-                <div className="envelope-tap-badge">
-                  <span>Tap to open</span>
+              {/* Bottom Flap */}
+              <div className="paper-flap flap-bottom">
+                <div className="paper-texture-overlay" />
+                <div className="paper-crease-highlight" />
+              </div>
+
+              {/* Left Flap */}
+              <div className="paper-flap flap-left">
+                <div className="paper-texture-overlay" />
+                <div className="paper-crease-highlight" />
+              </div>
+
+              {/* Right Flap (Front Cover Flap) */}
+              <div className="paper-flap flap-right">
+                <div className="paper-texture-overlay" />
+                <div className="paper-crease-highlight" />
+              </div>
+
+              {/* Paper Parcel Center Seal & Stamp (Fades away when unfolded) */}
+              <div className="paper-seal-unit">
+                <div className="parcel-stamp-badge">
+                  <span className="stamp-title">EVERY BAR GIVES BACK</span>
+                </div>
+                <div className="paper-tap-badge">
+                  <span>Tap to unwrap</span>
                 </div>
               </div>
 
