@@ -251,8 +251,10 @@ export default function HomePage() {
 
                 <div className="cause-story-body">
                   <p>
-                    A childhood belongs in a classroom, not a cycle of survival.
+                    A childhood belongs in a classroom, not a cycle of survival.<br />
                     Your pin code should never decide your potential.
+                  </p>
+                  <p>
                     Somewhere right now, a brilliant mind faces a closed door.
                     With every bar you enjoy, you personally open that door.
                     You bring education to their life and hope to their heart.
