@@ -139,25 +139,18 @@ export default function HomePage() {
     }
   };
 
-  // MCQ Option Select (Steps 0 to 5)
+  // MCQ Option Select (Questions 1 to 7)
   const handleSelectOption = (questionId, value) => {
     playSound('pop');
     const updatedAnswers = { ...answers, [questionId]: value };
     setAnswers(updatedAnswers);
 
-    if (currentStep < QUIZ_QUESTIONS.length - 1) {
-      setTimeout(() => {
-        setCurrentStep(prev => prev + 1);
-      }, 200);
-    } else {
-      // 6th question answered -> Advance to Contact Form (Step 6)
-      setTimeout(() => {
-        setCurrentStep(6);
-      }, 200);
-    }
+    setTimeout(() => {
+      setCurrentStep(prev => prev + 1);
+    }, 180);
   };
 
-  // Step 6: Contact Form Submit -> Save to MongoDB & Show Thank You (Step 7)
+  // Contact Form Submit -> Save to MongoDB & Show Thank You
   const handleContactSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) return;
@@ -180,23 +173,23 @@ export default function HomePage() {
         })
       });
     } catch (err) {
-      console.error('Quiz save error:', err);
+      console.error('Quiz submit err:', err);
     } finally {
       setIsSubmitting(false);
-      setCurrentStep(7); // Thank You Step
-      playSound('fanfare');
+      setCurrentStep(QUIZ_QUESTIONS.length + 1);
       confetti({
-        particleCount: 120,
-        spread: 80,
+        particleCount: 70,
+        spread: 70,
         origin: { y: 0.6 }
       });
+      playSound('fanfare');
     }
   };
 
   const handleRetake = () => {
-    setCurrentStep(0);
     setAnswers({});
     setFormData({ name: '', email: '', phone: '' });
+    setCurrentStep(0);
     setComputedArchetype(null);
   };
 
@@ -398,7 +391,7 @@ export default function HomePage() {
               {/* Card Header & Only Percentage Completion */}
               <div className="card-header">
                 <div className="card-header-top">
-                  {currentStep > 0 && currentStep <= 6 ? (
+                  {currentStep > 0 && currentStep <= QUIZ_QUESTIONS.length ? (
                     <button
                       type="button"
                       onClick={() => setCurrentStep(prev => prev - 1)}
@@ -412,7 +405,7 @@ export default function HomePage() {
                   )}
 
                   <div className="percentage-completion-label">
-                    {currentStep <= 6 ? `${Math.round((currentStep / 6) * 100)}% Complete` : '100% Complete'}
+                    {currentStep <= QUIZ_QUESTIONS.length ? `${Math.round((currentStep / QUIZ_QUESTIONS.length) * 100)}% Complete` : '100% Complete'}
                   </div>
                 </div>
 
@@ -420,7 +413,7 @@ export default function HomePage() {
                 <div className="progress-track">
                   <div
                     className="progress-fill"
-                    style={{ width: `${Math.min(100, Math.round((currentStep / 6) * 100))}%` }}
+                    style={{ width: `${Math.min(100, Math.round((currentStep / QUIZ_QUESTIONS.length) * 100))}%` }}
                   />
                 </div>
               </div>
@@ -428,9 +421,9 @@ export default function HomePage() {
               {/* Steps Viewport */}
               <div className="steps-viewport">
                 
-                {/* STEPS 0 to 5: Clean MCQ Questions (Questions 1 to 6) */}
-                {currentStep >= 0 && currentStep <= 5 && (
-                  <div>
+                {/* STEPS 0 to 6: Clean MCQ Questions (Questions 1 to 7) */}
+                {currentStep >= 0 && currentStep < QUIZ_QUESTIONS.length && (
+                  <div key={QUIZ_QUESTIONS[currentStep].id}>
                     <h2 className="step-question">{QUIZ_QUESTIONS[currentStep].question}</h2>
 
                     <div className="options-container">
@@ -438,10 +431,13 @@ export default function HomePage() {
                         const isSelected = answers[QUIZ_QUESTIONS[currentStep].id] === opt.val;
                         return (
                           <button
-                            key={idx}
+                            key={`${QUIZ_QUESTIONS[currentStep].id}_${opt.val}`}
                             type="button"
                             className={`option-pill ${isSelected ? 'selected' : ''}`}
-                            onClick={() => handleSelectOption(QUIZ_QUESTIONS[currentStep].id, opt.val)}
+                            onClick={(e) => {
+                              e.currentTarget.blur();
+                              handleSelectOption(QUIZ_QUESTIONS[currentStep].id, opt.val);
+                            }}
                           >
                             <span className="opt-num">{idx + 1}</span>
                             <span>{opt.label}</span>
@@ -452,8 +448,8 @@ export default function HomePage() {
                   </div>
                 )}
 
-                {/* STEP 6: Question 7 (Final Step): Secure Your Founding Spot */}
-                {currentStep === 6 && (
+                {/* Final Step: Contact Details (Question 8: Secure Your Founding Spot) */}
+                {currentStep === QUIZ_QUESTIONS.length && (
                   <div>
                     <h2 className="step-question" style={{ marginBottom: '18px' }}>
                       Secure Your Founding Spot
@@ -513,8 +509,8 @@ export default function HomePage() {
                   </div>
                 )}
 
-                {/* STEP 7: Clean Thank You Screen */}
-                {currentStep === 7 && (
+                {/* Clean Thank You Screen */}
+                {currentStep === QUIZ_QUESTIONS.length + 1 && (
                   <div style={{ textAlign: 'center', padding: '12px 6px' }}>
                     <div style={{
                       width: '60px',
