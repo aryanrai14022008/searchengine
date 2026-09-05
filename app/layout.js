@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'HumblBar — Protein for You. Hope for a Child. | VIP Founding Waitlist',
+  title: 'HumblBar — Snack for You. Hope for a Child. | VIP Founding Waitlist',
   description: '15g Clean Protein, 0g Added Sugar, 100% Whole Ingredients. Take our 60-second Snack DNA quiz and pledge a child meal with every bar.',
   keywords: 'protein bar, clean protein, medjool dates, healthy snacks, child meal donation, humblbar'
 };

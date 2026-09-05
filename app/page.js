@@ -202,7 +202,7 @@ export default function HomePage() {
             </div>
 
             <h1 className="hero-headline">
-              Protein for you.<br />
+              Snack for you.<br />
               <span className="gradient-text">Hope for a child.</span>
             </h1>
 
@@ -329,7 +329,7 @@ export default function HomePage() {
 
                 <div className="sub-header-title">
                   <span className="header-main-tag">DISCOVER YOUR SNACK PERSONALITY</span>
-                  <span className="header-sub-tag">Protein for you. Hope for a child.</span>
+                  <span className="header-sub-tag">Snack for you. Hope for a child.</span>
                 </div>
 
                 <div className="step-counter-pill">
