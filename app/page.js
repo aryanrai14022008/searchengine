@@ -243,15 +243,11 @@ export default function HomePage() {
 
               {/* Right Side: Clean Story Text */}
               <div className="cause-card-text-col">
-                <h3 className="cause-story-title">Every Bar Gives Back !!</h3>
-
                 <div className="cause-stat-highlight">
                   <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
                 </div>
 
-                <p className="cause-story-lead">
-                  A child's future shouldn't be limited by the circumstances they're born into.
-                </p>
+                <h3 className="cause-story-title">EVERY BAR GIVES BACK !!</h3>
 
                 <p className="cause-story-body">
                   We believe good nutrition should do more than fuel your day and hence a share of our profits goes towards supporting child education in India — helping more children get the chance to learn, grow and dream bigger.
