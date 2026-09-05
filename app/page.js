@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { QUIZ_QUESTIONS, ARCHETYPES, calculateArchetype } from '@/lib/quizData';
 import {
@@ -25,7 +25,46 @@ export default function HomePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
-  const [isPaperOpened, setIsPaperOpened] = useState(false);
+  
+  // Slow stepped paper unfolding: 0 = closed ball, 1 = half-open shell, 2 = full open storybook
+  const [paperStage, setPaperStage] = useState(0);
+  const hoverTimerRef = useRef(null);
+  const closeTimerRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+    
+    // Step 1: Smoothly reveal the half-open origami paper shell
+    setPaperStage(1);
+
+    // Step 2: After a slow, generous pause to see the half-open stage, blossom open into the book
+    hoverTimerRef.current = setTimeout(() => {
+      setPaperStage(2);
+    }, 1100);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+
+    // Slowly reverse: first fold back to half-open shell
+    setPaperStage(1);
+
+    // Then gently return back to the closed crumpled ball
+    closeTimerRef.current = setTimeout(() => {
+      setPaperStage(0);
+    }, 1000);
+  };
+
+  const handlePaperClick = () => {
+    playSound('pop');
+    if (paperStage === 2) {
+      handleMouseLeave();
+    } else {
+      handleMouseEnter();
+    }
+  };
 
   // Web Audio FX Engine
   const playSound = (type = 'pop') => {
@@ -231,14 +270,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story (Origami Crumpled Paper Ball that Unfolds into Open Storybook on Hover) */}
+          {/* Cause Story (Origami Crumpled Paper Ball that Unfolds slowly in 3 stages on Hover) */}
           <div className="crumple-paper-stage">
             <div 
-              className={`crumple-paper-box ${isPaperOpened ? 'is-opened' : ''}`}
-              onClick={() => {
-                playSound('pop');
-                setIsPaperOpened(prev => !prev);
-              }}
+              className={`crumple-paper-box stage-${paperStage}`}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              onClick={handlePaperClick}
             >
               {/* Closed State: Hand-Drawn Crumpled Paper Ball & Half-Open Origami Shell */}
               <div className="crumple-ball-wrapper">
