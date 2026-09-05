@@ -193,88 +193,75 @@ body {
 .headline-bar-sticker {
   position: relative;
   flex-shrink: 0;
-  width: 145px;
-  transform: rotate(-7deg);
-  cursor: pointer;
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: transparent !important;
   border: none;
+  cursor: pointer;
   user-select: none;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .headline-bar-sticker:hover {
-  transform: rotate(-1deg) scale(1.06);
-}
-
-.headline-bar-sticker.opened {
-  transform: rotate(0deg) scale(1.04);
+  transform: scale(1.05);
 }
 
 .bar-wrapper-visual {
   position: relative;
-  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55));
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 100%;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: rotate(-6deg);
 }
 
 .headline-bar-sticker.opened .bar-wrapper-visual {
-  transform: scale(1.1) rotate(3deg);
-  filter: drop-shadow(0 14px 30px rgba(243, 181, 98, 0.5));
+  transform: rotate(0deg) scale(1.08);
+  filter: drop-shadow(0 12px 24px rgba(243, 181, 98, 0.4));
 }
 
-.bar-hint-pill {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #F3B562;
-  color: #1A0D08;
+/* Pure clean text hint (no box) */
+.bar-hint-text {
   font-family: var(--font-hand);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  padding: 2px 10px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  animation: pulseHint 2s ease-in-out infinite;
+  color: var(--color-gold);
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
   white-space: nowrap;
-  pointer-events: none;
-  z-index: 5;
+  animation: pulseHint 2s ease-in-out infinite;
 }
 
 @keyframes pulseHint {
   0%, 100% {
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
   50% {
-    transform: translateX(-50%) translateY(-4px);
+    transform: translateY(-3px);
   }
 }
 
-.bar-reveal-tag {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%) translateY(6px) scale(0.85);
-  background: linear-gradient(135deg, #C2633E 0%, #A84E2B 100%);
-  color: #FFFFFF;
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  font-weight: 800;
+/* Pure clean text tagline revealed below the bar (NO BOX, zero overlap) */
+.bar-reveal-text {
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #F3B562;
+  margin-top: 6px;
   letter-spacing: 0.02em;
-  padding: 5px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   white-space: nowrap;
-  z-index: 6;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.35s ease;
+  text-align: center;
 }
 
-.bar-reveal-tag.visible {
+.bar-reveal-text.visible {
   opacity: 1;
-  transform: translateX(-50%) translateY(0) scale(1);
-  pointer-events: auto;
+  max-height: 40px;
 }
 
 .headline-bar-img {
@@ -292,19 +279,16 @@ body {
     justify-content: space-between;
   }
   .headline-bar-sticker {
-    width: 95px;
+    width: 90px;
     margin-top: 4px;
-    transform: rotate(-5deg);
   }
-  .bar-reveal-tag {
-    font-size: 0.68rem;
-    padding: 4px 8px;
-    top: -26px;
+  .bar-hint-text {
+    font-size: 0.8rem;
+    margin-bottom: 2px;
   }
-  .bar-hint-pill {
-    font-size: 0.78rem;
-    padding: 1px 7px;
-    top: -18px;
+  .bar-reveal-text {
+    font-size: 0.82rem;
+    margin-top: 4px;
   }
 }
 

@@ -194,28 +194,27 @@ export default function HomePage() {
                   setIsBarOpened(nextState);
                   if (nextState) {
                     confetti({
-                      particleCount: 25,
-                      spread: 50,
-                      origin: { y: 0.28, x: 0.65 }
+                      particleCount: 20,
+                      spread: 45,
+                      origin: { y: 0.3, x: 0.65 }
                     });
                   }
                 }}
                 title={isBarOpened ? "Click to close" : "Tap to open HumblBar!"}
               >
-                {/* Revealed message above bar */}
-                <div className={`bar-reveal-tag ${isBarOpened ? 'visible' : ''}`}>
-                  <span>Built for ordinary days ✨</span>
-                </div>
-
-                {/* Hint chip when closed */}
                 {!isBarOpened && (
-                  <div className="bar-hint-pill">
-                    <span>Open me ✨</span>
-                  </div>
+                  <span className="bar-hint-text">
+                    Open me ✨
+                  </span>
                 )}
 
                 <div className="bar-wrapper-visual">
                   <img src="/sticker_bar.png" alt="HumblBar Clean Protein Bar" className="headline-bar-img" />
+                </div>
+
+                {/* Pure text tagline revealed below the bar - NO BOX, no overlap */}
+                <div className={`bar-reveal-text ${isBarOpened ? 'visible' : ''}`}>
+                  Built for ordinary days ✨
                 </div>
               </div>
             </div>
