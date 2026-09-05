@@ -141,11 +141,6 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* Ambient Floating Glows */}
-      <div className="ambient-glow glow-1" aria-hidden="true"></div>
-      <div className="ambient-glow glow-2" aria-hidden="true"></div>
-      <div className="ambient-glow glow-3" aria-hidden="true"></div>
-
       {/* Floating Chocolate Animation Layer */}
       <div className="particles-bg" aria-hidden="true">
         {CHOCOLATE_PARTICLES.map((p, i) => (
@@ -203,7 +198,7 @@ export default function HomePage() {
 
             <h1 className="hero-headline">
               Snack for you.<br />
-              <span className="gradient-text">Hope for a child.</span>
+              <span className="hero-highlight">Hope for a child.</span>
             </h1>
 
             <p className="hero-subtext">

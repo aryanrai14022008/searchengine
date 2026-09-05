@@ -55,57 +55,10 @@ html {
 body {
   font-family: var(--font-body);
   background-color: var(--bg-deep);
-  background-image: 
-    radial-gradient(circle at 15% 20%, rgba(200, 117, 86, 0.22) 0%, transparent 50%),
-    radial-gradient(circle at 85% 70%, rgba(243, 181, 98, 0.18) 0%, transparent 50%);
   color: var(--color-text-main);
   line-height: 1.6;
   overflow-x: hidden;
   min-width: 320px;
-}
-
-/* Ambient Glowing Blobs */
-.ambient-glow {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(100px);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.5;
-  animation: floatOrb 14s ease-in-out infinite alternate;
-}
-
-.glow-1 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(212, 132, 104, 0.3) 0%, transparent 70%);
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.glow-2 {
-  width: 550px;
-  height: 550px;
-  background: radial-gradient(circle, rgba(243, 181, 98, 0.2) 0%, transparent 70%);
-  bottom: 20%;
-  right: -80px;
-  animation-delay: -6s;
-}
-
-.glow-3 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(163, 76, 43, 0.18) 0%, transparent 70%);
-  top: 40%;
-  left: -60px;
-  animation-delay: -10s;
-}
-
-@keyframes floatOrb {
-  0% { transform: scale(1) translateY(0); }
-  50% { transform: scale(1.06) translateY(-25px) translateX(15px); }
-  100% { transform: scale(0.95) translateY(15px) translateX(-15px); }
 }
 
 /* Floating Chocolate & Ingredients Animation */
@@ -265,31 +218,35 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(243, 181, 98, 0.12);
-  border: 1px solid rgba(243, 181, 98, 0.3);
+  background: rgba(243, 181, 98, 0.1);
+  border: 1px solid rgba(243, 181, 98, 0.28);
   color: var(--color-gold);
   font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  padding: 5px 14px;
-  border-radius: var(--radius-pill);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 5px 12px;
+  border-radius: 6px;
   margin-bottom: 16px;
   max-width: 100%;
 }
 
 .hero-headline {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
   font-weight: 900;
   line-height: 1.1;
   letter-spacing: -0.03em;
   margin-bottom: 16px;
+  color: #FFFFFF;
+}
+
+.hero-highlight {
+  color: #F3B562;
+  display: inline-block;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #E89578 0%, var(--color-gold) 60%, #FFA875 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #F3B562;
   display: inline-block;
 }
 
@@ -316,12 +273,11 @@ body {
 }
 
 .stat-pill {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 12px 8px;
-  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 14px 10px;
+  border-radius: 12px;
   text-align: center;
-  backdrop-filter: blur(8px);
 }
 
 .stat-value {
@@ -564,37 +520,44 @@ body {
 }
 
 /* Terracotta Card & Quiz Section - Fluid on Mobile */
-.quiz-section {
-  padding: 50px 16px 70px;
+.quiz-section, .quiz-section-wrap {
+  padding: 54px 18px 76px;
   position: relative;
   z-index: 10;
 }
 
-.quiz-section-header {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto 28px;
+.quiz-container {
+  max-width: 720px;
+  margin: 0 auto;
 }
 
-.section-tag {
+.section-title-center {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 30px;
+}
+
+.sub-badge {
   display: inline-block;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  background: rgba(243, 181, 98, 0.12);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: rgba(243, 181, 98, 0.1);
   color: var(--color-gold);
   padding: 4px 12px;
-  border-radius: var(--radius-pill);
+  border-radius: 6px;
   margin-bottom: 8px;
+  border: 1px solid rgba(243, 181, 98, 0.25);
 }
 
 .section-heading {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
   font-weight: 900;
   letter-spacing: -0.02em;
   margin-bottom: 8px;
+  color: #FFFFFF;
 }
 
 .section-sub {
@@ -609,10 +572,10 @@ body {
 }
 
 .terracotta-card {
-  background: var(--bg-terracotta-gradient);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-modal);
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  background: #C86D24;
+  border-radius: 16px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   overflow: hidden;
   position: relative;
   display: flex;
@@ -621,32 +584,36 @@ body {
 
 /* Card Header */
 .card-header {
-  padding: 18px 20px 14px;
-  background: rgba(200, 117, 86, 0.6);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 22px 24px 16px;
+  background: rgba(0, 0, 0, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .card-header-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
-  gap: 8px;
+  margin-bottom: 14px;
+  gap: 10px;
 }
 
 .back-btn {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #FFF;
   font-weight: 700;
-  font-size: 0.78rem;
-  padding: 5px 12px;
-  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
+  transition: all 0.15s ease;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .sub-header-title {
@@ -669,12 +636,12 @@ body {
 }
 
 .step-counter-pill {
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 5px 12px;
+  border-radius: 8px;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -708,21 +675,21 @@ body {
   font-weight: 600;
 }
 
-/* Steps Viewport */
+/* Steps Viewport with generous padding */
 .steps-viewport {
-  padding: 24px 20px 24px;
+  padding: 32px 28px;
   min-height: 360px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .steps-viewport {
-    padding: 20px 14px 20px;
+    padding: 24px 18px;
   }
 }
 
 .step-category {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   color: var(--color-gold);
@@ -734,77 +701,79 @@ body {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 4vw, 1.65rem);
   font-weight: 900;
-  line-height: 1.2;
+  line-height: 1.25;
   margin-bottom: 6px;
   color: #FFF;
 }
 
 .step-sub {
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 22px;
 }
 
 /* Options Grid */
 .options-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
 }
 
 @media (max-width: 600px) {
   .options-container {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 }
 
 .option-pill {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-pill);
-  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 14px 16px;
   color: #FFF;
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   text-align: left;
   width: 100%;
   word-break: break-word;
 }
 
 .option-pill:hover {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: #FFF;
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-1px);
 }
 
 .option-pill.selected {
-  background: #FFF;
-  color: var(--color-text-dark);
-  border-color: #FFF;
+  background: #FFFFFF;
+  color: #1A0F0A;
+  border-color: #FFFFFF;
+  box-shadow: 0 3px 0 #D0C3B5;
 }
 
 .opt-num {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.18);
   color: #FFF;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   font-weight: 800;
   flex-shrink: 0;
 }
 
 .option-pill.selected .opt-num {
-  background: var(--color-terracotta);
+  background: #C86D24;
   color: #FFF;
 }
 
@@ -873,17 +842,17 @@ body {
 .waitlist-card-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .form-row {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .field-label {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #FFF;
 }
@@ -895,30 +864,30 @@ body {
 .input-icon {
   position: absolute;
   left: 14px;
-  top: 13px;
-  color: rgba(255, 255, 255, 0.8);
+  top: 14px;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .input-field {
   width: 100%;
-  padding: 12px 16px 12px 42px;
-  border-radius: var(--radius-pill);
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.15);
+  padding: 13px 16px 13px 44px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.12);
   color: #FFF;
   font-family: inherit;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   outline: none;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .input-field::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .input-field:focus {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: #FFF;
+  background: rgba(0, 0, 0, 0.22);
+  border-color: #FFFFFF;
 }
 
 .submit-waitlist-btn {
