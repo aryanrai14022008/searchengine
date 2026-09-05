@@ -187,9 +187,31 @@ export default function HomePage() {
                   </div>
                 )}
 
-                <div className="bar-wrapper-visual">
-                  {/* Outer Wrapper Layer */}
-                  <div className={`bar-outer-layer ${isBarOpened ? 'opened' : ''}`}>
+                <div className="bar-interactive-stage">
+                  {/* Real textured chocolate bar that emerges from inside the packaging */}
+                  <div className={`bar-emerging-chocolate ${isBarOpened ? 'opened' : ''}`}>
+                    <div className="chocolate-bar-body">
+                      <div className="chocolate-header">
+                        <span className="built-with-text">Built with</span>
+                      </div>
+                      <div className="chocolate-ingredients-flow">
+                        <span className="ing-tag">Dates</span>
+                        <span className="ing-separator">•</span>
+                        <span className="ing-tag">Almonds</span>
+                        <span className="ing-separator">•</span>
+                        <span className="ing-tag">Cocoa</span>
+                        <span className="ing-separator">•</span>
+                        <span className="ing-tag">Protein Blend</span>
+                        <span className="ing-separator">•</span>
+                        <span className="ing-tag">Peanuts</span>
+                        <span className="ing-separator">•</span>
+                        <span className="ing-tag">Coffee</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* The Packaging Wrapper Layer */}
+                  <div className={`bar-packaging-layer ${isBarOpened ? 'opened' : ''}`}>
                     <img
                       src="/sticker_bar_clean.png?v=8"
                       srcSet="/sticker_bar_clean.png?v=8 1x, /sticker_bar_hd.png?v=8 2x"
@@ -198,29 +220,9 @@ export default function HomePage() {
                       loading="eager"
                       decoding="async"
                     />
-                  </div>
-
-                  {/* Inner Bar Core Revealed directly ON the bar */}
-                  <div className={`bar-inner-core ${isBarOpened ? 'revealed' : ''}`}>
-                    <div className="inner-bar-chocolate-texture">
-                      <div className="inner-bar-header">
-                        <span className="built-with-text">Built with</span>
-                      </div>
-                      <div className="inner-bar-ingredients-list">
-                        <span className="inner-ing">Dates</span>
-                        <span className="inner-dot">•</span>
-                        <span className="inner-ing">Almonds</span>
-                        <span className="inner-dot">•</span>
-                        <span className="inner-ing">Cocoa</span>
-                        <span className="inner-dot">•</span>
-                        <span className="inner-ing">Protein Blend</span>
-                        <span className="inner-dot">•</span>
-                        <span className="inner-ing">Peanuts</span>
-                        <span className="inner-dot">•</span>
-                        <span className="inner-ing">Coffee</span>
-                      </div>
-                      <span className="inner-bar-close-hint">Tap to close ↩</span>
-                    </div>
+                    {isBarOpened && (
+                      <span className="wrap-close-pill">Tap to wrap ↩</span>
+                    )}
                   </div>
                 </div>
               </div>
