@@ -26,44 +26,63 @@ export default function HomePage() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
   
-  // Slow stepped paper unfolding: 0 = closed ball, 1 = half-open shell, 2 = full open storybook
+  // Automatic slow stepped paper unfolding sequence:
+  // 0 = closed ball -> 1 = half-open shell -> 2 = main open storybook (remains open)
   const [paperStage, setPaperStage] = useState(0);
-  const hoverTimerRef = useRef(null);
-  const closeTimerRef = useRef(null);
+  const paperStageRef = useRef(null);
+  const hasAnimatedRef = useRef(false);
 
-  const handleMouseEnter = () => {
-    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
-    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-    
-    // Step 1: Smoothly reveal the half-open origami paper shell
-    setPaperStage(1);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimatedRef.current) {
+            hasAnimatedRef.current = true;
+            
+            // Step 1: Slowly transition into the half-open origami paper shell
+            setTimeout(() => {
+              setPaperStage(1);
+            }, 1200);
 
-    // Step 2: After a slow, generous pause to see the half-open stage, blossom open into the book
-    hoverTimerRef.current = setTimeout(() => {
-      setPaperStage(2);
-    }, 1100);
-  };
+            // Step 2: Slowly transition into the main open storybook and remain open
+            setTimeout(() => {
+              setPaperStage(2);
+            }, 2800);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-  const handleMouseLeave = () => {
-    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
-
-    // Slowly reverse: first fold back to half-open shell
-    setPaperStage(1);
-
-    // Then gently return back to the closed crumpled ball
-    closeTimerRef.current = setTimeout(() => {
-      setPaperStage(0);
-    }, 1000);
-  };
-
-  const handlePaperClick = () => {
-    playSound('pop');
-    if (paperStage === 2) {
-      handleMouseLeave();
-    } else {
-      handleMouseEnter();
+    if (paperStageRef.current) {
+      observer.observe(paperStageRef.current);
     }
+
+    // Immediate fallback trigger
+    const t1 = setTimeout(() => {
+      setPaperStage(prev => (prev === 0 ? 1 : prev));
+    }, 1200);
+
+    const t2 = setTimeout(() => {
+      setPaperStage(prev => (prev === 1 || prev === 0 ? 2 : prev));
+    }, 2800);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, []);
+
+  const replayPaperSequence = () => {
+    playSound('pop');
+    setPaperStage(0);
+    setTimeout(() => {
+      setPaperStage(1);
+    }, 1200);
+    setTimeout(() => {
+      setPaperStage(2);
+    }, 2800);
   };
 
   // Web Audio FX Engine
@@ -270,13 +289,12 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story (Origami Crumpled Paper Ball that Unfolds slowly in 3 stages on Hover) */}
-          <div className="crumple-paper-stage">
+          {/* Cause Story (Origami Crumpled Paper Ball that Unfolds automatically in 3 slow stages into Open Storybook) */}
+          <div className="crumple-paper-stage" ref={paperStageRef}>
             <div 
               className={`crumple-paper-box stage-${paperStage}`}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              onClick={handlePaperClick}
+              onClick={replayPaperSequence}
+              title="Click to replay unfolding animation"
             >
               {/* Closed State: Hand-Drawn Crumpled Paper Ball & Half-Open Origami Shell */}
               <div className="crumple-ball-wrapper">
