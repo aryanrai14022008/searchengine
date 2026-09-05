@@ -279,6 +279,10 @@ export default function HomePage() {
               {/* Envelope Front Flap & Seal */}
               <div className="envelope-front-fold" />
               <div className="envelope-top-flap">
+                <div className="envelope-tap-badge">
+                  <Sparkles size={14} className="tap-sparkle-icon" />
+                  <span>Tap to open</span>
+                </div>
                 <div className="envelope-seal">
                   <span className="seal-heart">♥</span>
                 </div>
