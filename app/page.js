@@ -222,7 +222,7 @@ export default function HomePage() {
 
             <div className="hero-cta-group">
               <a href="#quiz" className="btn-hero-primary">
-                <span>Find Your Snack Match</span>
+                <span>Join the waitlist</span>
                 <ArrowRight size={16} />
               </a>
             </div>
