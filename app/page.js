@@ -280,7 +280,7 @@ export default function HomePage() {
           
           <div className="section-title-center">
             <h2 className="section-heading">
-              8 quick questions to uncover your ideal flavor profile & pledge 1 child meal.
+              8 quick questions to uncover your ideal flavor profile.
             </h2>
           </div>
 
