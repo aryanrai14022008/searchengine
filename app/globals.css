@@ -533,62 +533,70 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Cause Story Notebook - 3D Realistic Book Opening Animation (PC & Mobile) */
+/* Cause Story Vertical Notebook - 3D Realistic Book Opening Animation (PC & Mobile) */
 .book-stage {
   position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
-  perspective: 2600px;
+  perspective: 2400px;
   perspective-origin: 50% 45%;
-  padding: 18px 0 12px;
+  padding: 16px 0 10px;
 }
 
 .book-wrapper {
   position: relative;
-  width: 100%;
-  max-width: 720px;
   transform-style: preserve-3d;
   cursor: pointer;
   user-select: none;
-  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 1.6s ease;
+  transition: width 1.3s cubic-bezier(0.2, 0.85, 0.25, 1), 
+              max-width 1.3s cubic-bezier(0.2, 0.85, 0.25, 1), 
+              transform 1.3s cubic-bezier(0.2, 0.85, 0.25, 1), 
+              box-shadow 1.3s ease;
 }
 
-/* 3D Realistic Resting State (Angled in space, clearly ajar and inviting) */
+/* Vertical / Portrait Book When Closed (No horizontal long box) */
 .book-wrapper.is-closed {
-  transform: rotateX(6deg) rotateY(-7deg) rotateZ(0.5deg);
+  width: min(350px, 88vw);
+  max-width: 350px;
+  min-height: 440px;
+  transform: rotateX(6deg) rotateY(-8deg) rotateZ(0.5deg);
 }
 
 .book-wrapper.is-closed:hover {
   transform: rotateX(3deg) rotateY(-4deg) rotateZ(0deg) translateY(-8px);
 }
 
+/* Expanded Dual-Page Spread When Opened */
 .book-wrapper.is-opened {
+  width: min(720px, 94vw);
+  max-width: 720px;
+  min-height: 330px;
   transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
 
-/* Inside 2-Page Spread (Revealed when open & peeking when ajar) */
+/* Inside 2-Page Spread */
 .book-pages-spread {
   position: relative;
   width: 100%;
+  height: 100%;
+  min-height: inherit;
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 1fr 1fr;
   background: #FAF7F2;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.2);
-  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease, box-shadow 1.6s ease;
+  transition: opacity 0.8s ease 0.2s, box-shadow 1.3s ease;
   transform-style: preserve-3d;
 }
 
 .is-closed .book-pages-spread {
-  transform: scale(0.98) translateZ(-4px);
-  opacity: 0.85;
+  opacity: 0.1;
   pointer-events: none;
 }
 
 .is-opened .book-pages-spread {
-  transform: scale(1) translateZ(0);
   opacity: 1;
   pointer-events: auto;
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.3);
@@ -622,7 +630,7 @@ body {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 32px;
+  width: 28px;
   pointer-events: none;
   z-index: 5;
 }
@@ -642,8 +650,8 @@ body {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 51.2%;
-  width: 24px;
+  left: 50%;
+  width: 20px;
   transform: translateX(-50%);
   pointer-events: none;
   z-index: 15;
@@ -663,16 +671,16 @@ body {
 .book-right-page {
   background: #FAF9F6;
   background-image: linear-gradient(180deg, #FFFFFF 0%, #F5F3ED 100%);
-  padding: 26px 24px;
+  padding: 24px 22px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 12px;
+  gap: 11px;
 }
 
 .cause-story-title {
   font-family: var(--font-display);
-  font-size: clamp(1.18rem, 2.2vw, 1.48rem);
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
   font-weight: 900;
   color: #111827;
   letter-spacing: 0.03em;
@@ -683,7 +691,7 @@ body {
 
 .cause-stat-highlight {
   font-family: var(--font-body);
-  font-size: 0.92rem;
+  font-size: 0.90rem;
   font-weight: 700;
   color: #1F2937;
   background: #F3ECE7;
@@ -694,16 +702,16 @@ body {
 }
 
 .cause-stat-highlight strong {
-  font-size: 1.04rem;
+  font-size: 1.02rem;
   font-weight: 900;
   color: #B3441D;
 }
 
 .cause-story-body {
   font-family: var(--font-body);
-  font-size: clamp(0.86rem, 1.5vw, 0.94rem);
+  font-size: clamp(0.85rem, 1.5vw, 0.92rem);
   color: #374151;
-  line-height: 1.55;
+  line-height: 1.52;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -713,7 +721,7 @@ body {
   margin: 0;
 }
 
-/* Front Hardbound Book Cover (Fresh Light Theme - Warm Linen & Terracotta Accent) */
+/* Front Vertical Hardbound Book Cover (Fresh Light Theme - Warm Linen & Terracotta Accent) */
 .book-front-cover {
   position: absolute;
   inset: 0;
@@ -729,31 +737,31 @@ body {
     -12px 20px 50px rgba(0, 0, 0, 0.45),
     inset 0 0 0 1.5px rgba(200, 90, 50, 0.22),
     inset 0 2px 5px rgba(255, 255, 255, 0.85);
-  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease 0.4s, box-shadow 1.6s ease;
+  transition: transform 1.3s cubic-bezier(0.2, 0.85, 0.25, 1), opacity 0.6s ease 0.3s, box-shadow 1.3s ease;
   overflow: hidden;
 }
 
-/* Noticeably Ajar in Resting State (Clearly inviting and 3D) */
+/* Ajar in Resting State */
 .is-closed .book-front-cover {
-  transform: rotateY(-28deg);
+  transform: rotateY(-20deg);
   opacity: 1;
   pointer-events: auto;
   animation: cover-verge-breathing 4.5s ease-in-out infinite;
 }
 
 .book-wrapper.is-closed:hover .book-front-cover {
-  transform: rotateY(-42deg);
+  transform: rotateY(-36deg);
   animation-play-state: paused;
   box-shadow: -18px 26px 55px rgba(0, 0, 0, 0.55);
 }
 
 @keyframes cover-verge-breathing {
   0%, 100% {
-    transform: rotateY(-25deg);
+    transform: rotateY(-18deg);
     box-shadow: -10px 18px 40px rgba(0, 0, 0, 0.4);
   }
   50% {
-    transform: rotateY(-33deg);
+    transform: rotateY(-26deg);
     box-shadow: -15px 24px 50px rgba(0, 0, 0, 0.5);
   }
 }
@@ -771,7 +779,7 @@ body {
   top: 0;
   bottom: 0;
   left: 0;
-  width: 38px;
+  width: 34px;
   background: linear-gradient(to right, #A8421E 0%, #C85A32 70%, #D96A44 100%);
   border-right: 2px solid rgba(255, 255, 255, 0.45);
   border-radius: 16px 0 0 16px;
@@ -782,32 +790,54 @@ body {
 /* Book Cover Inner Debossed Frame Plate */
 .book-cover-plate {
   position: absolute;
-  inset: 14px 14px 14px 52px;
+  inset: 14px 14px 14px 46px;
   border: 1.5px solid rgba(184, 78, 42, 0.22);
   border-radius: 12px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 238, 228, 0.8) 100%);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 238, 228, 0.82) 100%);
   box-shadow: inset 0 0 22px rgba(184, 78, 42, 0.05), 0 4px 16px rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 22px;
+  padding: 24px 18px;
   z-index: 3;
 }
 
 .book-cover-title {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 4.8vw, 2.45rem);
+  font-size: clamp(1.45rem, 5.2vw, 2.05rem);
   font-weight: 900;
   color: #8C3415;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  line-height: 1.15;
+  line-height: 1.25;
   margin: 0;
   text-align: center;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(140, 52, 21, 0.12);
 }
 
+/* Page Edges Preview on Right of Closed Book */
+.book-closed-pages-edge {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  right: 0;
+  width: 6px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #FAF7F2,
+    #FAF7F2 2px,
+    #E2DACB 2px,
+    #E2DACB 4px
+  );
+  border-radius: 0 4px 4px 0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5);
+}
+
 @media (max-width: 640px) {
+  .book-wrapper.is-closed {
+    width: min(300px, 86vw);
+    min-height: 380px;
+  }
   .book-cover-spine {
     width: 24px;
     border-radius: 14px 0 0 14px;
@@ -817,8 +847,35 @@ body {
     padding: 14px 10px;
   }
   .book-cover-title {
-    font-size: clamp(1.15rem, 5.2vw, 1.45rem);
+    font-size: clamp(1.18rem, 5.4vw, 1.45rem);
     letter-spacing: 0.02em;
+  }
+  .book-pages-spread {
+    border-radius: 14px;
+  }
+  .book-right-page {
+    padding: 10px 8px 10px 10px;
+    gap: 6px;
+  }
+  .cause-story-title {
+    font-size: clamp(0.68rem, 2.6vw, 0.80rem);
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+  }
+  .cause-stat-highlight {
+    font-size: 0.66rem;
+    padding: 3px 5px;
+    line-height: 1.22;
+    border-left-width: 2.5px;
+  }
+  .cause-stat-highlight strong {
+    font-size: 0.74rem;
+  }
+  .cause-story-body {
+    font-size: 0.66rem;
+    line-height: 1.26;
+    gap: 4px;
   }
 }
 
