@@ -533,38 +533,32 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Cause Story Card - Envelope Opening Animation (PC & Mobile) */
-.envelope-stage {
+/* Cause Story Notebook - 3D Realistic Book Opening Animation (PC & Mobile) */
+.book-stage {
   position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
-  perspective: 1200px;
-  padding: 8px 0 4px;
+  perspective: 2000px;
+  padding: 10px 0 6px;
 }
 
-.envelope-box {
+.book-wrapper {
   position: relative;
   width: 100%;
   max-width: 720px;
   transform-style: preserve-3d;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Envelope Back Shell */
-.envelope-back-pocket {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(145deg, #C26B4E 0%, #A45237 100%);
-  border-radius: 18px;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55);
-  z-index: 1;
+.book-wrapper:hover {
+  transform: translateY(-3px);
 }
 
-/* The Inner Story Card Letter */
-.envelope-story-letter {
+/* Inside 2-Page Spread (Revealed when open) */
+.book-pages-spread {
   position: relative;
   width: 100%;
   display: grid;
@@ -576,133 +570,27 @@ body {
   transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease, box-shadow 0.9s ease;
 }
 
-.is-closed .envelope-story-letter {
-  transform: translateY(28px) scale(0.94);
-  opacity: 0.25;
+.is-closed .book-pages-spread {
+  transform: scale(0.95);
+  opacity: 0.15;
   pointer-events: none;
-  z-index: 2;
 }
 
-.is-opened .envelope-story-letter {
-  transform: translateY(-6px) scale(1.01);
+.is-opened .book-pages-spread {
+  transform: scale(1);
   opacity: 1;
   pointer-events: auto;
-  z-index: 20;
+  box-shadow: 0 28px 65px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.3);
 }
 
-.envelope-box:hover .is-opened.envelope-story-letter,
-.is-opened:hover .envelope-story-letter {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 30px 65px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.3);
-}
-
-/* Envelope Front Pocket Fold */
-.envelope-front-fold {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 52%;
-  background: linear-gradient(to top, #BA6144, #9E4B31);
-  clip-path: polygon(0 100%, 50% 22%, 100% 100%);
-  border-radius: 0 0 18px 18px;
-  z-index: 12;
-  pointer-events: none;
-  transition: opacity 0.6s ease, transform 0.8s ease;
-}
-
-.is-opened .envelope-front-fold {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-/* Envelope Top Flap */
-.envelope-top-flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 56%;
-  background: linear-gradient(160deg, #D4785A 0%, #BA5F42 100%);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  border-radius: 18px 18px 0 0;
-  transform-origin: top center;
-  z-index: 15;
-  pointer-events: none;
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.35, 1), opacity 0.5s ease;
-}
-
-.is-closed .envelope-top-flap {
-  transform: rotateX(0deg);
-  opacity: 1;
-}
-
-.is-opened .envelope-top-flap {
-  transform: rotateX(180deg);
-  opacity: 0;
-}
-
-/* Envelope Seal & Tap Badge Unit (Centered & Never Clipped) */
-.envelope-seal-unit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 25;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.is-opened .envelope-seal-unit {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.4);
-}
-
-/* Envelope Wax Seal */
-.envelope-seal {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #E74C3C 0%, #96281B 100%);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 2px 3px rgba(255, 255, 255, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFF;
-  font-size: 1.25rem;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-}
-
-.seal-heart {
-  line-height: 1;
-  display: inline-block;
-  transform: translateY(-1px);
-}
-
-/* Simple Clean White Tap to Open Badge */
-.envelope-tap-badge {
-  background: #FFFFFF;
-  color: #1A0D08;
-  font-family: var(--font-body);
-  font-size: clamp(0.74rem, 2vw, 0.82rem);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  padding: 4px 14px;
-  border-radius: 20px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  white-space: nowrap;
-}
-
-/* Left Side: Photo Column */
-.cause-card-image-col {
-  background: #FFFFFF;
+/* Book Individual Pages */
+.book-page {
   position: relative;
   overflow: hidden;
+}
+
+.book-left-page {
+  background: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -716,8 +604,31 @@ body {
   display: block;
 }
 
-/* Right Side: Clean Story Text */
-.cause-card-text-col {
+.book-page-gutter-shadow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  pointer-events: none;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.16), transparent);
+}
+
+/* Book Center Spine Crease & Shadow */
+.book-center-crease {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 51.2%;
+  width: 20px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 12;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 48%, rgba(0, 0, 0, 0.42) 50%, rgba(0, 0, 0, 0.3) 52%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+/* Right Page: Clean Story Text */
+.book-right-page {
   background: #DDF2F6;
   background-image: linear-gradient(180deg, #E5F6F9 0%, #D6EFF4 100%);
   padding: 22px 22px;
@@ -770,12 +681,173 @@ body {
   margin: 0;
 }
 
+/* Front Hardcover Book (3D Flips Open on Click) */
+.book-front-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 35% 30%, #3B1B10 0%, #200E08 72%, #140704 100%);
+  border-radius: 16px;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  z-index: 30;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(226, 125, 96, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.15);
+  transition: transform 0.95s cubic-bezier(0.25, 1, 0.35, 1), opacity 0.5s ease 0.35s, box-shadow 0.95s ease;
+  overflow: hidden;
+}
+
+.is-closed .book-front-cover {
+  transform: rotateY(0deg);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.is-opened .book-front-cover {
+  transform: rotateY(-180deg);
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: -20px 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Book Spine Edge Strip */
+.book-cover-spine-edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 28px;
+  background: linear-gradient(to right, #150603 0%, #281008 65%, rgba(0, 0, 0, 0.5) 100%);
+  border-right: 1.5px solid rgba(226, 125, 96, 0.35);
+  border-radius: 16px 0 0 16px;
+  z-index: 2;
+}
+
+/* Book Cover Inner Debossed Golden Frame */
+.book-cover-frame {
+  position: absolute;
+  inset: 14px 14px 14px 38px;
+  border: 1.5px solid rgba(226, 125, 96, 0.45);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.22);
+  box-shadow: inset 0 0 26px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 16px 14px;
+  z-index: 3;
+}
+
+.book-cover-top-tag {
+  font-family: var(--font-body);
+  font-size: clamp(0.68rem, 1.8vw, 0.76rem);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #E27D60;
+  opacity: 0.9;
+}
+
+.book-cover-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  margin: auto 0;
+}
+
+.book-cover-star {
+  font-size: 1.3rem;
+  color: #E27D60;
+  line-height: 1;
+  filter: drop-shadow(0 2px 8px rgba(226, 125, 96, 0.6));
+  animation: pulse-star 3s ease-in-out infinite;
+}
+
+@keyframes pulse-star {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+.book-cover-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3.8vw, 2.05rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin: 0;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85), 0 0 20px rgba(226, 125, 96, 0.3);
+}
+
+.book-cover-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.78rem, 1.8vw, 0.92rem);
+  font-weight: 500;
+  color: rgba(255, 245, 238, 0.85);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Simple Clean White Tap to Open Badge */
+.book-tap-badge {
+  background: #FFFFFF;
+  color: #1A0D08;
+  font-family: var(--font-body);
+  font-size: clamp(0.74rem, 2vw, 0.82rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  padding: 5px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(226, 125, 96, 0.4);
+  white-space: nowrap;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.book-wrapper:hover .book-tap-badge {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(226, 125, 96, 0.6);
+}
+
 @media (max-width: 640px) {
-  .envelope-story-letter {
+  .book-pages-spread {
     border-radius: 14px;
     grid-template-columns: 1fr 1fr;
   }
-  .cause-card-text-col {
+  .book-front-cover {
+    border-radius: 14px;
+  }
+  .book-cover-spine-edge {
+    width: 18px;
+    border-radius: 14px 0 0 14px;
+  }
+  .book-cover-frame {
+    inset: 10px 10px 10px 24px;
+    padding: 10px 8px 10px;
+  }
+  .book-cover-top-tag {
+    font-size: 0.60rem;
+    letter-spacing: 0.12em;
+  }
+  .book-cover-star {
+    font-size: 1rem;
+  }
+  .book-cover-title {
+    font-size: clamp(1.05rem, 5vw, 1.35rem);
+    letter-spacing: 0.02em;
+  }
+  .book-cover-subtitle {
+    font-size: 0.68rem;
+  }
+  .book-tap-badge {
+    padding: 3px 12px;
+    font-size: 0.68rem;
+  }
+  .book-right-page {
     padding: 10px 8px 10px 10px;
     gap: 6px;
   }

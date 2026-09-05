@@ -25,7 +25,7 @@ export default function HomePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
-  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
+  const [isBookOpen, setIsBookOpen] = useState(false);
 
   // Web Audio FX Engine
   const playSound = (type = 'pop') => {
@@ -231,31 +231,32 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story Card (Envelope Opening Animation on Click) */}
-          <div className="envelope-stage">
+          {/* Cause Story Notebook (3D Realistic Book Opening Animation on Click) */}
+          <div className="book-stage">
             <div 
-              className={`envelope-box ${isEnvelopeOpen ? 'is-opened' : 'is-closed'}`}
+              className={`book-wrapper ${isBookOpen ? 'is-opened' : 'is-closed'}`}
               onClick={() => {
                 playSound('pop');
-                setIsEnvelopeOpen(prev => !prev);
+                setIsBookOpen(prev => !prev);
               }}
             >
-              {/* Envelope Back Shell */}
-              <div className="envelope-back-pocket" />
-
-              {/* The Inner Story Card Letter */}
-              <div className="envelope-story-letter">
-                {/* Left Side: Child Rocket Sketch */}
-                <div className="cause-card-image-col">
+              {/* Inside 2-Page Spread (Revealed when open) */}
+              <div className="book-pages-spread">
+                {/* Left Page: Child Rocket Sketch */}
+                <div className="book-page book-left-page">
                   <img
                     src="/dream_rocket_sketch.png?v=snug_1"
                     alt="My Dream child rocket drawing"
                     className="cause-card-photo"
                   />
+                  <div className="book-page-gutter-shadow" />
                 </div>
 
-                {/* Right Side: Clean Story Text */}
-                <div className="cause-card-text-col">
+                {/* Center Spine Crease */}
+                <div className="book-center-crease" />
+
+                {/* Right Page: Clean Story Text */}
+                <div className="book-page book-right-page">
                   <div className="cause-stat-highlight">
                     <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
                   </div>
@@ -276,17 +277,21 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Envelope Front Flap & Seal */}
-              <div className="envelope-front-fold" />
-              <div className="envelope-top-flap" />
+              {/* Front Book Cover (3D Flipping Hardbound Cover) */}
+              <div className="book-front-cover">
+                <div className="book-cover-spine-edge" />
+                <div className="book-cover-frame">
+                  <div className="book-cover-top-tag">HUMBL IMPACT JOURNAL</div>
+                  
+                  <div className="book-cover-body">
+                    <div className="book-cover-star">✦</div>
+                    <h3 className="book-cover-title">EVERY BAR GIVES BACK</h3>
+                    <p className="book-cover-subtitle">A childhood belongs in a classroom.</p>
+                  </div>
 
-              {/* Seal and Tap Badge Unit (Never clipped by flap) */}
-              <div className="envelope-seal-unit">
-                <div className="envelope-seal">
-                  <span className="seal-heart">♥</span>
-                </div>
-                <div className="envelope-tap-badge">
-                  <span>Tap to open</span>
+                  <div className="book-tap-badge">
+                    <span>Tap to open</span>
+                  </div>
                 </div>
               </div>
 
