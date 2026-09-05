@@ -185,12 +185,12 @@ export default function HomePage() {
             </h1>
 
             <p className="hero-subtext">
-              Take our 60-second interactive quiz to uncover your unique <strong>Snack Personality</strong> and help pledge a nutritious meal to a child in need.
+              Take our 15-second interactive quiz to uncover your unique <strong>Snack Personality</strong> and help pledge a nutritious meal to a child in need.
             </p>
 
             <div className="hero-stats-row">
               <div className="stat-pill">
-                <span className="stat-value">60s</span>
+                <span className="stat-value">15s</span>
                 <span className="stat-label">Snack Quiz</span>
               </div>
               <div className="stat-pill">
@@ -213,6 +213,11 @@ export default function HomePage() {
 
           {/* Directed Visual: Classroom Dream & Cause Story Card */}
           <div style={{ position: 'relative', width: '100%' }}>
+            {/* Floating Clean HumblBar Product Wrapper Sticker */}
+            <div className="hero-floating-bar-sticker" title="HumblBar Clean Snack Bar">
+              <img src="/sticker_bar.png" alt="HumblBar Snack" className="hero-floating-bar-img" />
+            </div>
+
             <div className="dream-story-card">
               <div className="dream-card-inner">
                 {/* Left: Notebook Sketch */}
@@ -413,7 +418,7 @@ export default function HomePage() {
                       </div>
 
                       <button type="submit" className="submit-waitlist-btn">
-                        <span>Start 60-Second Quiz</span>
+                        <span>Start 15-Second Quiz</span>
                         <ArrowRight size={16} />
                       </button>
                     </form>
