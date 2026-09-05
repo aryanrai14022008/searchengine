@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { QUIZ_QUESTIONS, ARCHETYPES, calculateArchetype } from '@/lib/quizData';
 import {
@@ -25,7 +25,35 @@ export default function HomePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
-  const [isParcelOpen, setIsParcelOpen] = useState(false);
+  const [paperStage, setPaperStage] = useState(0); // 0: closed, 1: half-open shell, 2: full storybook (open)
+
+  // Automatic stepped unfolding sequence on load
+  useEffect(() => {
+    const t1 = setTimeout(() => {
+      setPaperStage(prev => (prev === 0 ? 1 : prev));
+    }, 900);
+
+    const t2 = setTimeout(() => {
+      setPaperStage(prev => (prev === 1 || prev === 0 ? 2 : prev));
+    }, 2000);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, []);
+
+  const triggerUnfoldSequence = () => {
+    playSound('pop');
+    if (paperStage === 2) {
+      setPaperStage(0);
+    } else {
+      setPaperStage(1);
+      setTimeout(() => {
+        setPaperStage(2);
+      }, 900);
+    }
+  };
 
   // Web Audio FX Engine
   const playSound = (type = 'pop') => {
@@ -231,38 +259,40 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story (Artisanal Origami Crumpled Paper Ball that Unfolds into Open Storybook) */}
+          {/* Cause Story (Hand-Drawn Crumpled Paper Ball that Automatically Unfolds in Steps into Open Storybook) */}
           <div className="crumple-paper-stage">
             <div 
-              className={`crumple-paper-box ${isParcelOpen ? 'is-opened' : 'is-closed'}`}
-              onClick={() => {
-                playSound('pop');
-                setIsParcelOpen(prev => !prev);
-              }}
+              className={`crumple-paper-box stage-${paperStage}`}
+              onClick={triggerUnfoldSequence}
+              title={paperStage === 2 ? "Click to fold back or replay animation" : "Tap to unfold story"}
             >
-              {/* Closed State: Hand-Drawn Crumpled Paper Ball Unfolding Stages */}
-              <div className="crumple-ball-wrapper">
+              {/* Stage 0 & Stage 1: Hand-Drawn Crumpled Paper Ball & Half-Open Origami Shell */}
+              <div className={`crumple-ball-wrapper ${paperStage === 2 ? 'is-hidden' : 'is-visible'}`}>
                 <div className="crumple-ball-container">
+                  {/* Stage 0: Closed tight crumpled ball */}
                   <img
                     src="/paper_ball_closed.png"
-                    alt="Crumpled paper ball"
-                    className="crumple-ball-img closed-ball"
+                    alt="Closed crumpled paper ball"
+                    className={`crumple-ball-img stage-0-ball ${paperStage === 0 ? 'active' : 'inactive'}`}
                   />
+                  {/* Stage 1: Half-open faceted origami paper shell */}
                   <img
-                    src="/paper_crumple_stage.png"
-                    alt="Paper ball unfolding stage"
-                    className="crumple-ball-img opening-shell"
+                    src="/paper_half_open.png"
+                    alt="Half-open crumpled origami paper shell"
+                    className={`crumple-ball-img stage-1-shell ${paperStage === 1 ? 'active' : 'inactive'}`}
                   />
                 </div>
 
-                {/* Tap to Unfold Badge */}
+                {/* Dynamic stage status caption */}
                 <div className="crumple-tap-badge">
-                  <span>Tap to unfold story</span>
+                  <span>
+                    {paperStage === 0 ? 'Unfolding paper...' : paperStage === 1 ? 'Revealing story...' : 'Tap to unfold'}
+                  </span>
                 </div>
               </div>
 
-              {/* Opened State: Full 2-Page Storybook Spread */}
-              <div className="paper-inside-book">
+              {/* Stage 2: Opened State - Full 2-Page Storybook Spread (Remains Open) */}
+              <div className={`paper-inside-book ${paperStage === 2 ? 'is-open' : 'is-closed'}`}>
                 <div className="book-pages-spread">
                   {/* Left Page: Child Rocket Sketch */}
                   <div className="book-page book-left-page">
@@ -300,6 +330,11 @@ export default function HomePage() {
                     </div>
                     <div className="book-page-gutter-shadow right-gutter" />
                   </div>
+                </div>
+
+                {/* Replay caption hint */}
+                <div className="book-replay-hint">
+                  <span>↻ Tap to fold / replay animation</span>
                 </div>
               </div>
 

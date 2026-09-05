@@ -555,25 +555,25 @@ body {
   justify-content: center;
 }
 
-/* Closed State: Hand-Drawn Crumpled Paper Ball Container */
+/* Crumpled Paper Ball Wrapper */
 .crumple-ball-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
 }
 
-.is-closed .crumple-ball-wrapper {
+.crumple-ball-wrapper.is-visible {
   opacity: 1;
   transform: scale(1) translateY(0);
   pointer-events: auto;
 }
 
-.is-opened .crumple-ball-wrapper {
+.crumple-ball-wrapper.is-hidden {
   opacity: 0;
-  transform: scale(0.7) translateY(-20px);
+  transform: scale(0.65) translateY(-22px);
   pointer-events: none;
   height: 0;
   overflow: hidden;
@@ -583,16 +583,16 @@ body {
 
 .crumple-ball-container {
   position: relative;
-  width: min(290px, 72vw);
-  height: min(240px, 60vw);
+  width: min(300px, 75vw);
+  height: min(250px, 62vw);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .crumple-paper-box:hover .crumple-ball-container {
-  transform: scale(1.04) translateY(-3px);
+  transform: scale(1.05) translateY(-3px);
 }
 
 .crumple-ball-img {
@@ -601,31 +601,38 @@ body {
   object-fit: contain;
   object-position: center;
   filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.45));
-  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: opacity 0.6s ease, transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.crumple-ball-img.closed-ball {
+/* Stage 0: Tight closed crumpled ball */
+.crumple-ball-img.stage-0-ball {
+  position: relative;
+}
+
+.crumple-ball-img.stage-0-ball.active {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1) rotate(0deg);
 }
 
-.crumple-ball-img.opening-shell {
+.crumple-ball-img.stage-0-ball.inactive {
+  opacity: 0;
+  transform: scale(1.15) rotate(12deg);
+}
+
+/* Stage 1: Half-open origami faceted shell */
+.crumple-ball-img.stage-1-shell {
   position: absolute;
   inset: 0;
-  opacity: 0;
-  transform: scale(0.92);
-  border-radius: 20px;
 }
 
-/* On Hover: Smoothly teases the opening origami shell stage */
-.crumple-paper-box:hover .is-closed .closed-ball {
-  opacity: 0.15;
-  transform: scale(1.05);
-}
-
-.crumple-paper-box:hover .is-closed .opening-shell {
+.crumple-ball-img.stage-1-shell.active {
   opacity: 1;
-  transform: scale(1.05);
+  transform: scale(1.08) rotate(0deg);
+}
+
+.crumple-ball-img.stage-1-shell.inactive {
+  opacity: 0;
+  transform: scale(0.85) rotate(-10deg);
 }
 
 /* Tap to Unfold Badge */
@@ -649,7 +656,7 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
-/* Opened State: Full 2-Page Storybook Spread */
+/* Stage 2 / Opened State: Full 2-Page Storybook Spread */
 .paper-inside-book {
   position: relative;
   width: 100%;
@@ -659,24 +666,40 @@ body {
   transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
 }
 
-.is-closed .paper-inside-book {
-  transform: scale(0.92) translateY(20px);
+.paper-inside-book.is-closed {
+  transform: scale(0.88) translateY(24px);
   opacity: 0;
   pointer-events: none;
   height: 0;
   overflow: hidden;
 }
 
-.is-opened .paper-inside-book {
+.paper-inside-book.is-open {
   transform: scale(1) translateY(0);
   opacity: 1;
   pointer-events: auto;
   height: auto;
 }
 
-.crumple-paper-box:hover .is-opened .paper-inside-book {
+.crumple-paper-box:hover .paper-inside-book.is-open {
   transform: translateY(-4px) scale(1.01);
   box-shadow: 0 30px 68px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.book-replay-hint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0 2px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.03em;
+  transition: color 0.2s ease;
+}
+
+.crumple-paper-box:hover .book-replay-hint {
+  color: #E27D60;
 }
 
 /* Book 2-Page Spread Layout */
