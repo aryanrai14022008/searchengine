@@ -25,35 +25,7 @@ export default function HomePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
-  const [paperStage, setPaperStage] = useState(0); // 0: closed, 1: half-open shell, 2: full storybook (open)
-
-  // Automatic stepped unfolding sequence on load
-  useEffect(() => {
-    const t1 = setTimeout(() => {
-      setPaperStage(prev => (prev === 0 ? 1 : prev));
-    }, 900);
-
-    const t2 = setTimeout(() => {
-      setPaperStage(prev => (prev === 1 || prev === 0 ? 2 : prev));
-    }, 2000);
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, []);
-
-  const triggerUnfoldSequence = () => {
-    playSound('pop');
-    if (paperStage === 2) {
-      setPaperStage(0);
-    } else {
-      setPaperStage(1);
-      setTimeout(() => {
-        setPaperStage(2);
-      }, 900);
-    }
-  };
+  const [isPaperOpened, setIsPaperOpened] = useState(false);
 
   // Web Audio FX Engine
   const playSound = (type = 'pop') => {
@@ -259,40 +231,35 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story (Hand-Drawn Crumpled Paper Ball that Automatically Unfolds in Steps into Open Storybook) */}
+          {/* Cause Story (Origami Crumpled Paper Ball that Unfolds into Open Storybook on Hover) */}
           <div className="crumple-paper-stage">
             <div 
-              className={`crumple-paper-box stage-${paperStage}`}
-              onClick={triggerUnfoldSequence}
-              title={paperStage === 2 ? "Click to fold back or replay animation" : "Tap to unfold story"}
+              className={`crumple-paper-box ${isPaperOpened ? 'is-opened' : ''}`}
+              onClick={() => {
+                playSound('pop');
+                setIsPaperOpened(prev => !prev);
+              }}
             >
-              {/* Stage 0 & Stage 1: Hand-Drawn Crumpled Paper Ball & Half-Open Origami Shell */}
-              <div className={`crumple-ball-wrapper ${paperStage === 2 ? 'is-hidden' : 'is-visible'}`}>
+              {/* Closed State: Hand-Drawn Crumpled Paper Ball & Half-Open Origami Shell */}
+              <div className="crumple-ball-wrapper">
                 <div className="crumple-ball-container">
-                  {/* Stage 0: Closed tight crumpled ball */}
+                  {/* Stage 0: Tight closed crumpled ball */}
                   <img
                     src="/paper_ball_closed.png"
                     alt="Closed crumpled paper ball"
-                    className={`crumple-ball-img stage-0-ball ${paperStage === 0 ? 'active' : 'inactive'}`}
+                    className="crumple-ball-img stage-0-ball"
                   />
                   {/* Stage 1: Half-open faceted origami paper shell */}
                   <img
                     src="/paper_half_open.png"
                     alt="Half-open crumpled origami paper shell"
-                    className={`crumple-ball-img stage-1-shell ${paperStage === 1 ? 'active' : 'inactive'}`}
+                    className="crumple-ball-img stage-1-shell"
                   />
-                </div>
-
-                {/* Dynamic stage status caption */}
-                <div className="crumple-tap-badge">
-                  <span>
-                    {paperStage === 0 ? 'Unfolding paper...' : paperStage === 1 ? 'Revealing story...' : 'Tap to unfold'}
-                  </span>
                 </div>
               </div>
 
-              {/* Stage 2: Opened State - Full 2-Page Storybook Spread (Remains Open) */}
-              <div className={`paper-inside-book ${paperStage === 2 ? 'is-open' : 'is-closed'}`}>
+              {/* Stage 2: Full 2-Page Storybook Spread */}
+              <div className="paper-inside-book">
                 <div className="book-pages-spread">
                   {/* Left Page: Child Rocket Sketch */}
                   <div className="book-page book-left-page">
@@ -330,11 +297,6 @@ export default function HomePage() {
                     </div>
                     <div className="book-page-gutter-shadow right-gutter" />
                   </div>
-                </div>
-
-                {/* Replay caption hint */}
-                <div className="book-replay-hint">
-                  <span>↻ Tap to fold / replay animation</span>
                 </div>
               </div>
 
