@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HumblBar — Protein for You. Hope for a Child. | VIP Waitlist & Quiz</title>
+  <meta name="description" content="Discover your snack personality in 60s and join the exclusive HumblBar waitlist. 15g clean protein, 0g added sugar. Every bar donates a meal to a child.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient Floating Glows & Background Ingredient Particles -->
+  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+  <div class="ambient-glow glow-3" aria-hidden="true"></div>
+  <div class="particles-bg" id="particlesBg" aria-hidden="true"></div>
+
+  <!-- Header Bar -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="#" class="brand-logo">
+        <span class="logo-mark">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="10" fill="#20130E"/>
+            <path d="M10 22C10 16 15 11 22 10C22 17 17 22 10 22Z" fill="#F3B562"/>
+            <path d="M10 22L22 10" stroke="#FFF" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="logo-text">HUMBL<span>BAR</span></span>
+      </a>
+
+      <div class="header-center-pill">
+        <span class="live-dot"></span>
+        <span class="pill-text"><strong>3,842</strong> foodies on waitlist</span>
+        <span class="pill-sep">•</span>
+        <span class="pill-impact">❤️ 3,842 Meals Pledged</span>
+      </div>
+
+      <div class="header-actions">
+        <button class="sound-toggle-btn" id="soundToggle" title="Toggle Sound FX" aria-label="Toggle Sound FX">
+          <span class="sound-on">🔊</span>
+          <span class="sound-off" style="display: none;">🔇</span>
+        </button>
+        <button class="btn-nav-quiz" id="navQuizBtn">
+          <span>Take Quiz</span>
+          <span class="nav-arrow">↓</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Live Social Proof Toast -->
+  <div class="live-toast" id="liveToast">
+    <span class="toast-icon">🍫</span>
+    <span class="toast-text"><strong id="toastUser">Priya from Mumbai</strong> just claimed VIP pass #0384 &bull; 2s ago</span>
+  </div>
+
+  <main class="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="heroSection">
+      <div class="hero-container">
+        
+        <div class="hero-copy">
+          <div class="hero-badge animate-fade-in">
+            <span class="sparkle">✨</span>
+            <span>BE AMONG THE FIRST &bull; JOIN THE REVOLUTION</span>
+          </div>
+
+          <h1 class="hero-headline animate-fade-up">
+            Protein for you.<br>
+            <span class="gradient-text">Hope for a child.</span>
+          </h1>
+
+          <p class="hero-subtext animate-fade-up delay-1">
+            Real dates, California roasted almonds, 100% clean whey, and zero junk. Take our 60-second snack quiz to uncover your <strong>Snack Personality</strong> & claim your VIP Founding Member perks!
+          </p>
+
+          <div class="hero-stats-row animate-fade-up delay-2">
+            <div class="stat-pill">
+              <span class="stat-value">15g</span>
+              <span class="stat-label">Clean Protein</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-value">0g</span>
+              <span class="stat-label">Added Sugar</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-value">1 = 1</span>
+              <span class="stat-label">Child Meal Donated</span>
+            </div>
+          </div>
+
+          <div class="hero-cta-group animate-fade-up delay-3">
+            <button type="button" class="btn-hero-primary" id="heroStartQuizBtn">
+              <span>Find Your Snack Personality</span>
+              <span class="btn-arrow">↓</span>
+            </button>
+            <a href="#compareSection" class="btn-hero-secondary">
+              <span>Why HumblBar?</span>
+            </a>
+          </div>
+
+          <div class="hero-perk-note">
+            <span>🎁 <strong>Free 3-Bar Tasting Box</strong> for first 500 waitlist members</span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="product-card-3d" id="productCard3D">
+            <div class="image-wrapper">
+              <img src="assets/humblbar_hero.jpg" alt="HumblBar Chocolate Almond Protein Bar" class="hero-product-img">
+              <div class="badge-float badge-top">
+                <span>🌿 100% Clean Label</span>
+              </div>
+              <div class="badge-float badge-bottom">
+                <span>💖 1 Bar = 1 Meal Donated</span>
+              </div>
+            </div>
+            <div class="product-card-meta">
+              <div class="prod-flavor">Chocolate Almond Crunch</div>
+              <div class="prod-sub">Hand-Roasted Nuts • Medjool Dates • Organic Cocoa</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Interactive Automated Step-by-Step Questionnaire -->
+    <section class="quiz-section" id="quizSection">
+      <div class="quiz-section-header">
+        <span class="section-tag">60-SECOND INTERACTIVE QUIZ</span>
+        <h2 class="section-heading">Uncover Your Snack DNA</h2>
+        <p class="section-sub">Answer each question below — the quiz automatically advances as you choose.</p>
+      </div>
+
+      <div class="terracotta-card-container">
+        <div class="terracotta-card" id="terracottaCard">
+          
+          <!-- Card Progress Header & Back Button -->
+          <div class="card-header">
+            <div class="card-header-top">
+              <button type="button" class="back-btn" id="backBtn" style="visibility: hidden;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <span>Back</span>
+              </button>
+
+              <div class="sub-header-title">
+                <span class="header-main-tag">BE AMONG THE FIRST! JOIN THE WAITLIST!</span>
+                <span class="header-sub-tag">Protein for you. Hope for a child.</span>
+              </div>
+
+              <div class="step-counter-pill" id="stepCounterPill">
+                <span id="stepNumber">Step 1 of 8</span>
+              </div>
+            </div>
+
+            <!-- Liquid Progress Bar -->
+            <div class="progress-wrapper">
+              <div class="progress-track">
+                <div class="progress-fill" id="progressFill" style="width: 12.5%;">
+                  <div class="progress-spark"></div>
+                </div>
+              </div>
+              <div class="progress-details">
+                <span class="progress-caption" id="progressCaption">Finding your daily snacking rhythm...</span>
+                <span class="progress-pct" id="progressPct">12%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Automated Steps Carousel Viewport -->
+          <div class="steps-viewport" id="stepsViewport">
+            
+            <!-- STEP 0: Demographic -->
+            <div class="quiz-step active" data-step="0">
+              <div class="step-category">YOUR ROUTINE</div>
+              <h2 class="step-question">What describes you best? <span class="req-star">*</span></h2>
+              <p class="step-sub">Help us understand your daily fuel & snacking habits.</p>
+
+              <div class="options-container" data-question="role">
+                <button type="button" class="option-pill" data-index="1" data-val="Office goer">
+                  <span class="opt-num">1</span>
+                  <span class="opt-icon">💼</span>
+                  <span class="opt-label">Office goer</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="2" data-val="Work from home">
+                  <span class="opt-num">2</span>
+                  <span class="opt-icon">💻</span>
+                  <span class="opt-label">Work from home</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="3" data-val="Student">
+                  <span class="opt-num">3</span>
+                  <span class="opt-icon">📚</span>
+                  <span class="opt-label">Student</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="4" data-val="Fitness / sports enthusiast">
+                  <span class="opt-num">4</span>
+                  <span class="opt-icon">🏃‍♂️</span>
+                  <span class="opt-label">Fitness / sports enthusiast</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="5" data-val="Homemaker">
+                  <span class="opt-num">5</span>
+                  <span class="opt-icon">🏡</span>
+                  <span class="opt-label">Homemaker</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="6" data-val="Other">
+                  <span class="opt-num">6</span>
+                  <span class="opt-icon">✨</span>
+                  <span class="opt-label">Other</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 1: Weakness -->
+            <div class="quiz-step" data-step="1">
+              <div class="step-category">CRAVINGS</div>
+              <h2 class="step-question">1. What’s your biggest snack weakness? <span class="req-star">*</span></h2>
+              <p class="step-sub">Zero judgment here — we’ll find clean ways to satisfy it.</p>
+
+              <div class="options-container" data-question="weakness">
+                <button type="button" class="option-pill" data-index="1" data-val="Chocolate">
+                  <span class="opt-num">1</span>
+                  <span class="opt-icon">🍫</span>
+                  <span class="opt-label">Chocolate</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="2" data-val="Chips">
+                  <span class="opt-num">2</span>
+                  <span class="opt-icon">🥔</span>
+                  <span class="opt-label">Chips</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="3" data-val="Biscuits">
+                  <span class="opt-num">3</span>
+                  <span class="opt-icon">🍪</span>
+                  <span class="opt-label">Biscuits</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="4" data-val="Sweets">
+                  <span class="opt-num">4</span>
+                  <span class="opt-icon">🍬</span>
+                  <span class="opt-label">Sweets</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="5" data-val="Fried snacks">
+                  <span class="opt-num">5</span>
+                  <span class="opt-icon">🥟</span>
+                  <span class="opt-label">Fried snacks</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="6" data-val="I have no weakness 😎">
+                  <span class="opt-num">6</span>
+                  <span class="opt-icon">😎</span>
+                  <span class="opt-label">I have no weakness 😎</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2: Nutrition Label -->
+            <div class="quiz-step" data-step="2">
+              <div class="step-category">LABEL HABITS</div>
+              <h2 class="step-question">2. Be honest: How often do you check the nutrition label? <span class="req-star">*</span></h2>
+              <p class="step-sub">Most bars hide 15g+ of sugar under chemical aliases!</p>
+
+              <div class="options-container" data-question="label">
+                <button type="button" class="option-pill" data-index="1" data-val="Every time">
+                  <span class="opt-num">1</span>
+                  <span class="opt-icon">🧐</span>
+                  <span class="opt-label">Every time</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="2" data-val="Sometimes">
+                  <span class="opt-num">2</span>
+                  <span class="opt-icon">👀</span>
+                  <span class="opt-label">Sometimes</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="3" data-val="Only when dieting">
+                  <span class="opt-num">3</span>
+                  <span class="opt-icon">🥗</span>
+                  <span class="opt-label">Only when dieting</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="4" data-val="Never">
+                  <span class="opt-num">4</span>
+                  <span class="opt-icon">🙈</span>
+                  <span class="opt-label">Never</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="5" data-val="I pretend I understand it 😂">
+                  <span class="opt-num">5</span>
+                  <span class="opt-icon">😂</span>
+                  <span class="opt-label">I pretend I understand it 😂</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 3: Snack Timing Need -->
+            <div class="quiz-step" data-step="3">
+              <div class="step-category">SLUMP TIMING</div>
+              <h2 class="step-question">3. When do you usually need a better snack? <span class="req-star">*</span></h2>
+              <p class="step-sub">Let's find the exact moment your energy takes a dip.</p>
+
+              <div class="options-container" data-question="timing">
+                <button type="button" class="option-pill" data-index="1" data-val="During a busy workday">
+                  <span class="opt-num">1</span>
+                  <span class="opt-icon">⏱️</span>
+                  <span class="opt-label">During a busy workday</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="2" data-val="Between meals">
+                  <span class="opt-num">2</span>
+                  <span class="opt-icon">🥪</span>
+                  <span class="opt-label">Between meals</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="3" data-val="While travelling">
+                  <span class="opt-num">3</span>
+                  <span class="opt-icon">✈️</span>
+                  <span class="opt-label">While travelling</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="4" data-val="After school/college">
+                  <span class="opt-num">4</span>
+                  <span class="opt-icon">🎒</span>
+                  <span class="opt-label">After school/college</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="5" data-val="When I’m too busy to eat properly">
+                  <span class="opt-num">5</span>
+                  <span class="opt-icon">🏃</span>
+                  <span class="opt-label">When I’m too busy to eat properly</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="6" data-val="Whenever I get hungry 😂">
+                  <span class="opt-num">6</span>
+                  <span class="opt-icon">🤤</span>
+                  <span class="opt-label">Whenever I get hungry 😂</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 4: Protein Bottleneck -->
+            <div class="quiz-step" data-step="4">
+              <div class="step-category">PROTEIN GAP</div>
+              <h2 class="step-question">4. When do you find it hardest to get enough protein? <span class="req-star">*</span></h2>
+              <p class="step-sub">Over 70% of Indians fall short of daily protein requirements.</p>
+
+              <div class="options-container" data-question="protein_timing">
+                <button type="button" class="option-pill" data-index="1" data-val="Breakfast">
+                  <span class="opt-num">1</span>
+                  <span class="opt-icon">🍳</span>
+                  <span class="opt-label">Breakfast</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="2" data-val="Lunch">
+                  <span class="opt-num">2</span>
+                  <span class="opt-icon">🍱</span>
+                  <span class="opt-label">Lunch</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="3" data-val="Evening snack">
+                  <span class="opt-num">3</span>
+                  <span class="opt-icon">☕</span>
+                  <span class="opt-label">Evening snack (4–6 PM)</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="4" data-val="Dinner">
+                  <span class="opt-num">4</span>
+                  <span class="opt-icon">🍲</span>
+                  <span class="opt-label">Dinner</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="5" data-val="I struggle throughout the day">
+                  <span class="opt-num">5</span>
+                  <span class="opt-icon">😫</span>
+                  <span class="opt-label">I struggle throughout the day</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 5: Price Point -->
+            <div class="quiz-step" data-step="5">
+              <div class="step-category">HONEST PRICING</div>
+              <h2 class="step-question">5. What price feels reasonable for a good protein snack? <span class="req-star">*</span></h2>
+              <p class="step-sub">Clean nourishment should be honest and accessible.</p>
+
+              <div class="options-container" data-question="price">
+                <button type="button" class="option-pill" data-index="1" data-val="Under ₹50">
+                  <span class="opt-num">1</span>
+                  <span class="opt-icon">🪙</span>
+                  <span class="opt-label">Under ₹50</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="2" data-val="₹50–75">
+                  <span class="opt-num">2</span>
+                  <span class="opt-icon">🏷️</span>
+                  <span class="opt-label">₹50–75 (Sweet spot)</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="3" data-val="₹75–100">
+                  <span class="opt-num">3</span>
+                  <span class="opt-icon">💳</span>
+                  <span class="opt-label">₹75–100</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="4" data-val="Price Doesn't matter">
+                  <span class="opt-num">4</span>
+                  <span class="opt-icon">💎</span>
+                  <span class="opt-label">Price Doesn't matter (Quality first)</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 6: Definition -->
+            <div class="quiz-step" data-step="6">
+              <div class="step-category">PERCEPTION</div>
+              <h2 class="step-question">6. What do you call a protein snack bar? <span class="req-star">*</span></h2>
+              <p class="step-sub">What role does it serve in your daily nutrition?</p>
+
+              <div class="options-container" data-question="definition">
+                <button type="button" class="option-pill" data-index="1" data-val="A healthy snack">
+                  <span class="opt-num">1</span>
+                  <span class="opt-icon">🥑</span>
+                  <span class="opt-label">A healthy snack</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="2" data-val="A meal replacement">
+                  <span class="opt-num">2</span>
+                  <span class="opt-icon">🍽️</span>
+                  <span class="opt-label">A meal replacement</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="3" data-val="A quick energy boost">
+                  <span class="opt-num">3</span>
+                  <span class="opt-icon">⚡</span>
+                  <span class="opt-label">A quick energy boost</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="4" data-val="Emergency food 😂">
+                  <span class="opt-num">4</span>
+                  <span class="opt-icon">🚨</span>
+                  <span class="opt-label">Emergency food 😂</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="5" data-val="Chocolate pretending to be healthy 😂">
+                  <span class="opt-num">5</span>
+                  <span class="opt-icon">🎭</span>
+                  <span class="opt-label">Chocolate pretending to be healthy 😂</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 7: Sharing -->
+            <div class="quiz-step" data-step="7">
+              <div class="step-category">SHARING CIRCLE</div>
+              <h2 class="step-question">7. Who would you most likely share a HumblBar with? <span class="req-star">*</span></h2>
+              <p class="step-sub">Sharing is caring — or keeping it all to yourself!</p>
+
+              <div class="options-container" data-question="share">
+                <button type="button" class="option-pill" data-index="1" data-val="Myself">
+                  <span class="opt-num">1</span>
+                  <span class="opt-icon">👑</span>
+                  <span class="opt-label">Myself (Mine alone!)</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="2" data-val="My partner">
+                  <span class="opt-num">2</span>
+                  <span class="opt-icon">❤️</span>
+                  <span class="opt-label">My partner</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="3" data-val="My kids">
+                  <span class="opt-num">3</span>
+                  <span class="opt-icon">👶</span>
+                  <span class="opt-label">My kids</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="4" data-val="My parents">
+                  <span class="opt-num">4</span>
+                  <span class="opt-icon">👵</span>
+                  <span class="opt-label">My parents</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="5" data-val="Friends/colleagues">
+                  <span class="opt-num">5</span>
+                  <span class="opt-icon">🤝</span>
+                  <span class="opt-label">Friends/colleagues</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+                <button type="button" class="option-pill" data-index="6" data-val="Everyone at home 😄">
+                  <span class="opt-num">6</span>
+                  <span class="opt-icon">🏡</span>
+                  <span class="opt-label">Everyone at home 😄</span>
+                  <span class="opt-radio"><span class="opt-radio-dot"></span></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 8: Personality Reveal Stage -->
+            <div class="quiz-step" data-step="8" id="personalityStep">
+              
+              <div class="personality-calc-loader" id="personalityLoader">
+                <div class="radar-pulse"></div>
+                <h3 class="loader-heading">Synthesizing Your Snack DNA...</h3>
+                <p class="loader-desc">Calculating cravings index, protein gaps & flavor affinities...</p>
+              </div>
+
+              <div class="personality-result-wrap" id="personalityResult" style="display: none;">
+                <div class="reveal-top">
+                  <span class="dna-tag">DNA SYNTHESIS VERIFIED 😎</span>
+                  <h2 class="reveal-heading">Okay, we know your snack personality now.</h2>
+                </div>
+
+                <div class="hologram-personality-card">
+                  <div class="holo-badge" id="archetypeBadge">THE 4PM POWER STRATEGIST</div>
+                  <div class="holo-avatar" id="archetypeEmoji">⚡</div>
+                  <h3 class="holo-archetype-name" id="archetypeName">The Mindful Fuel Connoisseur</h3>
+                  <p class="holo-archetype-desc" id="archetypeDesc">
+                    You crave wholesome indulgence without the nasty sugar spikes. Real ingredients, clean protein & zero compromises.
+                  </p>
+
+                  <div class="holo-metrics-grid">
+                    <div class="h-metric">
+                      <div class="h-top"><span>Protein Need</span><strong id="mProtein">High (88%)</strong></div>
+                      <div class="h-bar"><div class="h-fill" style="width: 88%;"></div></div>
+                    </div>
+                    <div class="h-metric">
+                      <div class="h-top"><span>Craving Slump</span><strong id="mCraving">4:30 PM</strong></div>
+                      <div class="h-bar"><div class="h-fill" style="width: 75%;"></div></div>
+                    </div>
+                    <div class="h-metric">
+                      <div class="h-top"><span>Clean Label IQ</span><strong>100%</strong></div>
+                      <div class="h-bar"><div class="h-fill" style="width: 95%;"></div></div>
+                    </div>
+                  </div>
+
+                  <div class="recommended-blend-box">
+                    <span class="blend-lbl">MATCHED HUMBLBAR BLEND:</span>
+                    <strong class="blend-name">Dark Chocolate & California Almond Crunch (15g Whey Protein)</strong>
+                  </div>
+                </div>
+
+                <button type="button" class="btn-proceed-waitlist" id="proceedWaitlistBtn">
+                  <span>Lock In Personality & Join VIP Waitlist</span>
+                  <span class="btn-arrow">→</span>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- STEP 9: Waitlist Form -->
+            <div class="quiz-step" data-step="9" id="waitlistStep">
+              
+              <div class="waitlist-header">
+                <span class="early-access-ribbon">🔥 EXCLUSIVE EARLY ACCESS</span>
+                <h2 class="w-heading">Want to be among the first to try HumblBar?</h2>
+                <h3 class="w-subheading">JOIN THE WAITLIST!</h3>
+                <p class="w-cause-badge">
+                  <span class="cause-icon">❤️</span>
+                  <span><strong>Protein for you. Hope for a child.</strong> 1 bar you claim helps donate 1 nutritious meal to an underprivileged child.</span>
+                </p>
+              </div>
+
+              <form class="waitlist-card-form" id="waitlistCardForm" novalidate>
+                <div class="form-row">
+                  <label for="userName" class="field-label">Your name <span class="req-star">*</span></label>
+                  <div class="input-container">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="userName" name="userName" class="input-field" placeholder="e.g. Aryan Sharma" required autocomplete="name">
+                  </div>
+                  <span class="error-text" id="nameError">Please enter your full name</span>
+                </div>
+
+                <div class="form-row">
+                  <label for="userEmail" class="field-label">Email <span class="req-star">*</span></label>
+                  <div class="input-container">
+                    <span class="input-icon">✉️</span>
+                    <input type="email" id="userEmail" name="userEmail" class="input-field" placeholder="e.g. aryan@example.com" required autocomplete="email">
+                  </div>
+                  <span class="error-text" id="emailError">Please enter a valid email address</span>
+                </div>
+
+                <div class="form-row">
+                  <label for="userPhone" class="field-label">Phone number <span class="req-star">*</span></label>
+                  <div class="input-container">
+                    <span class="input-icon">📱</span>
+                    <input type="tel" id="userPhone" name="userPhone" class="input-field" placeholder="e.g. 9876543210" required autocomplete="tel">
+                  </div>
+                  <span class="error-text" id="phoneError">Please enter your 10-digit mobile number</span>
+                </div>
+
+                <div class="waitlist-perks-box">
+                  <div class="perk-row"><span>✓</span> Free 3-bar sample box on official launch</div>
+                  <div class="perk-row"><span>✓</span> 30% secret early backer discount code</div>
+                  <div class="perk-row"><span>✓</span> 1 Child meal pledge certificate included</div>
+                </div>
+
+                <button type="submit" class="submit-waitlist-btn" id="submitWaitlistBtn">
+                  <span class="shine-sweep"></span>
+                  <span>CLAIM MY VIP FOUNDING PASS</span>
+                  <span class="btn-arrow">🚀</span>
+                </button>
+
+                <div class="form-bottom-disclaimer">
+                  <span>🔒 We'll notify you when we launch. No spam. EVER.</span>
+                </div>
+              </form>
+
+            </div>
+
+            <!-- STEP 10: Celebration & VIP Pass Reveal -->
+            <div class="quiz-step" data-step="10" id="successStep">
+              
+              <div class="confetti-container">
+                <canvas id="confettiCanvas"></canvas>
+              </div>
+
+              <div class="success-wrap">
+                <div class="success-pill">🎉 VIP ACCESS CONFIRMED!</div>
+                <h2 class="success-title">Welcome to the family, <span id="confirmedUser">Friend</span>!</h2>
+                <p class="success-sub">You're locked in and 1 wholesome meal has been reserved for a child in need.</p>
+
+                <!-- VIP Pass Digital Ticket -->
+                <div class="vip-digital-card">
+                  <div class="ticket-top">
+                    <div class="ticket-logo">HUMBL<span>BAR</span></div>
+                    <div class="ticket-status">FOUNDING MEMBER</div>
+                  </div>
+                  <div class="ticket-grid">
+                    <div class="t-col">
+                      <span class="t-lbl">NAME</span>
+                      <span class="t-val" id="tName">Aryan Sharma</span>
+                    </div>
+                    <div class="t-col">
+                      <span class="t-lbl">QUEUE NUMBER</span>
+                      <span class="t-val gold" id="tQueue">#0384</span>
+                    </div>
+                    <div class="t-col">
+                      <span class="t-lbl">SNACK DNA</span>
+                      <span class="t-val" id="tDNA">The Mindful Fuel Connoisseur</span>
+                    </div>
+                    <div class="t-col">
+                      <span class="t-lbl">SOCIAL IMPACT</span>
+                      <span class="t-val green">1 Meal Pledged ❤️</span>
+                    </div>
+                  </div>
+                  <div class="ticket-bottom">
+                    <div class="t-barcode"></div>
+                    <div class="t-id" id="tPassId">HBL-VIP-8842</div>
+                  </div>
+                </div>
+
+                <!-- Referral Share Box -->
+                <div class="referral-share-box">
+                  <span class="ref-heading">🎁 Want to skip 100 spots in line?</span>
+                  <div class="ref-input-group">
+                    <input type="text" readonly id="refLinkInput" value="https://humblbar.com/waitlist?ref=vip8842" class="ref-input">
+                    <button type="button" class="ref-copy-btn" id="copyRefBtn">Copy</button>
+                  </div>
+                  <div class="ref-social-btns">
+                    <button type="button" class="social-btn wa" id="shareWaBtn">Share on WhatsApp</button>
+                    <button type="button" class="social-btn tw" id="shareTwBtn">Share on X / Twitter</button>
+                  </div>
+                </div>
+
+                <button type="button" class="retake-quiz-btn" id="retakeQuizBtn">← Retake Quiz</button>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Card Footer -->
+          <div class="card-footer">
+            <p>🌱 100% Clean Ingredients &bull; Zero Artificial Sweeteners &bull; Gluten Free &bull; Made in India</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Whole Food Ingredients Spotlight -->
+    <section class="ingredients-section" id="ingredientsSection">
+      <div class="section-container">
+        <span class="section-tag">THE RECIPE</span>
+        <h2 class="section-heading">6 Whole-Food Ingredients. Zero Junk.</h2>
+        <p class="section-sub">No chemical names you can't pronounce. No palm oils, no maltitol, no shortcuts.</p>
+
+        <div class="ingredients-grid">
+          <div class="ing-card">
+            <span class="ing-icon">🌰</span>
+            <h3>California Roasted Almonds</h3>
+            <p>Hand-roasted for rich crunch, healthy fats, and sustained natural satiety.</p>
+          </div>
+          <div class="ing-card">
+            <span class="ing-icon">🌴</span>
+            <h3>Whole Medjool Dates</h3>
+            <p>Mother Nature's natural caramel sweetness packed with natural prebiotic fiber.</p>
+          </div>
+          <div class="ing-card">
+            <span class="ing-icon">⚡</span>
+            <h3>100% Pure Whey Isolate</h3>
+            <p>15 grams of fast-absorbing clean protein for lean muscle fuel and daily energy.</p>
+          </div>
+          <div class="ing-card">
+            <span class="ing-icon">🍫</span>
+            <h3>Organic Single-Origin Cocoa</h3>
+            <p>Rich, antioxidant-dense cocoa providing a decadent fudgy brownie experience.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="compare-section" id="compareSection">
+      <div class="section-container">
+        <span class="section-tag">HONEST NUTRITION</span>
+        <h2 class="section-heading">Standard Market Bars vs. <span class="gradient-text">HumblBar</span></h2>
+        <p class="section-sub">Most protein snacks are candy bars in disguise. Here is how we differ:</p>
+
+        <div class="compare-grid">
+          <div class="compare-box bad">
+            <div class="c-tag bad-tag">Typical Market Bars</div>
+            <h3>The Sugar Pretenders</h3>
+            <ul class="c-list">
+              <li><span class="cross">✕</span> 15-20g hidden sugars or laxative sugar alcohols</li>
+              <li><span class="cross">✕</span> Cheap hydrogenated palm oils & emulsifiers</li>
+              <li><span class="cross">✕</span> Rubbery or chalky cardboard texture</li>
+              <li><span class="cross">✕</span> Long 30-item chemical ingredient lists</li>
+              <li><span class="cross">✕</span> Pure profit driven — zero social impact</li>
+            </ul>
+          </div>
+
+          <div class="compare-box good">
+            <div class="popular-ribbon">⭐ THE HUMBL PROMISE</div>
+            <div class="c-tag good-tag">HumblBar</div>
+            <h3>Clean, Honest & Nutritious</h3>
+            <ul class="c-list">
+              <li><span class="tick">✓</span> <strong>15g Real Whey & Almond Protein</strong></li>
+              <li><span class="tick">✓</span> <strong>0g Added Refined Sugar</strong> (Dates only)</li>
+              <li><span class="tick">✓</span> <strong>Rich, fudgy brownie texture</strong></li>
+              <li><span class="tick">✓</span> <strong>Only 6 natural whole-food ingredients</strong></li>
+              <li><span class="tick">✓</span> <strong>1 Bar Bought = 1 Nutritious Child Meal Donated</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Impact Mission Banner -->
+    <section class="mission-section">
+      <div class="mission-container">
+        <span class="mission-badge">OUR SOCIAL MISSION</span>
+        <h2 class="mission-title">Protein for you. Hope for a child.</h2>
+        <p class="mission-text">
+          Millions of school children in India miss out on basic daily protein nutrition. For every single HumblBar purchased, we partner with verified grassroot welfare kitchens to provide a nutritious, protein-rich meal to a child in need.
+        </p>
+        <div class="mission-counter">
+          <span class="counter-val" id="liveMealCounter">12,482</span>
+          <span class="counter-lbl">Nutritious Meals Committed for Launch</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section class="faq-section">
+      <div class="section-container">
+        <span class="section-tag">GOT QUESTIONS?</span>
+        <h2 class="section-heading">Frequently Asked Questions</h2>
+        
+        <div class="faq-accordion">
+          <details class="faq-item" open>
+            <summary class="faq-question">What makes HumblBar different from other protein bars?</summary>
+            <div class="faq-answer">
+              Unlike traditional bars packed with artificial sweeteners (maltitol/sucralose) and palm oils, HumblBar is made with only 6 whole-food ingredients (almonds, dates, pure whey, cocoa). Plus, every bar funds a meal for a child in need!
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">When will HumblBar officially launch?</summary>
+            <div class="faq-answer">
+              We are launching our initial small batch soon! Waitlist members get guaranteed 48-hour priority access, a free tasting sample box, and an exclusive 30% discount.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">Is HumblBar gluten-free and vegetarian?</summary>
+            <div class="faq-answer">
+              Yes! HumblBar is 100% vegetarian, naturally gluten-free, and contains zero artificial preservatives, trans-fats, or hydrogenated oils.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="logo-text">HUMBL<span>BAR</span></div>
+        <p>Clean fuel for the body &bull; Nutritious hope for children.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#heroSection">Home</a>
+        <a href="#quizSection">Snack Quiz</a>
+        <a href="#ingredientsSection">Ingredients</a>
+        <a href="#compareSection">Why HumblBar</a>
+        <a href="https://humblbar.com" target="_blank" rel="noopener">Official Site</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 HumblBar Inc. All rights reserved. Made with ❤️ for clean snacking.
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
