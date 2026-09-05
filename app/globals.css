@@ -642,63 +642,10 @@ body {
   opacity: 0;
 }
 
-/* Glowing Tap to Open Badge */
-.envelope-tap-badge {
-  position: absolute;
-  top: 36%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(26, 14, 10, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 209, 102, 0.65);
-  color: #FFFFFF;
-  font-family: var(--font-body);
-  font-size: clamp(0.78rem, 2vw, 0.88rem);
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  padding: 6px 16px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 16px rgba(226, 125, 96, 0.5);
-  animation: pulseTapBadge 2.4s ease-in-out infinite;
-  white-space: nowrap;
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-@keyframes pulseTapBadge {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(1);
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 14px rgba(226, 125, 96, 0.45);
-  }
-  50% {
-    transform: translate(-50%, -56%) scale(1.05);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 24px rgba(255, 209, 102, 0.65);
-  }
-}
-
-.tap-sparkle-icon {
-  color: #FFD166;
-  animation: sparkleTwinkle 2.5s ease-in-out infinite;
-}
-
-@keyframes sparkleTwinkle {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
-  50% { transform: scale(1.25) rotate(15deg); opacity: 1; }
-}
-
-.is-opened .envelope-tap-badge {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.6);
-}
-
 /* Envelope Wax Seal */
 .envelope-seal {
   position: absolute;
-  top: 78%;
+  top: 68%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 42px;
@@ -724,6 +671,32 @@ body {
   line-height: 1;
   display: inline-block;
   transform: translateY(-1px);
+}
+
+/* Decent Tap to Open Label Under Heart */
+.envelope-tap-badge {
+  position: absolute;
+  top: calc(68% + 30px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 3px 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.is-opened .envelope-tap-badge {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.6);
 }
 
 /* Left Side: Photo Column */
