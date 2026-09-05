@@ -549,7 +549,7 @@ body {
 
 /* Left Side: Horizontal Image Column */
 .cause-card-image-col {
-  background: #0E2218;
+  background: #EBF6FA;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -565,10 +565,10 @@ body {
   display: block;
 }
 
-/* Right Side: Light blue background for the text section */
+/* Right Side: Light cyan/blue background matching reference */
 .cause-card-text-col {
-  background: #EDF6FA;
-  background-image: linear-gradient(180deg, #F2F8FC 0%, #E3EFF7 100%);
+  background: #DDF2F6;
+  background-image: linear-gradient(180deg, #E5F6F9 0%, #D6EFF4 100%);
   padding: 30px 28px;
   display: flex;
   flex-direction: column;
@@ -580,7 +580,7 @@ body {
   font-family: var(--font-display);
   font-size: clamp(1.24rem, 2.2vw, 1.65rem);
   font-weight: 900;
-  color: #0A1C2C;
+  color: #123C40;
   letter-spacing: -0.02em;
   line-height: 1.2;
   margin: 0;
@@ -590,7 +590,7 @@ body {
   font-family: var(--font-body);
   font-size: 0.94rem;
   font-weight: 700;
-  color: #13334C;
+  color: #154246;
   background: rgba(200, 90, 50, 0.1);
   border-left: 4px solid #C85A32;
   padding: 8px 12px;
