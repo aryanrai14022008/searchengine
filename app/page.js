@@ -249,11 +249,13 @@ export default function HomePage() {
                     alt="My Dream child rocket drawing"
                     className="cause-card-photo"
                   />
-                  <div className="book-page-gutter-shadow" />
+                  <div className="book-page-gutter-shadow left-gutter" />
                 </div>
 
-                {/* Center Spine Crease */}
-                <div className="book-center-crease" />
+                {/* Center Spine Crease & Shadow */}
+                <div className="book-center-crease">
+                  <div className="spine-crease-line" />
+                </div>
 
                 {/* Right Page: Clean Story Text */}
                 <div className="book-page book-right-page">
@@ -274,17 +276,28 @@ export default function HomePage() {
                       You bring education to their life and hope to their heart.
                     </p>
                   </div>
+                  <div className="book-page-gutter-shadow right-gutter" />
                 </div>
               </div>
 
-              {/* Front Book Cover (3D Flipping Hardbound Cover) */}
+              {/* Front Hardbound Book Cover (3D Flips Open on Click) */}
               <div className="book-front-cover">
-                <div className="book-cover-spine-edge" />
-                <div className="book-cover-frame">
-                  <div className="book-cover-top-tag">HUMBL IMPACT JOURNAL</div>
+                <div className="book-cover-spine">
+                  <div className="spine-rib" />
+                  <div className="spine-rib" />
+                  <div className="spine-rib" />
+                </div>
+                
+                <div className="book-cover-plate">
+                  <div className="book-corner-guard top-left" />
+                  <div className="book-corner-guard top-right" />
+                  <div className="book-corner-guard bottom-left" />
+                  <div className="book-corner-guard bottom-right" />
+
+                  <div className="book-cover-tag">HUMBL IMPACT NOTEBOOK</div>
                   
-                  <div className="book-cover-body">
-                    <div className="book-cover-star">✦</div>
+                  <div className="book-cover-center">
+                    <div className="book-emblem-gold">★</div>
                     <h3 className="book-cover-title">EVERY BAR GIVES BACK</h3>
                     <p className="book-cover-subtitle">A childhood belongs in a classroom.</p>
                   </div>
@@ -293,6 +306,9 @@ export default function HomePage() {
                     <span>Tap to open</span>
                   </div>
                 </div>
+
+                {/* Right Paper Edge Layer for Closed Book */}
+                <div className="book-closed-pages-edge" />
               </div>
 
             </div>
