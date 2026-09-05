@@ -127,11 +127,18 @@ body {
 .brand-logo-img {
   height: 38px;
   width: auto;
+  max-width: 100%;
   display: block;
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+@media (max-width: 640px) {
+  .brand-logo-img {
+    height: 32px;
+  }
 }
 
 .brand-logo:hover .brand-logo-img {
