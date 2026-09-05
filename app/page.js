@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 
 export default function HomePage() {
-  // 0: Details Gate (Name, Email, Phone), 1-8: MCQ Questions, 9: Thank You Screen
+  // 0-7: MCQ Questions (1 to 8), 8: Contact Details (Name, Email, Phone), 9: Thank You Screen
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
   const [answers, setAnswers] = useState({});
@@ -67,62 +67,64 @@ export default function HomePage() {
     }
   };
 
-  // Step 0: Gate Form Submit
-  const handleStartQuiz = (e) => {
-    e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) return;
-    playSound('pop');
-    setCurrentStep(1); // Proceed to first question
-  };
-
-  // MCQ Option Select (Steps 1 to 8)
-  const handleSelectOption = async (questionId, value) => {
+  // MCQ Option Select (Steps 0 to 7)
+  const handleSelectOption = (questionId, value) => {
     playSound('pop');
     const updatedAnswers = { ...answers, [questionId]: value };
     setAnswers(updatedAnswers);
 
-    const questionIndex = currentStep - 1;
-    if (questionIndex < QUIZ_QUESTIONS.length - 1) {
+    if (currentStep < QUIZ_QUESTIONS.length - 1) {
       setTimeout(() => {
         setCurrentStep(prev => prev + 1);
-      }, 250);
+      }, 200);
     } else {
-      // Last question answered -> Compute Archetype & Store to MongoDB / Admin API
-      const archetype = calculateArchetype(updatedAnswers);
-      setComputedArchetype(archetype);
-      const generatedPass = `HBL-VIP-${Math.floor(1000 + Math.random() * 9000)}`;
-      setAssignedPassId(generatedPass);
-      setIsSubmitting(true);
+      // 8th question answered -> Advance to Contact Form (Step 8)
+      setTimeout(() => {
+        setCurrentStep(8);
+      }, 200);
+    }
+  };
 
-      try {
-        await fetch('/api/quiz', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: formData.name.trim(),
-            email: formData.email.trim(),
-            phone: formData.phone.trim(),
-            answers: updatedAnswers
-          })
-        });
-      } catch (err) {
-        console.error('Quiz save error:', err);
-      } finally {
-        setIsSubmitting(false);
-        setCurrentStep(9); // Thank You Step
-        playSound('fanfare');
-        confetti({
-          particleCount: 120,
-          spread: 80,
-          origin: { y: 0.6 }
-        });
-      }
+  // Step 8: Contact Form Submit -> Save to MongoDB & Show Thank You
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) return;
+
+    setIsSubmitting(true);
+    const archetype = calculateArchetype(answers);
+    setComputedArchetype(archetype);
+    const generatedPass = `HBL-VIP-${Math.floor(1000 + Math.random() * 9000)}`;
+    setAssignedPassId(generatedPass);
+
+    try {
+      await fetch('/api/quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          answers: answers
+        })
+      });
+    } catch (err) {
+      console.error('Quiz save error:', err);
+    } finally {
+      setIsSubmitting(false);
+      setCurrentStep(9); // Thank You Step
+      playSound('fanfare');
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
     }
   };
 
   const handleRetake = () => {
     setCurrentStep(0);
     setAnswers({});
+    setFormData({ name: '', email: '', phone: '' });
     setComputedArchetype(null);
   };
 
@@ -286,7 +288,7 @@ export default function HomePage() {
           <div className="terracotta-card-container">
             <div className="terracotta-card">
               
-              {/* Card Header & Liquid Progress */}
+              {/* Card Header & Only Percentage Completion */}
               <div className="card-header">
                 <div className="card-header-top">
                   {currentStep > 0 && currentStep <= 8 ? (
@@ -299,56 +301,65 @@ export default function HomePage() {
                       <span>Back</span>
                     </button>
                   ) : (
-                    <div style={{ width: '48px' }}></div>
+                    <div style={{ width: '1px' }}></div>
                   )}
 
-                  <div className="sub-header-title">
-                    <span className="header-main-tag">YOUR CLEAN SNACK PROFILE</span>
-                    <span className="header-sub-tag">15 seconds &bull; 1 school meal pledged</span>
-                  </div>
-
-                  <div className="step-counter-pill">
-                    <span>
-                      {currentStep === 0
-                        ? 'Start'
-                        : currentStep <= 8
-                        ? `Question ${currentStep} of 8`
-                        : 'Completed'}
-                    </span>
+                  <div className="percentage-completion-label">
+                    {currentStep <= 8 ? `${Math.round((currentStep / 8) * 100)}% Complete` : '100% Complete'}
                   </div>
                 </div>
 
                 {/* Progress Track */}
-                <div className="progress-wrapper">
-                  <div className="progress-track">
-                    <div
-                      className="progress-fill"
-                      style={{ width: `${(currentStep / 9) * 100}%` }}
-                    />
-                  </div>
-                  <div className="progress-details">
-                    <span>{currentStep <= 8 ? `${Math.round((currentStep / 8) * 100)}% Complete` : 'Completed'}</span>
-                    <span>1 Meal Pledged</span>
-                  </div>
+                <div className="progress-track">
+                  <div
+                    className="progress-fill"
+                    style={{ width: `${Math.min(100, Math.round((currentStep / 8) * 100))}%` }}
+                  />
                 </div>
               </div>
 
               {/* Steps Viewport */}
               <div className="steps-viewport">
                 
-                {/* STEP 0: Simple VIP Registration Gate */}
-                {currentStep === 0 && (
+                {/* STEPS 0 to 7: Clean MCQ Questions (Questions Come First) */}
+                {currentStep >= 0 && currentStep <= 7 && (
                   <div>
-                    <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-                      <h2 className="step-question" style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)' }}>
+                    <div className="step-category">{QUIZ_QUESTIONS[currentStep].category}</div>
+                    <h2 className="step-question">{QUIZ_QUESTIONS[currentStep].question}</h2>
+                    <p className="step-sub">{QUIZ_QUESTIONS[currentStep].subtitle}</p>
+
+                    <div className="options-container">
+                      {QUIZ_QUESTIONS[currentStep].options.map((opt, idx) => {
+                        const isSelected = answers[QUIZ_QUESTIONS[currentStep].id] === opt.val;
+                        return (
+                          <button
+                            key={idx}
+                            type="button"
+                            className={`option-pill ${isSelected ? 'selected' : ''}`}
+                            onClick={() => handleSelectOption(QUIZ_QUESTIONS[currentStep].id, opt.val)}
+                          >
+                            <span className="opt-num">{idx + 1}</span>
+                            <span>{opt.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 8: VIP Registration Form (Name, Email, Phone After Questions) */}
+                {currentStep === 8 && (
+                  <div>
+                    <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+                      <h2 className="step-question" style={{ fontSize: 'clamp(1.35rem, 4vw, 1.7rem)' }}>
                         Where should we send your results?
                       </h2>
-                      <p className="step-sub">
-                        Enter your details below to start your quick 8-question quiz.
+                      <p className="step-sub" style={{ marginBottom: '14px' }}>
+                        Enter your details below to see your clean snack profile and claim your meal pledge.
                       </p>
                     </div>
 
-                    <form onSubmit={handleStartQuiz} className="waitlist-card-form">
+                    <form onSubmit={handleContactSubmit} className="waitlist-card-form">
                       <div className="form-row">
                         <label className="field-label">Your Full Name *</label>
                         <div className="input-container">
@@ -394,62 +405,36 @@ export default function HomePage() {
                         </div>
                       </div>
 
-                      <button type="submit" className="submit-waitlist-btn">
-                        <span>Start 15-Second Quiz</span>
+                      <button type="submit" disabled={isSubmitting} className="submit-waitlist-btn">
+                        <span>{isSubmitting ? 'Submitting...' : 'See My Clean Snack Profile'}</span>
                         <ArrowRight size={16} />
                       </button>
                     </form>
                   </div>
                 )}
 
-                {/* STEPS 1 to 8: Clean MCQ Questions */}
-                {currentStep >= 1 && currentStep <= 8 && (
-                  <div>
-                    <div className="step-category">{QUIZ_QUESTIONS[currentStep - 1].category}</div>
-                    <h2 className="step-question">{QUIZ_QUESTIONS[currentStep - 1].question}</h2>
-                    <p className="step-sub">{QUIZ_QUESTIONS[currentStep - 1].subtitle}</p>
-
-                    <div className="options-container">
-                      {QUIZ_QUESTIONS[currentStep - 1].options.map((opt, idx) => {
-                        const isSelected = answers[QUIZ_QUESTIONS[currentStep - 1].id] === opt.val;
-                        return (
-                          <button
-                            key={idx}
-                            type="button"
-                            className={`option-pill ${isSelected ? 'selected' : ''}`}
-                            onClick={() => handleSelectOption(QUIZ_QUESTIONS[currentStep - 1].id, opt.val)}
-                          >
-                            <span className="opt-num">{idx + 1}</span>
-                            <span>{opt.label}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {/* STEP 9: Clean Thank You Screen (No percentages or complex breakdown) */}
+                {/* STEP 9: Clean Thank You Screen */}
                 {currentStep === 9 && (
-                  <div style={{ textAlign: 'center', padding: '16px 8px' }}>
+                  <div style={{ textAlign: 'center', padding: '12px 6px' }}>
                     <div style={{
-                      width: '64px',
-                      height: '64px',
+                      width: '60px',
+                      height: '60px',
                       borderRadius: '50%',
                       background: 'rgba(46, 204, 113, 0.16)',
                       border: '2px solid #2ECC71',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      margin: '0 auto 16px'
+                      margin: '0 auto 14px'
                     }}>
-                      <CheckCircle size={34} color="#2ECC71" />
+                      <CheckCircle size={32} color="#2ECC71" />
                     </div>
 
-                    <h2 className="step-question" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.1rem)', margin: '0 0 10px', color: '#FFF' }}>
+                    <h2 className="step-question" style={{ fontSize: 'clamp(1.4rem, 4.5vw, 1.9rem)', margin: '0 0 10px', color: '#FFF' }}>
                       Thank You for Attempting the Quiz{formData.name ? `, ${formData.name.split(' ')[0]}` : ''}!
                     </h2>
 
-                    <p style={{ fontSize: '1rem', color: 'rgba(255, 255, 255, 0.9)', maxWidth: '440px', margin: '0 auto 24px', lineHeight: 1.55 }}>
+                    <p style={{ fontSize: '0.95rem', color: 'rgba(255, 255, 255, 0.9)', maxWidth: '440px', margin: '0 auto 20px', lineHeight: 1.55 }}>
                       Your response has been successfully recorded. 1 nutritious meal has been reserved for a child in need on your behalf.
                     </p>
 

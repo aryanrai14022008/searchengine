@@ -744,7 +744,7 @@ body {
 .card-header {
   position: relative;
   z-index: 2;
-  padding: 22px 24px 16px;
+  padding: 14px 20px 12px;
   background: rgba(0, 0, 0, 0.18);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
@@ -753,7 +753,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
   gap: 10px;
 }
 
@@ -762,9 +762,9 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #FFF;
   font-weight: 700;
-  font-size: 0.8rem;
-  padding: 6px 14px;
-  border-radius: 8px;
+  font-size: 0.78rem;
+  padding: 4px 12px;
+  border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -783,6 +783,14 @@ body {
 
 .back-btn:hover svg {
   transform: translateX(-3px);
+}
+
+.percentage-completion-label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.84rem;
+  color: #FFFFFF;
+  letter-spacing: 0.02em;
 }
 
 .sub-header-title {
@@ -844,17 +852,17 @@ body {
   font-weight: 600;
 }
 
-/* Steps Viewport with generous padding */
+/* Steps Viewport with snug, well-proportioned padding */
 .steps-viewport {
   position: relative;
   z-index: 2;
-  padding: 32px 28px;
-  min-height: 360px;
+  padding: 22px 24px;
+  min-height: auto;
 }
 
 @media (max-width: 640px) {
   .steps-viewport {
-    padding: 24px 18px;
+    padding: 16px 14px;
   }
 }
 
