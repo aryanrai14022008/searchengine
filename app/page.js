@@ -289,17 +289,8 @@ export default function HomePage() {
                 </div>
                 
                 <div className="book-cover-plate">
-                  <div className="book-corner-guard top-left" />
-                  <div className="book-corner-guard top-right" />
-                  <div className="book-corner-guard bottom-left" />
-                  <div className="book-corner-guard bottom-right" />
-
-                  <div className="book-cover-tag">HUMBL IMPACT NOTEBOOK</div>
-                  
                   <div className="book-cover-center">
-                    <div className="book-emblem-gold">★</div>
                     <h3 className="book-cover-title">EVERY BAR GIVES BACK</h3>
-                    <p className="book-cover-subtitle">A childhood belongs in a classroom.</p>
                   </div>
 
                   <div className="book-tap-badge">
