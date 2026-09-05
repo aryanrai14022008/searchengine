@@ -228,21 +228,21 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Directed Visual: Cause Story Card (Stacked Vertical: Full Image on Top + Light Blue Story Below) */}
+          {/* Cause Story Card (Horizontal: Image on Left, Story Text on Right) */}
           <div style={{ position: 'relative', width: '100%' }}>
-            <div className="cause-story-card">
+            <div className="cause-horizontal-card">
               
-              {/* Top Section: Full Clean Image */}
-              <div className="cause-image-wrapper">
+              {/* Left Side: Full Horizontal Image */}
+              <div className="cause-card-image-col">
                 <img
-                  src="/children_reading.png?v=2"
+                  src="/children_reading.png?v=3"
                   alt="Children reading books with big dreams"
-                  className="cause-story-photo"
+                  className="cause-card-photo"
                 />
               </div>
 
-              {/* Bottom Section: Light Blue Cause Story Text */}
-              <div className="cause-text-container">
+              {/* Right Side: Clean Story Text */}
+              <div className="cause-card-text-col">
                 <h3 className="cause-story-title">Every Bar Gives Back !!</h3>
 
                 <div className="cause-stat-highlight">
