@@ -177,7 +177,7 @@ export default function HomePage() {
           
           <div className="hero-copy">
             <div className="hero-eyebrow">
-              CLEAN SNACKING &bull; REAL SOCIAL IMPACT
+              100% WHOLE INGREDIENTS &bull; 1 BAR = 1 MEAL FOR A CHILD
             </div>
 
             <div className="headline-sticker-wrap">
@@ -220,27 +220,27 @@ export default function HomePage() {
             </div>
 
             <p className="hero-subtext">
-              Take our 15-second interactive quiz to uncover your unique <strong>Snack Personality</strong> and help pledge a nutritious meal to a child in need.
+              Take our quick 15-second snack quiz to discover your clean nutrition match. Every completed quiz reserves a warm, wholesome meal for a child in school.
             </p>
 
             <div className="hero-stats-row">
               <div className="stat-pill">
                 <span className="stat-value">15s</span>
-                <span className="stat-label">Snack Quiz</span>
+                <span className="stat-label">Snack Match</span>
               </div>
               <div className="stat-pill">
-                <span className="stat-value">1 = 1</span>
-                <span className="stat-label">Child Meal Pledged</span>
+                <span className="stat-value">1 : 1</span>
+                <span className="stat-label">School Meal Pledged</span>
               </div>
               <div className="stat-pill">
                 <span className="stat-value">100%</span>
-                <span className="stat-label">Wholesome Cause</span>
+                <span className="stat-label">Whole Food</span>
               </div>
             </div>
 
             <div className="hero-cta-group">
               <a href="#quiz" className="btn-hero-primary">
-                <span>Start Your Snack Quiz</span>
+                <span>Find Your Snack Match</span>
                 <ArrowRight size={16} />
               </a>
             </div>
@@ -253,8 +253,8 @@ export default function HomePage() {
                 {/* Left: Notebook Sketch */}
                 <div className="dream-sketch-side">
                   <div>
-                    <div className="sketch-header">My Dream</div>
-                    <div className="sketch-sub">When I grow up, I want to be...</div>
+                    <div className="sketch-header">My Big Dream</div>
+                    <div className="sketch-sub">When I grow up, I want to be an astronaut!</div>
                   </div>
 
                   <div className="sketch-illustration">
@@ -287,8 +287,8 @@ export default function HomePage() {
                     </svg>
                   </div>
 
-                  <div style={{ fontFamily: 'var(--font-hand)', fontSize: '0.95rem', color: '#718096', textAlign: 'center' }}>
-                    Fueling bright futures, one meal at a time.
+                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.86rem', color: '#718096', textAlign: 'center', fontStyle: 'italic' }}>
+                    Nourishing everyday dreams, one meal at a time.
                   </div>
                 </div>
 
@@ -296,7 +296,7 @@ export default function HomePage() {
                 <div className="dream-copy-side">
                   <div className="dream-copy-header">
                     <h3 className="dream-headline">
-                      Nourishing Potential, One Clean Bite at a Time.
+                      Every clean bite fuels your day — and a child's future.
                     </h3>
                     <div className="dream-ingredients-seal" title="Whole Food Ingredients: Dates, Almonds, Cocoa, Coffee, Peanuts">
                       <img
@@ -307,11 +307,12 @@ export default function HomePage() {
                     </div>
                   </div>
                   <p className="dream-p">
-                    While you stay energized with whole Medjool dates and pure almonds, a child receives a balanced, nourishing meal for school.
+                    Made with organic Medjool dates, California almonds, and pure cocoa. Every time you snack clean, we deliver a balanced meal to a classroom in need.
                   </p>
                   <div className="dream-badge-row">
-                    <span className="dream-tag-badge">ZERO PRESERVATIVES</span>
-                    <span className="dream-tag-badge">15G PROTEIN</span>
+                    <span className="dream-tag-badge">MEDJOOL DATES</span>
+                    <span className="dream-tag-badge">CALIFORNIA ALMONDS</span>
+                    <span className="dream-tag-badge">NO REFINED SUGAR</span>
                   </div>
                 </div>
               </div>
@@ -326,9 +327,9 @@ export default function HomePage() {
         <div className="quiz-container">
           
           <div className="section-title-center">
-            <h2 className="section-heading">Discover Your Snack Personality</h2>
+            <h2 className="section-heading">Find Your Clean Snack Match</h2>
             <p className="section-sub">
-              Answer 8 quick questions to unlock your custom profile & pledge your meal donation.
+              8 quick questions to uncover your ideal flavor profile & pledge 1 child meal.
             </p>
           </div>
 
@@ -356,8 +357,8 @@ export default function HomePage() {
                   )}
 
                   <div className="sub-header-title">
-                    <span className="header-main-tag">DISCOVER YOUR SNACK PERSONALITY</span>
-                    <span className="header-sub-tag">Snack for you. Hope for a child.</span>
+                    <span className="header-main-tag">YOUR CLEAN SNACK PROFILE</span>
+                    <span className="header-sub-tag">15 seconds &bull; 1 school meal pledged</span>
                   </div>
 
                   <div className="step-counter-pill">
@@ -394,10 +395,10 @@ export default function HomePage() {
                   <div>
                     <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                       <h2 className="step-question" style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)' }}>
-                        Join the VIP Founding Waitlist
+                        Where should we send your results?
                       </h2>
                       <p className="step-sub">
-                        Enter your details below to start your quick 8-question quiz.
+                        Enter your details to begin the quiz and receive your VIP Founder Pass.
                       </p>
                     </div>
 
