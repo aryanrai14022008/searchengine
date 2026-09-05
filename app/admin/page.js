@@ -621,13 +621,15 @@ export default function AdminPage() {
                   <div className="modal-answers-list">
                     {Object.entries(selectedResponse.answers).map(([key, val]) => {
                       const qMeta = questionMap[key];
+                      const matchedOpt = qMeta?.options?.find(o => o.val === val);
+                      const displayVal = matchedOpt ? matchedOpt.label : String(val);
                       return (
                         <div key={key} className="modal-answer-item">
                           <div className="answer-question-text">
                             {qMeta ? qMeta.question : key}
                           </div>
                           <div className="answer-value-badge">
-                            {String(val)}
+                            {displayVal}
                           </div>
                         </div>
                       );
