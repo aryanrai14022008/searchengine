@@ -517,7 +517,7 @@ export default function HomePage() {
                       marginBottom: '26px'
                     }}>
                       <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>VIP Pass:</span>
-                      <strong style={{ color: '#F3B562', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>{assignedPassId}</strong>
+                      <strong style={{ color: '#FFFFFF', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>{assignedPassId}</strong>
                     </div>
 
                     <div>

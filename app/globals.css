@@ -12,7 +12,7 @@
   
   --color-terracotta: #C87556;
   --color-terracotta-dark: #A34C2B;
-  --color-gold: #F3B562;
+  --color-gold: #E27D60;
   --color-forest: #2D6A4F;
 
   --color-white: #FFFFFF;
@@ -131,13 +131,13 @@ body {
 }
 
 .logo-text span {
-  color: var(--color-gold);
+  color: #E27D60;
 }
 
 .header-tagline {
-  font-size: 0.85rem;
-  color: var(--color-gold);
-  font-weight: 600;
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 500;
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
@@ -173,8 +173,8 @@ body {
 
 .hero-eyebrow {
   display: inline-block;
-  color: var(--color-gold);
-  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -219,7 +219,7 @@ body {
 
 .headline-bar-sticker.opened .bar-wrapper-visual {
   transform: rotate(0deg) scale(1.08);
-  filter: drop-shadow(0 12px 24px rgba(243, 181, 98, 0.4));
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.55));
 }
 
 /* Pure clean text hint (no box) */
@@ -227,7 +227,7 @@ body {
   font-family: var(--font-hand);
   font-size: 0.92rem;
   font-weight: 700;
-  color: var(--color-gold);
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: 4px;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -248,7 +248,7 @@ body {
   font-family: var(--font-hand);
   font-size: 0.95rem;
   font-weight: 700;
-  color: #F3B562;
+  color: #FFFFFF;
   margin-top: 6px;
   letter-spacing: 0.01em;
   opacity: 0;
@@ -307,12 +307,12 @@ body {
 }
 
 .hero-highlight {
-  color: #F3B562;
+  color: #E27D60;
   display: inline-block;
 }
 
 .gradient-text {
-  color: #F3B562;
+  color: #E27D60;
   display: inline-block;
 }
 
@@ -351,7 +351,7 @@ body {
   font-family: var(--font-display);
   font-weight: 900;
   font-size: clamp(1.15rem, 3vw, 1.45rem);
-  color: var(--color-gold);
+  color: #FFFFFF;
   line-height: 1.1;
 }
 
@@ -369,36 +369,37 @@ body {
 }
 
 .btn-hero-primary {
-  background: linear-gradient(180deg, #F3B562 0%, #DF9E47 100%);
-  color: #1A0D07;
+  background: #FFFFFF;
+  color: #120A06;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   letter-spacing: -0.01em;
-  padding: 14px 28px;
-  border-radius: 12px;
-  border: 1.5px solid #F9CF8D;
+  padding: 13px 26px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 16px rgba(243, 181, 98, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
 }
 
 .btn-hero-primary:hover {
-  background: linear-gradient(180deg, #FFC578 0%, #EAA950 100%);
+  background: #F4EFEA;
+  color: #000000;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(243, 181, 98, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 .btn-hero-primary:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 8px rgba(243, 181, 98, 0.3);
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 /* Dream Story Card - Fully Responsive & Non-clipping */
@@ -601,12 +602,12 @@ body {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  background: rgba(243, 181, 98, 0.1);
-  color: var(--color-gold);
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFF;
   padding: 4px 12px;
   border-radius: 6px;
   margin-bottom: 8px;
-  border: 1px solid rgba(243, 181, 98, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .section-heading {
@@ -633,7 +634,7 @@ body {
   background: linear-gradient(165deg, #24150E 0%, #170D08 100%);
   border-radius: 18px;
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(243, 181, 98, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   overflow: hidden;
   position: relative;
   display: flex;
@@ -721,7 +722,7 @@ body {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #F3B562 0%, #FFF 100%);
+  background: linear-gradient(90deg, #E27D60 0%, #FFFFFF 100%);
   border-radius: var(--radius-pill);
   transition: width 0.35s ease;
 }
@@ -754,7 +755,7 @@ body {
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  color: var(--color-gold);
+  color: #E27D60;
   text-transform: uppercase;
   margin-bottom: 4px;
 }
@@ -854,7 +855,7 @@ body {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 800;
-  color: var(--color-gold);
+  color: #E27D60;
   letter-spacing: 0.08em;
 }
 
@@ -897,7 +898,7 @@ body {
 .h-metric strong {
   font-family: var(--font-display);
   font-size: 1rem;
-  color: var(--color-gold);
+  color: #FFFFFF;
 }
 
 /* Forms inside Terracotta Card */
@@ -953,35 +954,36 @@ body {
 }
 
 .submit-waitlist-btn {
-  background: linear-gradient(180deg, #F3B562 0%, #DF9E47 100%);
-  color: #1A0D07;
+  background: #FFFFFF;
+  color: #120A06;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 0.98rem;
+  font-size: 0.96rem;
   letter-spacing: -0.01em;
-  padding: 14px 20px;
-  border-radius: 12px;
-  border: 1.5px solid #F9CF8D;
+  padding: 13px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 16px rgba(243, 181, 98, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   margin-top: 8px;
   width: 100%;
 }
 
 .submit-waitlist-btn:hover {
-  background: linear-gradient(180deg, #FFC578 0%, #EAA950 100%);
+  background: #F4EFEA;
+  color: #000000;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(243, 181, 98, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 .submit-waitlist-btn:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 8px rgba(243, 181, 98, 0.3);
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 /* Footer */
