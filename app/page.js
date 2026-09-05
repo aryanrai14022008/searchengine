@@ -279,10 +279,9 @@ export default function HomePage() {
         <div className="quiz-container">
           
           <div className="section-title-center">
-            <h2 className="section-heading">Find Your Clean Snack Match</h2>
-            <p className="section-sub">
+            <h2 className="section-heading">
               8 quick questions to uncover your ideal flavor profile & pledge 1 child meal.
-            </p>
+            </h2>
           </div>
 
           <div className="terracotta-card-container">
