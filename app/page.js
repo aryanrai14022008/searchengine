@@ -282,20 +282,10 @@ export default function HomePage() {
 
               {/* Front Hardbound Book Cover (3D Flips Open on Click) */}
               <div className="book-front-cover">
-                <div className="book-cover-spine">
-                  <div className="spine-rib" />
-                  <div className="spine-rib" />
-                  <div className="spine-rib" />
-                </div>
+                <div className="book-cover-spine" />
                 
                 <div className="book-cover-plate">
-                  <div className="book-cover-center">
-                    <h3 className="book-cover-title">EVERY BAR GIVES BACK</h3>
-                  </div>
-
-                  <div className="book-tap-badge">
-                    <span>Tap to open</span>
-                  </div>
+                  <h3 className="book-cover-title">EVERY BAR GIVES BACK</h3>
                 </div>
 
                 {/* Right Paper Edge Layer for Closed Book */}
