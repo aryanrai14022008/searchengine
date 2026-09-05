@@ -167,7 +167,6 @@ export default function HomePage() {
           <a href="#" className="brand-logo">
             <span className="logo-text">HUMBL<span>BAR</span></span>
           </a>
-          <span className="header-tagline">Clean Nutrition &bull; 1 Bar = 1 Meal for a Child</span>
         </div>
       </header>
 
@@ -176,10 +175,6 @@ export default function HomePage() {
         <div className="hero-container">
           
           <div className="hero-copy">
-            <div className="hero-eyebrow">
-              100% WHOLE INGREDIENTS &bull; 1 BAR = 1 MEAL FOR A CHILD
-            </div>
-
             <div className="headline-sticker-wrap">
               <h1 className="hero-headline">
                 Snack for you.<br />
