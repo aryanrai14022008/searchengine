@@ -209,7 +209,7 @@ export default function HomePage() {
                 )}
 
                 <div className="bar-wrapper-visual">
-                  <img src="/sticker_bar.png" alt="HumblBar Clean Protein Bar" className="headline-bar-img" />
+                  <img src="/sticker_bar_clean.png?v=3" alt="HumblBar Clean Protein Bar" className="headline-bar-img" />
                 </div>
 
                 {/* Pure text tagline revealed below the bar - NO BOX, no overlap */}
@@ -336,7 +336,7 @@ export default function HomePage() {
             <div className="terracotta-card">
               {/* Elegant HumblBar Product Background Watermark */}
               <div className="card-bg-bar-watermark" aria-hidden="true">
-                <img src="/sticker_bar.png" alt="" className="watermark-bar-img" />
+                <img src="/sticker_bar_clean.png?v=3" alt="" className="watermark-bar-img" />
               </div>
               
               {/* Card Header & Liquid Progress */}

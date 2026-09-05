@@ -369,21 +369,21 @@ body {
 }
 
 .btn-hero-primary {
-  background: linear-gradient(180deg, #C7623D 0%, #B04F2A 100%);
-  color: #FFFFFF;
+  background: linear-gradient(180deg, #F3B562 0%, #DF9E47 100%);
+  color: #1A0D07;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.96rem;
+  font-weight: 800;
+  font-size: 0.98rem;
   letter-spacing: -0.01em;
   padding: 14px 28px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  border: 1.5px solid #F9CF8D;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 14px rgba(176, 79, 42, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(243, 181, 98, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.7);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   width: 100%;
@@ -391,14 +391,14 @@ body {
 }
 
 .btn-hero-primary:hover {
-  background: linear-gradient(180deg, #D46E49 0%, #B95732 100%);
+  background: linear-gradient(180deg, #FFC578 0%, #EAA950 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(176, 79, 42, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 24px rgba(243, 181, 98, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .btn-hero-primary:active {
   transform: translateY(1px);
-  box-shadow: 0 2px 8px rgba(176, 79, 42, 0.3);
+  box-shadow: 0 2px 8px rgba(243, 181, 98, 0.3);
 }
 
 /* Dream Story Card - Fully Responsive & Non-clipping */
@@ -953,35 +953,35 @@ body {
 }
 
 .submit-waitlist-btn {
-  background: linear-gradient(180deg, #C7623D 0%, #B04F2A 100%);
-  color: #FFFFFF;
+  background: linear-gradient(180deg, #F3B562 0%, #DF9E47 100%);
+  color: #1A0D07;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 800;
+  font-size: 0.98rem;
   letter-spacing: -0.01em;
   padding: 14px 20px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  border: 1.5px solid #F9CF8D;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 14px rgba(176, 79, 42, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(243, 181, 98, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.7);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   margin-top: 8px;
   width: 100%;
 }
 
 .submit-waitlist-btn:hover {
-  background: linear-gradient(180deg, #D46E49 0%, #B95732 100%);
+  background: linear-gradient(180deg, #FFC578 0%, #EAA950 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(176, 79, 42, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 24px rgba(243, 181, 98, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .submit-waitlist-btn:active {
   transform: translateY(1px);
-  box-shadow: 0 2px 8px rgba(176, 79, 42, 0.3);
+  box-shadow: 0 2px 8px rgba(243, 181, 98, 0.3);
 }
 
 /* Footer */
