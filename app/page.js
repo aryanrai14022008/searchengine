@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 
 export default function HomePage() {
-  // 0-7: MCQ Questions (1 to 8), 8: Contact Details (Name, Email, Phone), 9: Thank You Screen
+  // 0-8: MCQ Questions (1 to 9), 9: Contact Details (Name, Email, Phone), 10: Thank You Screen
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
   const [answers, setAnswers] = useState({});
@@ -68,7 +68,7 @@ export default function HomePage() {
     }
   };
 
-  // MCQ Option Select (Steps 0 to 7)
+  // MCQ Option Select (Steps 0 to 8)
   const handleSelectOption = (questionId, value) => {
     playSound('pop');
     const updatedAnswers = { ...answers, [questionId]: value };
@@ -79,14 +79,14 @@ export default function HomePage() {
         setCurrentStep(prev => prev + 1);
       }, 200);
     } else {
-      // 8th question answered -> Advance to Contact Form (Step 8)
+      // 9th question answered -> Advance to Contact Form (Step 9)
       setTimeout(() => {
-        setCurrentStep(8);
+        setCurrentStep(9);
       }, 200);
     }
   };
 
-  // Step 8: Contact Form Submit -> Save to MongoDB & Show Thank You
+  // Step 9: Contact Form Submit -> Save to MongoDB & Show Thank You
   const handleContactSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) return;
@@ -112,7 +112,7 @@ export default function HomePage() {
       console.error('Quiz save error:', err);
     } finally {
       setIsSubmitting(false);
-      setCurrentStep(9); // Thank You Step
+      setCurrentStep(10); // Thank You Step
       playSound('fanfare');
       confetti({
         particleCount: 120,
@@ -313,7 +313,7 @@ export default function HomePage() {
               {/* Card Header & Only Percentage Completion */}
               <div className="card-header">
                 <div className="card-header-top">
-                  {currentStep > 0 && currentStep <= 8 ? (
+                  {currentStep > 0 && currentStep <= 9 ? (
                     <button
                       type="button"
                       onClick={() => setCurrentStep(prev => prev - 1)}
@@ -327,7 +327,7 @@ export default function HomePage() {
                   )}
 
                   <div className="percentage-completion-label">
-                    {currentStep <= 8 ? `${Math.round((currentStep / 8) * 100)}% Complete` : '100% Complete'}
+                    {currentStep <= 9 ? `${Math.round((currentStep / 9) * 100)}% Complete` : '100% Complete'}
                   </div>
                 </div>
 
@@ -335,7 +335,7 @@ export default function HomePage() {
                 <div className="progress-track">
                   <div
                     className="progress-fill"
-                    style={{ width: `${Math.min(100, Math.round((currentStep / 8) * 100))}%` }}
+                    style={{ width: `${Math.min(100, Math.round((currentStep / 9) * 100))}%` }}
                   />
                 </div>
               </div>
@@ -343,12 +343,10 @@ export default function HomePage() {
               {/* Steps Viewport */}
               <div className="steps-viewport">
                 
-                {/* STEPS 0 to 7: Clean MCQ Questions (Questions Come First) */}
-                {currentStep >= 0 && currentStep <= 7 && (
+                {/* STEPS 0 to 8: Clean MCQ Questions (No category tags, no subtitles) */}
+                {currentStep >= 0 && currentStep <= 8 && (
                   <div>
-                    <div className="step-category">{QUIZ_QUESTIONS[currentStep].category}</div>
                     <h2 className="step-question">{QUIZ_QUESTIONS[currentStep].question}</h2>
-                    <p className="step-sub">{QUIZ_QUESTIONS[currentStep].subtitle}</p>
 
                     <div className="options-container">
                       {QUIZ_QUESTIONS[currentStep].options.map((opt, idx) => {
@@ -369,18 +367,9 @@ export default function HomePage() {
                   </div>
                 )}
 
-                {/* STEP 8: VIP Registration Form (Name, Email, Phone After Questions) */}
-                {currentStep === 8 && (
+                {/* STEP 9: VIP Registration Form (No headers / subtitles) */}
+                {currentStep === 9 && (
                   <div>
-                    <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-                      <h2 className="step-question" style={{ fontSize: 'clamp(1.35rem, 4vw, 1.7rem)' }}>
-                        Where should we send your results?
-                      </h2>
-                      <p className="step-sub" style={{ marginBottom: '14px' }}>
-                        Enter your details below to see your clean snack profile and claim your meal pledge.
-                      </p>
-                    </div>
-
                     <form onSubmit={handleContactSubmit} className="waitlist-card-form">
                       <div className="form-row">
                         <label className="field-label">Your Full Name *</label>
@@ -435,8 +424,8 @@ export default function HomePage() {
                   </div>
                 )}
 
-                {/* STEP 9: Clean Thank You Screen */}
-                {currentStep === 9 && (
+                {/* STEP 10: Clean Thank You Screen */}
+                {currentStep === 10 && (
                   <div style={{ textAlign: 'center', padding: '12px 6px' }}>
                     <div style={{
                       width: '60px',
