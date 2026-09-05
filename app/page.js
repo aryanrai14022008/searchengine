@@ -15,20 +15,6 @@ import {
   Sparkles
 } from 'lucide-react';
 
-const CHOCOLATE_PARTICLES = [
-  { icon: '🍫', left: '5%', size: '2.4rem', duration: '18s', delay: '-2s', opacity: 0.4 },
-  { icon: '🌰', left: '16%', size: '1.8rem', duration: '22s', delay: '-8s', opacity: 0.35 },
-  { icon: '🍫', left: '27%', size: '2.6rem', duration: '16s', delay: '-14s', opacity: 0.42 },
-  { icon: '🌴', left: '38%', size: '1.9rem', duration: '20s', delay: '-5s', opacity: 0.32 },
-  { icon: '✨', left: '49%', size: '1.4rem', duration: '15s', delay: '-11s', opacity: 0.45 },
-  { icon: '🍫', left: '60%', size: '2.3rem', duration: '19s', delay: '-1s', opacity: 0.4 },
-  { icon: '🌰', left: '72%', size: '1.7rem', duration: '24s', delay: '-16s', opacity: 0.35 },
-  { icon: '🍫', left: '83%', size: '2.6rem', duration: '18s', delay: '-7s', opacity: 0.44 },
-  { icon: '🌴', left: '91%', size: '1.9rem', duration: '21s', delay: '-13s', opacity: 0.32 },
-  { icon: '🤎', left: '96%', size: '1.6rem', duration: '19s', delay: '-4s', opacity: 0.38 },
-  { icon: '🍫', left: '11%', size: '2.1rem', duration: '23s', delay: '-17s', opacity: 0.38 }
-];
-
 export default function HomePage() {
   // 0: Details Gate (Name, Email, Phone), 1-8: MCQ Questions, 9: Thank You Screen
   const [currentStep, setCurrentStep] = useState(0);
@@ -142,25 +128,6 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* Floating Chocolate Animation Layer */}
-      <div className="particles-bg" aria-hidden="true">
-        {CHOCOLATE_PARTICLES.map((p, i) => (
-          <div
-            key={i}
-            className="floating-chocolate-item"
-            style={{
-              left: p.left,
-              fontSize: p.size,
-              animationDuration: p.duration,
-              animationDelay: p.delay,
-              '--particle-opacity': p.opacity
-            }}
-          >
-            {p.icon}
-          </div>
-        ))}
-      </div>
-
       {/* Header Bar - Clean Minimalist Brand Header */}
       <header className="site-header">
         <div className="header-inner">
