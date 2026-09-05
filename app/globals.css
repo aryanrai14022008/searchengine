@@ -645,7 +645,7 @@ body {
   opacity: 0;
 }
 
-/* Envelope Seal & Tap Badge Unit (Centered & Never Clipped) */
+/* Envelope Badge Unit (Centered & Never Clipped) */
 .envelope-seal-unit {
   position: absolute;
   top: 50%;
@@ -653,9 +653,8 @@ body {
   transform: translate(-50%, -50%);
   z-index: 25;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
   pointer-events: none;
   transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -665,39 +664,18 @@ body {
   transform: translate(-50%, -50%) scale(0.4);
 }
 
-/* Envelope Wax Seal */
-.envelope-seal {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #E74C3C 0%, #96281B 100%);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 2px 3px rgba(255, 255, 255, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFF;
-  font-size: 1.25rem;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-}
-
-.seal-heart {
-  line-height: 1;
-  display: inline-block;
-  transform: translateY(-1px);
-}
-
 /* Simple Clean White Tap to Open Badge */
 .envelope-tap-badge {
   background: #FFFFFF;
-  color: #1A0D08;
+  color: #0F233E;
   font-family: var(--font-body);
-  font-size: clamp(0.74rem, 2vw, 0.82rem);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  padding: 4px 14px;
+  font-size: clamp(0.78rem, 2vw, 0.86rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  padding: 6px 18px;
   border-radius: 20px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   white-space: nowrap;
 }
 

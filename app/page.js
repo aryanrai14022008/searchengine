@@ -276,15 +276,12 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Envelope Front Flap & Seal */}
+              {/* Envelope Front Flap */}
               <div className="envelope-front-fold" />
               <div className="envelope-top-flap" />
 
-              {/* Seal and Tap Badge Unit (Never clipped by flap) */}
+              {/* Tap Badge Unit */}
               <div className="envelope-seal-unit">
-                <div className="envelope-seal">
-                  <span className="seal-heart">♥</span>
-                </div>
                 <div className="envelope-tap-badge">
                   <span>Tap to open</span>
                 </div>
