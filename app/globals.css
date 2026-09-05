@@ -547,7 +547,7 @@ body {
     0 0 0 1px rgba(255, 255, 255, 0.25);
 }
 
-/* Left Side: Horizontal Image Column (HD Portrait Crayon Drawing) */
+/* Left Side: Horizontal Image Column (HD Full-Bleed Lined Notebook) */
 .cause-card-image-col {
   background: #FFFFFF;
   position: relative;
@@ -560,10 +560,9 @@ body {
 .cause-card-photo {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   display: block;
-  background: #FFFFFF;
 }
 
 /* Right Side: Light cyan/blue background matching reference */
