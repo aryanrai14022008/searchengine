@@ -273,126 +273,67 @@ body {
   }
 }
 
-.bar-interactive-stage {
+/* Pop-up Ingredients Plate */
+.ingredients-plate-popup {
   position: relative;
+  width: 280px;
+  max-width: 86vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: popUpPlate 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.55));
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+@keyframes popUpPlate {
+  0% {
+    opacity: 0;
+    transform: scale(0.65) translateY(20px) rotate(-6deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+}
+
+.plate-popup-img {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.55));
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform: rotate(-2deg) translateZ(0);
+  height: auto;
+  object-fit: contain;
+  display: block;
+  background: transparent !important;
+  animation: floatPlate 3.2s ease-in-out infinite;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-.hero-bar-sticker-large.opened .bar-interactive-stage {
-  transform: rotate(0deg) translateZ(0);
+@keyframes floatPlate {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(1.5deg);
+  }
 }
 
-/* Emerging Chocolate Protein Bar (slides out upward from inside the wrapper) */
-.bar-emerging-chocolate {
-  position: relative;
-  width: 88%;
-  max-height: 0;
-  opacity: 0;
-  transform: translateY(20px) scale(0.95);
-  transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-  margin-bottom: -16px;
-}
-
-.bar-emerging-chocolate.opened {
-  max-height: 140px;
-  opacity: 1;
-  transform: translateY(0px) scale(1);
-  pointer-events: auto;
-  margin-bottom: -14px;
-}
-
-.chocolate-bar-body {
-  background: linear-gradient(135deg, #3A2016 0%, #26130B 50%, #150804 100%);
-  border: 1.5px solid rgba(226, 125, 96, 0.55);
-  border-bottom: none;
-  border-radius: 14px 14px 4px 4px;
-  padding: 12px 14px 18px;
-  box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.15), 0 -4px 16px rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-}
-
-.chocolate-header {
-  line-height: 1;
-}
-
-.built-with-text {
-  font-family: var(--font-hand);
-  font-size: 1.15rem;
-  font-weight: 800;
+.plate-close-hint {
+  margin-top: 8px;
+  background: rgba(26, 14, 10, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: #E27D60;
-  letter-spacing: 0.04em;
-}
-
-.chocolate-ingredients-flow {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 4px 7px;
-  max-width: 96%;
-}
-
-.ing-tag {
   font-family: var(--font-body);
+  font-size: 0.74rem;
   font-weight: 700;
-  font-size: 0.84rem;
-  color: #FFFFFF;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-}
-
-.ing-separator {
-  color: #E27D60;
-  font-size: 0.72rem;
-  opacity: 0.85;
-}
-
-/* Packaging Layer (stays in front around the bottom of the emerging bar) */
-.bar-packaging-layer {
-  position: relative;
-  width: 100%;
-  z-index: 2;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.bar-packaging-layer.opened {
-  transform: translateY(4px) scale(0.98);
-}
-
-.wrap-close-pill {
-  position: absolute;
-  bottom: 8px;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.68rem;
-  font-weight: 700;
-  padding: 3px 10px;
+  padding: 4px 14px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(226, 125, 96, 0.4);
   letter-spacing: 0.02em;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
 }
 
 .headline-bar-img {
@@ -413,24 +354,11 @@ body {
   .hero-bar-sticker-large {
     width: min(295px, 88vw);
   }
+  .ingredients-plate-popup {
+    width: min(245px, 82vw);
+  }
   .hero-thought-bubble {
     width: 125px;
-  }
-  .bar-emerging-chocolate {
-    width: 86%;
-  }
-  .chocolate-bar-body {
-    padding: 10px 10px 14px;
-    gap: 4px;
-  }
-  .built-with-text {
-    font-size: 1.05rem;
-  }
-  .ing-tag {
-    font-size: 0.76rem;
-  }
-  .chocolate-ingredients-flow {
-    gap: 3px 5px;
   }
 }
 

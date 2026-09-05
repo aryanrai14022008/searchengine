@@ -187,31 +187,9 @@ export default function HomePage() {
                   </div>
                 )}
 
-                <div className="bar-interactive-stage">
-                  {/* Real textured chocolate bar that emerges from inside the packaging */}
-                  <div className={`bar-emerging-chocolate ${isBarOpened ? 'opened' : ''}`}>
-                    <div className="chocolate-bar-body">
-                      <div className="chocolate-header">
-                        <span className="built-with-text">Built with</span>
-                      </div>
-                      <div className="chocolate-ingredients-flow">
-                        <span className="ing-tag">Dates</span>
-                        <span className="ing-separator">•</span>
-                        <span className="ing-tag">Almonds</span>
-                        <span className="ing-separator">•</span>
-                        <span className="ing-tag">Cocoa</span>
-                        <span className="ing-separator">•</span>
-                        <span className="ing-tag">Protein Blend</span>
-                        <span className="ing-separator">•</span>
-                        <span className="ing-tag">Peanuts</span>
-                        <span className="ing-separator">•</span>
-                        <span className="ing-tag">Coffee</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* The Packaging Wrapper Layer */}
-                  <div className={`bar-packaging-layer ${isBarOpened ? 'opened' : ''}`}>
+                {/* When Closed: The Bar Wrapper Sticker */}
+                {!isBarOpened && (
+                  <div className="bar-wrapper-visual">
                     <img
                       src="/sticker_bar_clean.png?v=8"
                       srcSet="/sticker_bar_clean.png?v=8 1x, /sticker_bar_hd.png?v=8 2x"
@@ -220,11 +198,20 @@ export default function HomePage() {
                       loading="eager"
                       decoding="async"
                     />
-                    {isBarOpened && (
-                      <span className="wrap-close-pill">Tap to wrap ↩</span>
-                    )}
                   </div>
-                </div>
+                )}
+
+                {/* When Opened: Pop up the Plate with Ingredients */}
+                {isBarOpened && (
+                  <div className="ingredients-plate-popup">
+                    <img
+                      src="/ingredients_plate.png?v=1"
+                      alt="HumblBar Real Ingredients Plate"
+                      className="plate-popup-img"
+                    />
+                    <span className="plate-close-hint">Tap to close ↩</span>
+                  </div>
+                )}
               </div>
             </div>
 
