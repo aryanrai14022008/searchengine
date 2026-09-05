@@ -286,7 +286,7 @@ export default function HomePage() {
                   <span className="seal-heart">♥</span>
                 </div>
                 <div className="envelope-tap-badge">
-                  <span>✨ Tap to open</span>
+                  <span>Tap to open</span>
                 </div>
               </div>
 

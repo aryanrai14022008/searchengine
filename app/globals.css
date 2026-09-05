@@ -683,31 +683,19 @@ body {
   transform: translateY(-1px);
 }
 
-/* Vibrant & Attractive Tap to Open Badge */
+/* Simple Clean White Tap to Open Badge */
 .envelope-tap-badge {
-  background: linear-gradient(135deg, #FFE8B0 0%, #F5A27A 45%, #E27D60 100%);
-  color: #1A0A04;
+  background: #FFFFFF;
+  color: #1A0D08;
   font-family: var(--font-body);
-  font-size: clamp(0.76rem, 2.2vw, 0.86rem);
-  font-weight: 800;
-  letter-spacing: 0.03em;
-  padding: 5px 16px;
+  font-size: clamp(0.74rem, 2vw, 0.82rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 4px 14px;
   border-radius: 20px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 209, 102, 0.6);
-  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   white-space: nowrap;
-  animation: pulseTapVibrant 2.2s ease-in-out infinite;
-}
-
-@keyframes pulseTapVibrant {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 14px rgba(255, 209, 102, 0.5);
-  }
-  50% {
-    transform: scale(1.06);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 22px rgba(255, 209, 102, 0.85);
-  }
 }
 
 /* Left Side: Photo Column */
