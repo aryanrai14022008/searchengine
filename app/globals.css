@@ -547,9 +547,9 @@ body {
     0 0 0 1px rgba(255, 255, 255, 0.25);
 }
 
-/* Left Side: Horizontal Image Column */
+/* Left Side: Horizontal Image Column (HD Crayon Drawing) */
 .cause-card-image-col {
-  background: #EBF6FA;
+  background: #FFFFFF;
   position: relative;
   overflow: hidden;
   display: flex;
