@@ -191,9 +191,18 @@ body {
   margin-bottom: 12px;
 }
 
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .hero-bar-top-container {
   display: flex;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -203,7 +212,8 @@ body {
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   background: transparent !important;
   border: none;
   cursor: pointer;
@@ -261,7 +271,7 @@ body {
   max-height: 0;
   overflow: hidden;
   transition: all 0.35s ease;
-  text-align: left;
+  text-align: center;
   line-height: 1.25;
   width: 100%;
 }
@@ -304,6 +314,7 @@ body {
   letter-spacing: -0.03em;
   margin-bottom: 24px;
   color: #FFFFFF;
+  text-align: center;
 }
 
 .hero-highlight {
@@ -385,6 +396,9 @@ body {
 
 .hero-cta-group {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   gap: 12px;
   margin-bottom: 12px;
 }
