@@ -259,9 +259,18 @@ export default function HomePage() {
 
                 {/* Right: Cause Card */}
                 <div className="dream-copy-side">
-                  <h3 className="dream-headline">
-                    Nourishing Potential, One Clean Bite at a Time.
-                  </h3>
+                  <div className="dream-copy-header">
+                    <h3 className="dream-headline">
+                      Nourishing Potential, One Clean Bite at a Time.
+                    </h3>
+                    <div className="dream-ingredients-seal" title="Whole Food Ingredients: Dates, Almonds, Cocoa, Coffee, Peanuts">
+                      <img
+                        src="/sticker_ingredients.png"
+                        alt="Whole Food Ingredients"
+                        className="dream-ingredients-seal-img"
+                      />
+                    </div>
+                  </div>
                   <p className="dream-p">
                     While you stay energized with whole Medjool dates and pure almonds, a child receives a balanced, nourishing meal for school.
                   </p>
