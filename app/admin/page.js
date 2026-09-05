@@ -4,33 +4,23 @@ import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import {
   Users,
-  Heart,
-  HelpCircle,
-  Mail,
   Download,
   Search,
   Trash2,
   Eye,
   Lock,
   LogOut,
-  CheckCircle,
+  Check,
   ExternalLink,
   Shield,
-  Filter,
   X,
   RefreshCw,
   Phone,
-  MessageSquare,
   Copy,
-  Check,
-  Award,
-  Sparkles,
-  PieChart,
   Calendar,
-  Clock,
-  Send
+  Clock
 } from 'lucide-react';
-import { QUIZ_QUESTIONS, ARCHETYPES } from '@/lib/quizData';
+import { QUIZ_QUESTIONS } from '@/lib/quizData';
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -41,7 +31,6 @@ export default function AdminPage() {
 
   // Dashboard Data
   const [items, setItems] = useState([]);
-  const [metrics, setMetrics] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
   const [selectedResponse, setSelectedResponse] = useState(null);
@@ -98,10 +87,10 @@ export default function AdminPage() {
         setIsAuthenticated(true);
         fetchData();
       } else {
-        setLoginError(data.error || 'Invalid password. Try "admin123"');
+        setLoginError('Invalid access credentials. Please try again.');
       }
     } catch (err) {
-      setLoginError('Login request failed');
+      setLoginError('Login request failed. Please try again.');
     }
   };
 
@@ -122,7 +111,6 @@ export default function AdminPage() {
       const data = await res.json();
       if (data.success) {
         setItems(data.items || []);
-        setMetrics(data.metrics || null);
       }
     } catch (err) {
       console.error('Fetch error:', err);
@@ -138,7 +126,7 @@ export default function AdminPage() {
   }, [searchQuery, typeFilter, isAuthenticated]);
 
   const handleDelete = async (id) => {
-    if (!confirm('Are you sure you want to permanently delete this submission?')) return;
+    if (!confirm('Are you sure you want to permanently delete this candidate record?')) return;
     setDeletingId(id);
     try {
       const res = await fetch(`/api/responses?id=${id}`, { method: 'DELETE' });
@@ -146,7 +134,7 @@ export default function AdminPage() {
       if (data.success) {
         setItems(prev => prev.filter(item => item._id !== id));
         fetchData();
-        showToast('Lead deleted successfully');
+        showToast('Candidate record deleted successfully');
       }
     } catch (err) {
       alert('Failed to delete item');
@@ -155,64 +143,33 @@ export default function AdminPage() {
     }
   };
 
-  // Archetype distribution calculation
-  const archetypeDistribution = useMemo(() => {
-    const quizItems = items.filter(i => i.type === 'quiz');
-    const total = quizItems.length;
-    if (total === 0) return [];
-
-    const counts = {};
-    ARCHETYPES.forEach(arch => {
-      counts[arch.id] = { ...arch, count: 0 };
-    });
-
-    quizItems.forEach(item => {
-      const archId = item.archetype?.id;
-      if (archId && counts[archId]) {
-        counts[archId].count += 1;
-      } else {
-        // match by title or fallback to first
-        const matched = ARCHETYPES.find(a => a.title === item.archetype?.title);
-        if (matched && counts[matched.id]) {
-          counts[matched.id].count += 1;
-        }
-      }
-    });
-
-    return Object.values(counts).map(a => ({
-      ...a,
-      percentage: Math.round((a.count / total) * 100)
-    }));
-  }, [items]);
-
   const exportCSV = () => {
     if (!items.length) {
-      alert('No leads available to export.');
+      alert('No candidates available to export.');
       return;
     }
 
-    const headers = ['Type', 'Customer Name', 'Email', 'Phone', 'Pass ID / Category', 'Snack Archetype / Subject', 'Submission Date', 'Details / Answers'];
+    const headers = ['Type', 'Candidate Name', 'Email', 'Phone', 'Pass ID / Reference', 'Submission Date', 'Details / Answers'];
     const rows = items.map(item => {
       const isQuiz = item.type === 'quiz';
-      const type = isQuiz ? 'Quiz Waitlist' : 'Wholesale / Contact';
+      const type = isQuiz ? 'Quiz Waitlist' : 'Inquiry';
       const name = `"${item.name || ''}"`;
       const email = `"${item.email || ''}"`;
       const phone = `"${item.phone || ''}"`;
       const passId = isQuiz ? (item.passId || '') : 'Direct Inquiry';
-      const archetype = isQuiz ? (item.archetype?.title || 'Power Strategist') : (item.subject || '');
       const date = item.createdAt ? new Date(item.createdAt).toLocaleString() : '';
       const details = isQuiz 
         ? `"${Object.entries(item.answers || {}).map(([k, v]) => `${k}: ${v}`).join('; ')}"`
         : `"${(item.message || '').replace(/"/g, '""')}"`;
 
-      return [type, name, email, phone, passId, `"${archetype}"`, `"${date}"`, details].join(',');
+      return [type, name, email, phone, passId, `"${date}"`, details].join(',');
     });
 
     const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows].join('\n');
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `humblbar_leads_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute('download', `humblbar_candidates_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -228,7 +185,6 @@ export default function AdminPage() {
     return map;
   }, []);
 
-  // Format phone for direct WhatsApp link
   const getWhatsAppLink = (phone) => {
     if (!phone) return null;
     const cleanDigits = phone.replace(/[^0-9]/g, '');
@@ -236,7 +192,6 @@ export default function AdminPage() {
     return `https://wa.me/${cleanDigits}`;
   };
 
-  // Helper for initials
   const getInitials = (name) => {
     if (!name) return 'HB';
     const parts = name.trim().split(' ');
@@ -248,12 +203,12 @@ export default function AdminPage() {
     return (
       <div className="admin-loading-screen">
         <div className="admin-spinner" />
-        <p className="admin-loading-text">Initializing HumblBar Control Hub...</p>
+        <p className="admin-loading-text">Loading candidate records...</p>
       </div>
     );
   }
 
-  // Login Screen
+  // Login Screen (No default keys visible)
   if (!isAuthenticated) {
     return (
       <div className="admin-login-wrapper">
@@ -262,11 +217,11 @@ export default function AdminPage() {
         <div className="admin-login-card">
           <div className="admin-login-header">
             <div className="admin-lock-badge">
-              <Shield size={28} color="#F3B562" />
+              <Shield size={26} color="#F3B562" />
             </div>
-            <h1 className="admin-login-title">Client Admin Portal</h1>
+            <h1 className="admin-login-title">Admin Portal</h1>
             <p className="admin-login-subtitle">
-              Confidential control hub for HumblBar founding leads & customer quiz profiles.
+              Enter your secure admin key to view and manage candidate submissions.
             </p>
           </div>
 
@@ -279,7 +234,7 @@ export default function AdminPage() {
                   type="password"
                   required
                   autoFocus
-                  placeholder="Enter access password..."
+                  placeholder="Enter security key..."
                   className="admin-input"
                   value={passwordInput}
                   onChange={(e) => setPasswordInput(e.target.value)}
@@ -289,22 +244,19 @@ export default function AdminPage() {
 
             {loginError && (
               <div className="admin-error-alert">
-                <span>⚠️ {loginError}</span>
+                <span>{loginError}</span>
               </div>
             )}
 
             <button type="submit" className="admin-btn-primary">
-              <span>Unlock Executive Portal</span>
+              <span>Sign In</span>
               <span>→</span>
             </button>
           </form>
 
           <div className="admin-login-footer">
-            <div className="admin-key-hint">
-              <span>Default key: <code>admin123</code></span>
-            </div>
             <Link href="/" className="admin-back-link">
-              ← Return to live website
+              ← Return to website
             </Link>
           </div>
         </div>
@@ -312,7 +264,7 @@ export default function AdminPage() {
     );
   }
 
-  // Authenticated Admin Dashboard
+  // Authenticated Admin Dashboard: Candidate Details Only
   return (
     <div className="admin-shell">
       {/* Toast Notification */}
@@ -330,11 +282,11 @@ export default function AdminPage() {
             <div className="admin-logo-badge">HB</div>
             <div>
               <div className="admin-brand-name">
-                HUMBLBAR <span className="admin-badge-tag">EXECUTIVE HUB</span>
+                HUMBLBAR <span className="admin-badge-tag">ADMIN</span>
               </div>
               <div className="admin-status-indicator">
                 <span className="status-dot-pulse" />
-                <span className="status-label">Live Lead Engine Active</span>
+                <span className="status-label">Live Database Connected</span>
               </div>
             </div>
           </div>
@@ -344,10 +296,10 @@ export default function AdminPage() {
               onClick={fetchData}
               disabled={refreshing}
               className="admin-btn-secondary"
-              title="Refresh leads data"
+              title="Refresh candidate data"
             >
               <RefreshCw size={15} className={refreshing ? 'spin-icon' : ''} />
-              <span className="hide-mobile">{refreshing ? 'Updating...' : 'Sync Data'}</span>
+              <span className="hide-mobile">{refreshing ? 'Refreshing...' : 'Sync Data'}</span>
             </button>
 
             <Link
@@ -371,115 +323,21 @@ export default function AdminPage() {
       </header>
 
       <main className="admin-container">
-        {/* Welcome Section */}
+        {/* Simple Clean Header Bar */}
         <section className="admin-welcome-bar">
           <div>
-            <h1 className="admin-page-title">Executive Overview</h1>
+            <h1 className="admin-page-title">Candidate Details</h1>
             <p className="admin-page-sub">
-              Real-time customer waitlist, computed snack archetypes, and pledged meals impact tracker.
+              All submitted quiz candidates and contacts stored permanently in cloud MongoDB.
             </p>
           </div>
           <div className="admin-export-action">
             <button onClick={exportCSV} className="admin-btn-gold">
               <Download size={16} />
-              <span>Export CSV ({items.length} Leads)</span>
+              <span>Export CSV ({items.length})</span>
             </button>
           </div>
         </section>
-
-        {/* 4 Stat KPI Cards */}
-        <section className="admin-kpi-grid">
-          <div className="admin-kpi-card">
-            <div className="kpi-icon-wrap" style={{ background: 'rgba(200, 117, 86, 0.15)', color: '#C87556' }}>
-              <Users size={22} />
-            </div>
-            <div className="kpi-content">
-              <span className="kpi-title">TOTAL CUSTOMER LEADS</span>
-              <div className="kpi-number">{metrics?.totalWaitlistCount ?? items.length}</div>
-              <div className="kpi-subtext positive">
-                <span>↑ 100% Organic Founders</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="admin-kpi-card">
-            <div className="kpi-icon-wrap" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#F87171' }}>
-              <Heart size={22} />
-            </div>
-            <div className="kpi-content">
-              <span className="kpi-title">MEALS PLEDGED TO CHARITY</span>
-              <div className="kpi-number" style={{ color: '#F87171' }}>
-                {metrics?.totalMealsPledged ?? items.filter(i => i.type === 'quiz').length}
-              </div>
-              <div className="kpi-subtext">
-                <span>1 Bar = 1 Meal per signup</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="admin-kpi-card">
-            <div className="kpi-icon-wrap" style={{ background: 'rgba(243, 181, 98, 0.15)', color: '#F3B562' }}>
-              <Sparkles size={22} />
-            </div>
-            <div className="kpi-content">
-              <span className="kpi-title">SNACK DNA QUIZZES</span>
-              <div className="kpi-number">{metrics?.totalQuizResponses ?? items.filter(i => i.type === 'quiz').length}</div>
-              <div className="kpi-subtext positive">
-                <span>Completed 8-Question Profiles</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="admin-kpi-card">
-            <div className="kpi-icon-wrap" style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#60A5FA' }}>
-              <Mail size={22} />
-            </div>
-            <div className="kpi-content">
-              <span className="kpi-title">WHOLESALE / INQUIRIES</span>
-              <div className="kpi-number">{metrics?.totalContacts ?? items.filter(i => i.type === 'contact').length}</div>
-              <div className="kpi-subtext">
-                <span>Direct Partner Messages</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Archetype Breakdown Progress Cards */}
-        {archetypeDistribution.length > 0 && (
-          <section className="admin-archetype-panel">
-            <div className="panel-header">
-              <div className="panel-title-group">
-                <PieChart size={18} color="#F3B562" />
-                <h2 className="panel-title">Customer Flavor & Craving Archetype Distribution</h2>
-              </div>
-              <span className="panel-badge">{items.filter(i => i.type === 'quiz').length} Completed Quizzes</span>
-            </div>
-
-            <div className="archetype-bar-grid">
-              {archetypeDistribution.map((arch) => (
-                <div key={arch.id} className="archetype-stat-box">
-                  <div className="arch-stat-top">
-                    <span className="arch-stat-name">{arch.title}</span>
-                    <span className="arch-stat-count">{arch.count} ({arch.percentage}%)</span>
-                  </div>
-                  <div className="arch-progress-track">
-                    <div
-                      className="arch-progress-fill"
-                      style={{
-                        width: `${Math.max(arch.percentage, 4)}%`,
-                        background: arch.tagColor || 'linear-gradient(90deg, #C87556, #F3B562)'
-                      }}
-                    />
-                  </div>
-                  <div className="arch-stat-sub">
-                    <span>{arch.name}</span>
-                    <span>Score: {arch.cleanLabelScore}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
 
         {/* Controls, Search & Filter Bar */}
         <section className="admin-table-section">
@@ -489,7 +347,7 @@ export default function AdminPage() {
                 <Search size={18} className="search-icon" />
                 <input
                   type="text"
-                  placeholder="Search by customer name, email, phone, pass ID..."
+                  placeholder="Search candidate by name, email, phone, pass ID..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="search-field"
@@ -512,7 +370,7 @@ export default function AdminPage() {
                   onClick={() => setTypeFilter('quiz')}
                   className={`filter-chip ${typeFilter === 'quiz' ? 'active' : ''}`}
                 >
-                  Quiz Waitlist
+                  Quiz Candidates
                 </button>
                 <button
                   onClick={() => setTypeFilter('contact')}
@@ -525,20 +383,19 @@ export default function AdminPage() {
 
             <div className="toolbar-right">
               <span className="results-count-pill">
-                Showing {items.length} {items.length === 1 ? 'record' : 'records'}
+                Total: {items.length} {items.length === 1 ? 'candidate' : 'candidates'}
               </span>
             </div>
           </div>
 
-          {/* Submissions Table */}
+          {/* Candidates Submissions Table */}
           <div className="admin-table-container">
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>CUSTOMER</th>
+                  <th>CANDIDATE</th>
                   <th>CONTACT DETAILS</th>
-                  <th>SOURCE & TYPE</th>
-                  <th>SNACK ARCHETYPE / TOPIC</th>
+                  <th>TYPE</th>
                   <th>PASS / REF ID</th>
                   <th>SUBMITTED</th>
                   <th style={{ textAlign: 'right' }}>ACTIONS</th>
@@ -547,14 +404,14 @@ export default function AdminPage() {
               <tbody>
                 {items.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="table-empty-cell">
+                    <td colSpan={6} className="table-empty-cell">
                       <div className="empty-state-wrap">
                         <Users size={36} color="rgba(255, 255, 255, 0.2)" />
-                        <p className="empty-title">No submissions found</p>
+                        <p className="empty-title">No candidates found</p>
                         <p className="empty-desc">
                           {searchQuery
-                            ? `No records matching "${searchQuery}". Try clearing your search.`
-                            : 'New leads will automatically appear here when customers complete the Snack DNA quiz.'}
+                            ? `No records matching "${searchQuery}".`
+                            : 'Candidate submissions will appear here after attempting the quiz.'}
                         </p>
                       </div>
                     </td>
@@ -572,15 +429,15 @@ export default function AdminPage() {
 
                     return (
                       <tr key={item._id} className="table-row-hover">
-                        {/* Customer Profile */}
+                        {/* Candidate Profile */}
                         <td>
                           <div className="customer-cell">
                             <div className="customer-avatar">
                               {getInitials(item.name)}
                             </div>
                             <div>
-                              <div className="customer-name">{item.name || 'Anonymous User'}</div>
-                              <div className="customer-id-sub">Lead ID: {item._id.slice(-6)}</div>
+                              <div className="customer-name">{item.name || 'Anonymous'}</div>
+                              <div className="customer-id-sub">ID: {item._id ? item._id.slice(-8) : 'N/A'}</div>
                             </div>
                           </div>
                         </td>
@@ -598,10 +455,12 @@ export default function AdminPage() {
                                 {copiedId === `email-${item._id}` ? <Check size={12} color="#10B981" /> : <Copy size={12} />}
                               </button>
                             </div>
-
                             {item.phone && (
-                              <div className="contact-row">
-                                <span className="contact-phone">{item.phone}</span>
+                              <div className="contact-row" style={{ marginTop: '4px' }}>
+                                <span className="contact-phone">
+                                  <Phone size={12} style={{ display: 'inline', marginRight: '4px' }} />
+                                  {item.phone}
+                                </span>
                                 <button
                                   onClick={() => copyToClipboard(item.phone, `phone-${item._id}`)}
                                   className="copy-mini-btn"
@@ -614,11 +473,10 @@ export default function AdminPage() {
                                     href={waLink}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="whatsapp-mini-btn"
-                                    title="Open WhatsApp Chat"
+                                    className="whatsapp-badge-link"
+                                    title="Open WhatsApp chat"
                                   >
-                                    <MessageSquare size={12} />
-                                    <span>WA</span>
+                                    WA
                                   </a>
                                 )}
                               </div>
@@ -626,72 +484,50 @@ export default function AdminPage() {
                           </div>
                         </td>
 
-                        {/* Source Type Badge */}
+                        {/* Type */}
                         <td>
-                          {isQuiz ? (
-                            <span className="lead-pill pill-quiz">
-                              <Sparkles size={12} />
-                              <span>Quiz Waitlist</span>
-                            </span>
-                          ) : (
-                            <span className="lead-pill pill-contact">
-                              <Mail size={12} />
-                              <span>Wholesale</span>
-                            </span>
-                          )}
-                        </td>
-
-                        {/* Archetype / Subject */}
-                        <td>
-                          {isQuiz ? (
-                            <div className="archetype-cell">
-                              <span className="arch-tag-pill">
-                                {item.archetype?.title || 'Power Strategist'}
-                              </span>
-                            </div>
-                          ) : (
-                            <div className="subject-cell" title={item.subject}>
-                              {item.subject || 'Direct Inquiry'}
-                            </div>
-                          )}
+                          <span className={`source-type-pill ${isQuiz ? 'quiz-type' : 'contact-type'}`}>
+                            {isQuiz ? 'Quiz Candidate' : 'Direct Inquiry'}
+                          </span>
                         </td>
 
                         {/* Pass ID */}
                         <td>
-                          {isQuiz ? (
-                            <span className="pass-id-badge">
-                              {item.passId || item.queueNumber || '#0100'}
-                            </span>
-                          ) : (
-                            <span className="text-subtle-mono">Direct Form</span>
-                          )}
+                          <span className="pass-code-pill">
+                            {item.passId || 'VIP-ENTRY'}
+                          </span>
                         </td>
 
-                        {/* Date */}
+                        {/* Submission Time */}
                         <td>
-                          <div className="date-cell">
-                            <span className="date-main">{formattedDate}</span>
-                            <span className="date-time">{formattedTime}</span>
+                          <div className="date-time-cell">
+                            <span className="date-text">
+                              <Calendar size={12} style={{ display: 'inline', marginRight: '4px' }} />
+                              {formattedDate}
+                            </span>
+                            <span className="time-text">
+                              <Clock size={11} style={{ display: 'inline', marginRight: '3px' }} />
+                              {formattedTime}
+                            </span>
                           </div>
                         </td>
 
-                        {/* Actions */}
+                        {/* Actions: View & Delete */}
                         <td style={{ textAlign: 'right' }}>
                           <div className="actions-cell">
                             <button
                               onClick={() => setSelectedResponse(item)}
-                              className="btn-action-view"
-                              title="Inspect full questionnaire answers"
+                              className="action-btn-inspect"
+                              title="Inspect Candidate Answers"
                             >
                               <Eye size={14} />
-                              <span>Inspect</span>
+                              <span>View</span>
                             </button>
-
                             <button
                               onClick={() => handleDelete(item._id)}
                               disabled={deletingId === item._id}
-                              className="btn-action-delete"
-                              title="Delete submission"
+                              className="action-btn-delete"
+                              title="Delete candidate"
                             >
                               <Trash2 size={14} />
                             </button>
@@ -707,146 +543,110 @@ export default function AdminPage() {
         </section>
       </main>
 
-      {/* Detail Inspector Modal */}
+      {/* Candidate Details Modal */}
       {selectedResponse && (
         <div className="admin-modal-overlay" onClick={() => setSelectedResponse(null)}>
           <div className="admin-modal-card" onClick={(e) => e.stopPropagation()}>
-            {/* Modal Header */}
-            <div className="modal-top">
-              <div className="modal-customer-info">
+            <div className="modal-header">
+              <div className="modal-header-left">
                 <div className="customer-avatar large">
                   {getInitials(selectedResponse.name)}
                 </div>
                 <div>
-                  <h3 className="modal-title">{selectedResponse.name}</h3>
-                  <div className="modal-meta-pills">
-                    <span className="meta-pill">{selectedResponse.email}</span>
-                    {selectedResponse.phone && <span className="meta-pill">{selectedResponse.phone}</span>}
-                    <span className="meta-pill">
-                      {new Date(selectedResponse.createdAt).toLocaleString()}
-                    </span>
-                  </div>
+                  <h2 className="modal-customer-name">{selectedResponse.name}</h2>
+                  <p className="modal-customer-sub">
+                    Submitted on {new Date(selectedResponse.createdAt).toLocaleString()} &bull; Pass: {selectedResponse.passId || 'N/A'}
+                  </p>
                 </div>
               </div>
-
-              <button
-                onClick={() => setSelectedResponse(null)}
-                className="modal-close-btn"
-                title="Close"
-              >
+              <button onClick={() => setSelectedResponse(null)} className="modal-close-btn">
                 <X size={20} />
               </button>
             </div>
 
-            {/* Modal Body */}
-            <div className="modal-body-scroll">
-              {selectedResponse.type === 'quiz' ? (
-                <>
-                  {/* Archetype Profile Card */}
-                  <div className="modal-archetype-card">
-                    <div className="modal-arch-header">
-                      <Award size={20} color="#F3B562" />
-                      <div>
-                        <div className="modal-arch-badge">COMPUTED SNACK ARCHETYPE</div>
-                        <h4 className="modal-arch-title">
-                          {selectedResponse.archetype?.title || 'THE 4PM POWER STRATEGIST'}
-                        </h4>
-                      </div>
-                    </div>
-                    <p className="modal-arch-desc">
-                      {selectedResponse.archetype?.description ||
-                        'Prefers balanced clean fuel to sustain focus and avoid afternoon crashes.'}
-                    </p>
-                    <div className="modal-arch-metrics">
-                      <div>
-                        <span>Protein Need</span>
-                        <strong>{selectedResponse.archetype?.proteinNeed || 'High Focus'}</strong>
-                      </div>
-                      <div>
-                        <span>Peak Craving Window</span>
-                        <strong>{selectedResponse.archetype?.cravingTime || '4:00 PM'}</strong>
-                      </div>
-                      <div>
-                        <span>Clean Score</span>
-                        <strong style={{ color: '#10B981' }}>{selectedResponse.archetype?.cleanLabelScore || '98%'}</strong>
-                      </div>
+            <div className="modal-body">
+              {/* Contact Information */}
+              <div className="modal-section">
+                <h3 className="modal-section-title">Contact Information</h3>
+                <div className="modal-contact-grid">
+                  <div className="modal-info-box">
+                    <span className="info-box-label">Email Address</span>
+                    <div className="info-box-val-row">
+                      <span className="info-box-val">{selectedResponse.email}</span>
+                      <button
+                        onClick={() => copyToClipboard(selectedResponse.email, 'modal-email')}
+                        className="copy-mini-btn"
+                      >
+                        <Copy size={13} />
+                      </button>
                     </div>
                   </div>
 
-                  {/* Answers Questionnaire View */}
-                  <div className="modal-answers-section">
-                    <h4 className="section-subtitle">
-                      <span>Quiz Questionnaire Responses</span>
-                      <span className="count-tag">{Object.keys(selectedResponse.answers || {}).length} Questions</span>
-                    </h4>
-
-                    <div className="qa-cards-list">
-                      {QUIZ_QUESTIONS.map((q, idx) => {
-                        const userVal = selectedResponse.answers?.[q.id];
-                        return (
-                          <div key={q.id} className="qa-item-card">
-                            <div className="qa-item-header">
-                              <span className="qa-cat">{q.category}</span>
-                              <span className="qa-step">Step {idx + 1} of 8</span>
-                            </div>
-                            <div className="qa-question">{q.question}</div>
-                            <div className="qa-user-answer">
-                              <span className="ans-label">Selected Option:</span>
-                              <strong className="ans-value">{userVal || 'Not answered'}</strong>
-                            </div>
-                          </div>
-                        );
-                      })}
+                  <div className="modal-info-box">
+                    <span className="info-box-label">Phone Number</span>
+                    <div className="info-box-val-row">
+                      <span className="info-box-val">{selectedResponse.phone || 'Not provided'}</span>
+                      {selectedResponse.phone && (
+                        <>
+                          <button
+                            onClick={() => copyToClipboard(selectedResponse.phone, 'modal-phone')}
+                            className="copy-mini-btn"
+                          >
+                            <Copy size={13} />
+                          </button>
+                          {getWhatsAppLink(selectedResponse.phone) && (
+                            <a
+                              href={getWhatsAppLink(selectedResponse.phone)}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="whatsapp-badge-link"
+                            >
+                              WhatsApp
+                            </a>
+                          )}
+                        </>
+                      )}
                     </div>
-                  </div>
-                </>
-              ) : (
-                /* Contact Message View */
-                <div className="modal-contact-section">
-                  <div className="contact-subject-box">
-                    <span className="subject-label">Subject Topic:</span>
-                    <h4 className="subject-text">{selectedResponse.subject}</h4>
-                  </div>
-
-                  <div className="contact-message-box">
-                    <span className="message-label">Customer Message:</span>
-                    <p className="message-text">{selectedResponse.message}</p>
-                  </div>
-
-                  <div className="contact-actions-footer">
-                    <a
-                      href={`mailto:${selectedResponse.email}?subject=Re: ${encodeURIComponent(selectedResponse.subject || 'HumblBar Partnership')}`}
-                      className="admin-btn-gold"
-                    >
-                      <Send size={16} />
-                      <span>Reply via Email ({selectedResponse.email})</span>
-                    </a>
                   </div>
                 </div>
-              )}
+              </div>
+
+              {/* Quiz Answers / Details */}
+              <div className="modal-section" style={{ marginTop: '20px' }}>
+                <h3 className="modal-section-title">
+                  {selectedResponse.type === 'quiz' ? 'Quiz Responses' : 'Inquiry Message'}
+                </h3>
+
+                {selectedResponse.type === 'quiz' && selectedResponse.answers ? (
+                  <div className="modal-answers-list">
+                    {Object.entries(selectedResponse.answers).map(([key, val]) => {
+                      const qMeta = questionMap[key];
+                      return (
+                        <div key={key} className="modal-answer-item">
+                          <div className="answer-question-text">
+                            {qMeta ? qMeta.question : key}
+                          </div>
+                          <div className="answer-value-badge">
+                            {String(val)}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="modal-message-box">
+                    <p>{selectedResponse.message || 'No additional message provided.'}</p>
+                  </div>
+                )}
+              </div>
             </div>
 
-            {/* Modal Bottom Bar */}
-            <div className="modal-bottom-bar">
-              {selectedResponse.phone && getWhatsAppLink(selectedResponse.phone) && (
-                <a
-                  href={getWhatsAppLink(selectedResponse.phone)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="admin-btn-secondary"
-                  style={{ gap: '8px' }}
-                >
-                  <MessageSquare size={16} color="#22C55E" />
-                  <span>Chat on WhatsApp</span>
-                </a>
-              )}
+            <div className="modal-footer">
               <button
-                type="button"
                 onClick={() => setSelectedResponse(null)}
-                className="admin-btn-primary"
-                style={{ marginLeft: 'auto', width: 'auto', padding: '10px 24px' }}
+                className="admin-btn-secondary"
               >
-                Done
+                Close
               </button>
             </div>
           </div>

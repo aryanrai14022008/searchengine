@@ -7,21 +7,35 @@ import {
   ArrowRight,
   ArrowLeft,
   CheckCircle,
-  Heart,
   Volume2,
   VolumeX,
   User,
   Mail,
-  Phone
+  Phone,
+  Sparkles
 } from 'lucide-react';
 
+const CHOCOLATE_PARTICLES = [
+  { icon: '🍫', left: '5%', size: '2.4rem', duration: '18s', delay: '-2s', opacity: 0.4 },
+  { icon: '🌰', left: '16%', size: '1.8rem', duration: '22s', delay: '-8s', opacity: 0.35 },
+  { icon: '🍫', left: '27%', size: '2.6rem', duration: '16s', delay: '-14s', opacity: 0.42 },
+  { icon: '🌴', left: '38%', size: '1.9rem', duration: '20s', delay: '-5s', opacity: 0.32 },
+  { icon: '✨', left: '49%', size: '1.4rem', duration: '15s', delay: '-11s', opacity: 0.45 },
+  { icon: '🍫', left: '60%', size: '2.3rem', duration: '19s', delay: '-1s', opacity: 0.4 },
+  { icon: '🌰', left: '72%', size: '1.7rem', duration: '24s', delay: '-16s', opacity: 0.35 },
+  { icon: '🍫', left: '83%', size: '2.6rem', duration: '18s', delay: '-7s', opacity: 0.44 },
+  { icon: '🌴', left: '91%', size: '1.9rem', duration: '21s', delay: '-13s', opacity: 0.32 },
+  { icon: '🤎', left: '96%', size: '1.6rem', duration: '19s', delay: '-4s', opacity: 0.38 },
+  { icon: '🍫', left: '11%', size: '2.1rem', duration: '23s', delay: '-17s', opacity: 0.38 }
+];
 
 export default function HomePage() {
-  // 0: Details Gate (Name, Email, Phone), 1-8: MCQ Questions, 9: Thank You & Personality Reveal
+  // 0: Details Gate (Name, Email, Phone), 1-8: MCQ Questions, 9: Thank You Screen
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
   const [answers, setAnswers] = useState({});
   const [computedArchetype, setComputedArchetype] = useState(null);
+  const [assignedPassId, setAssignedPassId] = useState('HBL-VIP-8821');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
 
@@ -56,7 +70,7 @@ export default function HomePage() {
           g.gain.setValueAtTime(0.18, t);
           g.gain.exponentialRampToValueAtTime(0.001, t + 0.55);
           o.connect(g);
-          g.connect(ctx.destination);
+          gain.connect(ctx.destination);
           o.start(t);
           o.stop(t + 0.55);
         });
@@ -89,6 +103,8 @@ export default function HomePage() {
       // Last question answered -> Compute Archetype & Store to MongoDB / Admin API
       const archetype = calculateArchetype(updatedAnswers);
       setComputedArchetype(archetype);
+      const generatedPass = `HBL-VIP-${Math.floor(1000 + Math.random() * 9000)}`;
+      setAssignedPassId(generatedPass);
       setIsSubmitting(true);
 
       try {
@@ -130,6 +146,24 @@ export default function HomePage() {
       <div className="ambient-glow glow-2" aria-hidden="true"></div>
       <div className="ambient-glow glow-3" aria-hidden="true"></div>
 
+      {/* Floating Chocolate Animation Layer */}
+      <div className="particles-bg" aria-hidden="true">
+        {CHOCOLATE_PARTICLES.map((p, i) => (
+          <div
+            key={i}
+            className="floating-chocolate-item"
+            style={{
+              left: p.left,
+              fontSize: p.size,
+              animationDuration: p.duration,
+              animationDelay: p.delay,
+              '--particle-opacity': p.opacity
+            }}
+          >
+            {p.icon}
+          </div>
+        ))}
+      </div>
 
       {/* Header Bar */}
       <header className="site-header">
@@ -139,15 +173,13 @@ export default function HomePage() {
           </a>
 
           <div className="header-center-pill">
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Heart size={14} fill="#F3B562" /> 1 Bar = 1 Nutritious Child Meal
-            </span>
+            <span>Clean Nutrition &bull; 1 Bar = 1 Meal for a Child</span>
           </div>
 
           <div className="header-actions">
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
-              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.18)', width: '34px', height: '34px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF', cursor: 'pointer' }}
+              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.18)', width: '34px', height: '34px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF', cursor: 'pointer' }}
               title={soundEnabled ? 'Mute Audio' : 'Enable Audio'}
             >
               {soundEnabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
@@ -250,14 +282,18 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Right: Directed Text */}
+                {/* Right: Cause Card */}
                 <div className="dream-copy-side">
-                  <h2 className="dream-headline">
-                    Behind every classroom is a <strong>dream.</strong>
-                  </h2>
-                  <p className="dream-desc">
-                    Every Humbl Bar helps create opportunities for children through education.
+                  <h3 className="dream-headline">
+                    Nourishing Potential, One Clean Bite at a Time.
+                  </h3>
+                  <p className="dream-p">
+                    While you stay energized with whole Medjool dates and pure almonds, a child receives a balanced, nourishing meal for school.
                   </p>
+                  <div className="dream-badge-row">
+                    <span className="dream-tag-badge">ZERO PRESERVATIVES</span>
+                    <span className="dream-tag-badge">15G PROTEIN</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -266,223 +302,217 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Interactive Terracotta Step-by-Step Quiz */}
-      <section className="quiz-section" id="quiz">
-        <div className="quiz-section-header">
-          <span className="section-tag">60-SECOND INTERACTIVE QUIZ</span>
-          <h2 className="section-heading">Uncover Your Snack DNA</h2>
-          <p className="section-sub">
-            {currentStep === 0
-              ? 'Enter your details below to start your personalized 60-second quiz.'
-              : currentStep <= 8
-              ? 'Answer each question below — the quiz advances automatically.'
-              : 'Your personalized profile is ready!'}
-          </p>
-        </div>
+      {/* Main Interactive Questionnaire Section */}
+      <section id="quiz" className="quiz-section-wrap">
+        <div className="quiz-container">
+          
+          <div className="section-title-center">
+            <span className="sub-badge">INTERACTIVE DISCOVERY</span>
+            <h2 className="section-heading">Discover Your Snack Personality</h2>
+            <p className="section-sub">
+              Answer 8 quick questions to unlock your custom profile & pledge your meal donation.
+            </p>
+          </div>
 
-        <div className="terracotta-card-container">
-          <div className="terracotta-card">
-            
-            {/* Card Progress Header */}
-            <div className="card-header">
-              <div className="card-header-top">
-                {currentStep > 1 && currentStep <= 8 ? (
-                  <button type="button" className="back-btn" onClick={() => setCurrentStep(prev => prev - 1)}>
-                    <ArrowLeft size={13} />
-                    <span>Back</span>
-                  </button>
-                ) : (
-                  <div style={{ width: '48px' }}></div>
-                )}
-
-                <div className="sub-header-title">
-                  <span className="header-main-tag">DISCOVER YOUR SNACK PERSONALITY</span>
-                  <span className="header-sub-tag">Snack for you. Hope for a child.</span>
-                </div>
-
-                <div className="step-counter-pill">
-                  <span>
-                    {currentStep === 0
-                      ? 'Start'
-                      : currentStep <= 8
-                      ? `Question ${currentStep} of 8`
-                      : 'Completed'}
-                  </span>
-                </div>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="progress-wrapper">
-                <div className="progress-track">
-                  <div
-                    className="progress-fill"
-                    style={{
-                      width:
-                        currentStep === 0
-                          ? '10%'
-                          : currentStep <= 8
-                          ? `${((currentStep) / 8) * 100}%`
-                          : '100%'
-                    }}
-                  ></div>
-                </div>
-                <div className="progress-details">
-                  <span>
-                    {currentStep === 0
-                      ? 'Step 1: Your Details'
-                      : currentStep <= 8
-                      ? 'Analyzing daily habits...'
-                      : 'Thank You! Completed'}
-                  </span>
-                  <span>
-                    {currentStep === 0
-                      ? '10%'
-                      : currentStep <= 8
-                      ? `${Math.round(((currentStep) / 8) * 100)}%`
-                      : '100%'}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Viewport */}
-            <div className="steps-viewport">
+          <div className="terracotta-card-container">
+            <div className="terracotta-card">
               
-              {/* STEP 0: Blocked Gate - Enter Name, Email, Phone */}
-              {currentStep === 0 && (
-                <div>
-                  <div className="step-category">GET STARTED</div>
-                  <h2 className="step-question">Tell us about yourself</h2>
-                  <p className="step-sub">Enter your details to unlock your custom Snack DNA Quiz and pledge a child meal.</p>
-
-                  <form onSubmit={handleStartQuiz} className="waitlist-card-form">
-                    <div className="form-row">
-                      <label className="field-label">Your Name *</label>
-                      <div className="input-container">
-                        <User size={16} className="input-icon" />
-                        <input
-                          type="text"
-                          required
-                          placeholder="e.g. Aryan Sharma"
-                          className="input-field"
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-row">
-                      <label className="field-label">Email Address *</label>
-                      <div className="input-container">
-                        <Mail size={16} className="input-icon" />
-                        <input
-                          type="email"
-                          required
-                          placeholder="e.g. aryan@example.com"
-                          className="input-field"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-row">
-                      <label className="field-label">Phone / WhatsApp *</label>
-                      <div className="input-container">
-                        <Phone size={16} className="input-icon" />
-                        <input
-                          type="tel"
-                          required
-                          placeholder="e.g. 9876543210"
-                          className="input-field"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        />
-                      </div>
-                    </div>
-
-                    <button type="submit" className="submit-waitlist-btn">
-                      <span>Start 60-Second Quiz</span>
-                      <ArrowRight size={16} />
-                    </button>
-                  </form>
-                </div>
-              )}
-
-              {/* STEPS 1 to 8: Clean MCQ Questions (Numbered, No Emojis) */}
-              {currentStep >= 1 && currentStep <= 8 && (
-                <div>
-                  <div className="step-category">{QUIZ_QUESTIONS[currentStep - 1].category}</div>
-                  <h2 className="step-question">{QUIZ_QUESTIONS[currentStep - 1].question}</h2>
-                  <p className="step-sub">{QUIZ_QUESTIONS[currentStep - 1].subtitle}</p>
-
-                  <div className="options-container">
-                    {QUIZ_QUESTIONS[currentStep - 1].options.map((opt, idx) => {
-                      const isSelected = answers[QUIZ_QUESTIONS[currentStep - 1].id] === opt.val;
-                      return (
-                        <button
-                          key={idx}
-                          type="button"
-                          className={`option-pill ${isSelected ? 'selected' : ''}`}
-                          onClick={() => handleSelectOption(QUIZ_QUESTIONS[currentStep - 1].id, opt.val)}
-                        >
-                          <span className="opt-num">{idx + 1}</span>
-                          <span>{opt.label}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {/* STEP 9: Clean Thank You & Personality Reveal */}
-              {currentStep === 9 && computedArchetype && (
-                <div>
-                  <div style={{ textAlign: 'center', marginBottom: '18px' }}>
-                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#2ECC71', color: '#140C08', padding: '5px 14px', borderRadius: '9999px', fontSize: '0.82rem', fontWeight: 800, marginBottom: '10px' }}>
-                      <CheckCircle size={15} /> RESPONSE RECORDED
-                    </div>
-                    <h2 className="step-question" style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', margin: 0 }}>
-                      Thank You, {formData.name.split(' ')[0]}!
-                    </h2>
-                    <p className="step-sub" style={{ marginTop: '6px', color: '#FFF' }}>
-                      1 nutritious meal has been reserved for a child in need on your behalf.
-                    </p>
-                  </div>
-
-                  <div className="hologram-personality-card">
-                    <div className="holo-badge">{computedArchetype.title}</div>
-                    <h3 className="holo-archetype-name">{computedArchetype.name}</h3>
-                    <p className="holo-archetype-desc">{computedArchetype.description}</p>
-
-                    <div className="holo-metrics-grid">
-                      <div className="h-metric">
-                        <span>Energy Focus</span>
-                        <strong>{computedArchetype.proteinNeed}</strong>
-                      </div>
-                      <div className="h-metric">
-                        <span>Peak Slump</span>
-                        <strong>{computedArchetype.cravingTime}</strong>
-                      </div>
-                      <div className="h-metric">
-                        <span>Snack Awareness</span>
-                        <strong>{computedArchetype.cleanLabelScore}</strong>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div style={{ textAlign: 'center', marginTop: '18px' }}>
+              {/* Card Header & Liquid Progress */}
+              <div className="card-header">
+                <div className="card-header-top">
+                  {currentStep > 0 && currentStep <= 8 ? (
                     <button
                       type="button"
-                      onClick={handleRetake}
-                      className="btn-hero-primary"
-                      style={{ padding: '10px 24px', fontSize: '0.88rem', margin: '0 auto', display: 'inline-flex' }}
+                      onClick={() => setCurrentStep(prev => prev - 1)}
+                      className="back-btn"
                     >
-                      <span>Take Quiz Again</span>
+                      <ArrowLeft size={14} />
+                      <span>Back</span>
                     </button>
+                  ) : (
+                    <div style={{ width: '48px' }}></div>
+                  )}
+
+                  <div className="sub-header-title">
+                    <span className="header-main-tag">DISCOVER YOUR SNACK PERSONALITY</span>
+                    <span className="header-sub-tag">Snack for you. Hope for a child.</span>
+                  </div>
+
+                  <div className="step-counter-pill">
+                    <span>
+                      {currentStep === 0
+                        ? 'Start'
+                        : currentStep <= 8
+                        ? `Question ${currentStep} of 8`
+                        : 'Completed'}
+                    </span>
                   </div>
                 </div>
-              )}
+
+                {/* Progress Track */}
+                <div className="progress-wrapper">
+                  <div className="progress-track">
+                    <div
+                      className="progress-fill"
+                      style={{ width: `${(currentStep / 9) * 100}%` }}
+                    />
+                  </div>
+                  <div className="progress-details">
+                    <span>{currentStep <= 8 ? `${Math.round((currentStep / 8) * 100)}% Complete` : 'Completed'}</span>
+                    <span>1 Meal Pledged</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Steps Viewport */}
+              <div className="steps-viewport">
+                
+                {/* STEP 0: Simple VIP Registration Gate */}
+                {currentStep === 0 && (
+                  <div>
+                    <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                      <h2 className="step-question" style={{ fontSize: 'clamp(1.4rem, 4vw, 1.8rem)' }}>
+                        Join the VIP Founding Waitlist
+                      </h2>
+                      <p className="step-sub">
+                        Enter your details below to start your quick 8-question quiz.
+                      </p>
+                    </div>
+
+                    <form onSubmit={handleStartQuiz} className="waitlist-card-form">
+                      <div className="form-row">
+                        <label className="field-label">Your Full Name *</label>
+                        <div className="input-container">
+                          <User size={16} className="input-icon" />
+                          <input
+                            type="text"
+                            required
+                            placeholder="e.g. Aryan Rai"
+                            className="input-field"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="form-row">
+                        <label className="field-label">Email Address *</label>
+                        <div className="input-container">
+                          <Mail size={16} className="input-icon" />
+                          <input
+                            type="email"
+                            required
+                            placeholder="e.g. aryan@example.com"
+                            className="input-field"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="form-row">
+                        <label className="field-label">Phone / WhatsApp *</label>
+                        <div className="input-container">
+                          <Phone size={16} className="input-icon" />
+                          <input
+                            type="tel"
+                            required
+                            placeholder="e.g. 9876543210"
+                            className="input-field"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          />
+                        </div>
+                      </div>
+
+                      <button type="submit" className="submit-waitlist-btn">
+                        <span>Start 60-Second Quiz</span>
+                        <ArrowRight size={16} />
+                      </button>
+                    </form>
+                  </div>
+                )}
+
+                {/* STEPS 1 to 8: Clean MCQ Questions */}
+                {currentStep >= 1 && currentStep <= 8 && (
+                  <div>
+                    <div className="step-category">{QUIZ_QUESTIONS[currentStep - 1].category}</div>
+                    <h2 className="step-question">{QUIZ_QUESTIONS[currentStep - 1].question}</h2>
+                    <p className="step-sub">{QUIZ_QUESTIONS[currentStep - 1].subtitle}</p>
+
+                    <div className="options-container">
+                      {QUIZ_QUESTIONS[currentStep - 1].options.map((opt, idx) => {
+                        const isSelected = answers[QUIZ_QUESTIONS[currentStep - 1].id] === opt.val;
+                        return (
+                          <button
+                            key={idx}
+                            type="button"
+                            className={`option-pill ${isSelected ? 'selected' : ''}`}
+                            onClick={() => handleSelectOption(QUIZ_QUESTIONS[currentStep - 1].id, opt.val)}
+                          >
+                            <span className="opt-num">{idx + 1}</span>
+                            <span>{opt.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 9: Clean Thank You Screen (No percentages or complex breakdown) */}
+                {currentStep === 9 && (
+                  <div style={{ textAlign: 'center', padding: '16px 8px' }}>
+                    <div style={{
+                      width: '64px',
+                      height: '64px',
+                      borderRadius: '50%',
+                      background: 'rgba(46, 204, 113, 0.16)',
+                      border: '2px solid #2ECC71',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '0 auto 16px'
+                    }}>
+                      <CheckCircle size={34} color="#2ECC71" />
+                    </div>
+
+                    <h2 className="step-question" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.1rem)', margin: '0 0 10px', color: '#FFF' }}>
+                      Thank You for Attempting the Quiz{formData.name ? `, ${formData.name.split(' ')[0]}` : ''}!
+                    </h2>
+
+                    <p style={{ fontSize: '1rem', color: 'rgba(255, 255, 255, 0.9)', maxWidth: '440px', margin: '0 auto 18px', lineHeight: 1.55 }}>
+                      Your response has been successfully recorded. 1 nutritious meal has been reserved for a child in need on your behalf.
+                    </p>
+
+                    <div style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      border: '1px solid rgba(255, 255, 255, 0.22)',
+                      padding: '8px 18px',
+                      borderRadius: '10px',
+                      marginBottom: '26px'
+                    }}>
+                      <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>VIP Pass:</span>
+                      <strong style={{ color: '#F3B562', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>{assignedPassId}</strong>
+                    </div>
+
+                    <div>
+                      <button
+                        type="button"
+                        onClick={handleRetake}
+                        className="btn-hero-primary"
+                        style={{ margin: '0 auto', display: 'inline-flex' }}
+                      >
+                        <span>Retake Quiz</span>
+                        <ArrowRight size={16} />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+              </div>
 
             </div>
 
