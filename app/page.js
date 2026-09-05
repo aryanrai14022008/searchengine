@@ -282,7 +282,11 @@ export default function HomePage() {
 
               {/* Front Hardbound Book Cover (3D Flips Open on Click) */}
               <div className="book-front-cover">
-                <div className="book-cover-spine" />
+                <div className="book-cover-spine">
+                  <div className="spine-stitch" />
+                  <div className="spine-stitch" />
+                  <div className="spine-stitch" />
+                </div>
                 
                 <div className="book-cover-plate">
                   <h3 className="book-cover-title decorative-heading">
