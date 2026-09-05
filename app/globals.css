@@ -625,6 +625,14 @@ body {
   color: #0E3539;
   font-size: 1.02em;
   letter-spacing: -0.01em;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.movement-highlight {
+  color: #C85A32;
+  font-weight: 900;
 }
 
 @media (max-width: 640px) {
@@ -659,6 +667,7 @@ body {
   .cause-movement-tagline {
     font-size: 0.68rem;
     line-height: 1.25;
+    gap: 1px;
   }
 }
 

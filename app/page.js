@@ -258,7 +258,8 @@ export default function HomePage() {
                     You bring education to their life and hope to their heart.
                   </p>
                   <p className="cause-movement-tagline">
-                    This is More Than a Snack. It’s a Movement.
+                    <span>This is More Than a Snack.</span>
+                    <span className="movement-highlight">It’s a Movement.</span>
                   </p>
                 </div>
               </div>
