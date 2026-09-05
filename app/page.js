@@ -168,7 +168,14 @@ export default function HomePage() {
                 )}
 
                 <div className="bar-wrapper-visual">
-                  <img src="/sticker_bar_hd.png?v=6" alt="HumblBar Clean Protein Bar" className="headline-bar-img" />
+                  <img
+                    src="/sticker_bar_clean.png?v=8"
+                    srcSet="/sticker_bar_clean.png?v=8 1x, /sticker_bar_hd.png?v=8 2x"
+                    alt="HumblBar Clean Protein Bar"
+                    className="headline-bar-img"
+                    loading="eager"
+                    decoding="async"
+                  />
                 </div>
 
                 {/* Pure text tagline revealed below the bar - NO BOX, no overlap */}

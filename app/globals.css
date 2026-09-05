@@ -203,13 +203,13 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .hero-bar-sticker-large {
   position: relative;
-  width: 250px;
-  max-width: 100%;
+  width: 320px;
+  max-width: 90vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -219,32 +219,36 @@ body {
   cursor: pointer;
   user-select: none;
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hero-bar-sticker-large:hover {
-  transform: scale(1.05) rotate(1deg);
+  transform: scale(1.04) rotate(1deg);
 }
 
 .hero-bar-sticker-large .bar-wrapper-visual {
   position: relative;
   width: 100%;
-  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55));
   transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform: rotate(-3deg);
+  transform: rotate(-2.5deg) translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .hero-bar-sticker-large.opened .bar-wrapper-visual {
-  transform: rotate(0deg) scale(1.06);
-  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.6));
+  transform: rotate(0deg) scale(1.05) translateZ(0);
+  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.65));
 }
 
 /* Pure clean text hint (no box) */
 .bar-hint-text {
   font-family: var(--font-hand);
-  font-size: 0.96rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 8px;
   letter-spacing: 0.02em;
   white-space: nowrap;
   animation: pulseHint 2s ease-in-out infinite;
@@ -262,10 +266,10 @@ body {
 /* Pure clean text tagline revealed below the bar (NO BOX, zero overlap) */
 .bar-reveal-text {
   font-family: var(--font-hand);
-  font-size: 0.98rem;
+  font-size: 1.02rem;
   font-weight: 700;
   color: #FFFFFF;
-  margin-top: 8px;
+  margin-top: 10px;
   letter-spacing: 0.01em;
   opacity: 0;
   max-height: 0;
@@ -287,22 +291,25 @@ body {
   object-fit: contain;
   display: block;
   background: transparent !important;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 @media (max-width: 640px) {
   .hero-bar-top-container {
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
   .hero-bar-sticker-large {
-    width: 200px;
+    width: min(290px, 86vw);
   }
   .bar-hint-text {
-    font-size: 0.88rem;
-    margin-bottom: 4px;
+    font-size: 0.92rem;
+    margin-bottom: 6px;
   }
   .bar-reveal-text {
-    font-size: 0.9rem;
-    margin-top: 6px;
+    font-size: 0.95rem;
+    margin-top: 8px;
   }
 }
 
