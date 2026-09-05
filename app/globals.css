@@ -181,14 +181,57 @@ body {
   margin-bottom: 12px;
 }
 
+.headline-sticker-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.headline-bar-sticker {
+  flex-shrink: 0;
+  width: 140px;
+  transform: rotate(-8deg);
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.5));
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.headline-bar-sticker:hover {
+  transform: rotate(-2deg) scale(1.08);
+}
+
+.headline-bar-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .headline-sticker-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .headline-bar-sticker {
+    width: 90px;
+    margin-top: 4px;
+    transform: rotate(-6deg);
+  }
+}
+
 .hero-headline {
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 6vw, 3.8rem);
   font-weight: 900;
   line-height: 1.1;
   letter-spacing: -0.03em;
-  margin-bottom: 16px;
+  margin-bottom: 0;
   color: #FFFFFF;
+  flex: 1;
 }
 
 .hero-highlight {
@@ -284,38 +327,6 @@ body {
 .btn-hero-primary:active {
   transform: translateY(3px);
   box-shadow: 0 1px 0 #7E3518, 0 4px 8px rgba(0, 0, 0, 0.25);
-}
-
-/* Floating Clean HumblBar Product Wrapper Sticker */
-.hero-floating-bar-sticker {
-  position: absolute;
-  top: -24px;
-  right: 18px;
-  z-index: 10;
-  width: 140px;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.45));
-  transform: rotate(8deg);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
-}
-
-.hero-floating-bar-sticker:hover {
-  transform: rotate(2deg) scale(1.08);
-}
-
-.hero-floating-bar-img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
-
-@media (max-width: 768px) {
-  .hero-floating-bar-sticker {
-    width: 110px;
-    top: -18px;
-    right: 12px;
-  }
 }
 
 /* Dream Story Card - Fully Responsive & Non-clipping */

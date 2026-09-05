@@ -179,10 +179,15 @@ export default function HomePage() {
               CLEAN SNACKING &bull; REAL SOCIAL IMPACT
             </div>
 
-            <h1 className="hero-headline">
-              Snack for you.<br />
-              <span className="hero-highlight">Hope for a child.</span>
-            </h1>
+            <div className="headline-sticker-wrap">
+              <h1 className="hero-headline">
+                Snack for you.<br />
+                <span className="hero-highlight">Hope for a child.</span>
+              </h1>
+              <div className="headline-bar-sticker" title="HumblBar Clean Snack">
+                <img src="/sticker_bar.png" alt="HumblBar Clean Protein Bar" className="headline-bar-img" />
+              </div>
+            </div>
 
             <p className="hero-subtext">
               Take our 15-second interactive quiz to uncover your unique <strong>Snack Personality</strong> and help pledge a nutritious meal to a child in need.
@@ -213,11 +218,6 @@ export default function HomePage() {
 
           {/* Directed Visual: Classroom Dream & Cause Story Card */}
           <div style={{ position: 'relative', width: '100%' }}>
-            {/* Floating Clean HumblBar Product Wrapper Sticker */}
-            <div className="hero-floating-bar-sticker" title="HumblBar Clean Snack Bar">
-              <img src="/sticker_bar.png" alt="HumblBar Snack" className="hero-floating-bar-img" />
-            </div>
-
             <div className="dream-story-card">
               <div className="dream-card-inner">
                 {/* Left: Notebook Sketch */}
