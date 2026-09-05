@@ -238,6 +238,14 @@ export default function HomePage() {
             <div className="sticky-tag tag-water">Drink 3L water</div>
             <div className="sticky-tag tag-protein">Eating 50g protein</div>
 
+            {/* Custom Brand Stickers */}
+            <div className="sticker-bar-wrap" title="HumblBar Clean Snack">
+              <img src="/sticker_bar.png" alt="HumblBar Snack" className="sticker-bar-img" />
+            </div>
+            <div className="sticker-ingredients-wrap" title="Whole Medjool Dates, Almonds & Peanuts">
+              <img src="/sticker_ingredients.png" alt="Whole Clean Ingredients" className="sticker-ingredients-img" />
+            </div>
+
             <div className="dream-story-card">
               <div className="dream-card-inner">
                 {/* Left: Notebook Sketch */}
