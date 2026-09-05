@@ -228,52 +228,42 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Directed Visual: Classroom Dream & Cause Story Card */}
+          {/* Directed Visual: Open Book Child Education & Cause Story */}
           <div style={{ position: 'relative', width: '100%' }}>
-            <div className="dream-story-card">
-              <div className="dream-card-inner">
-                {/* Left: Notebook Sketch */}
-                <div className="dream-sketch-side">
-                  <div>
-                    <div className="sketch-header">My Big Dream</div>
-                    <div className="sketch-sub">When I grow up, I want to be an astronaut!</div>
-                  </div>
+            <div className="open-book-card">
+              {/* Book spine middle fold shadow */}
+              <div className="book-spine-fold" aria-hidden="true"></div>
 
-                  <div className="sketch-illustration">
-                    <svg viewBox="0 0 200 135" className="sketch-rocket-svg" fill="none">
-                      {/* Sun */}
-                      <circle cx="170" cy="22" r="12" fill="#F3B562" />
-                      <path d="M170 6 L170 10 M170 34 L170 38 M154 22 L158 22 M182 22 L186 22 M158 10 L162 14 M178 30 L182 34" stroke="#E27D60" strokeWidth="2" strokeLinecap="round" />
-                      {/* Planets */}
-                      <circle cx="28" cy="38" r="9" fill="#9B5DE5" opacity="0.8" />
-                      <ellipse cx="28" cy="38" rx="14" ry="3.5" stroke="#D48468" strokeWidth="1.5" transform="rotate(-20 28 38)" />
-                      <circle cx="155" cy="80" r="6" fill="#F15BB5" opacity="0.8" />
-                      {/* Stars */}
-                      <path d="M60 18 L62 23 L67 23 L63 26 L65 31 L60 28 L55 31 L57 26 L53 23 L58 23 Z" fill="#F3B562" />
-                      <path d="M180 98 L181 101 L184 101 L182 103 L183 106 L180 104 L177 106 L178 103 L176 101 L179 101 Z" fill="#F3B562" />
-                      {/* Rocket */}
-                      <path d="M100 15 C85 35 80 72 80 90 L120 90 C120 72 115 35 100 15 Z" fill="#E63946" stroke="#1D3557" strokeWidth="2" />
-                      <path d="M85 90 L100 20 L115 90 Z" fill="#FFF" />
-                      {/* Window */}
-                      <circle cx="100" cy="48" r="11" fill="#A8DADC" stroke="#1D3557" strokeWidth="2" />
-                      <circle cx="100" cy="48" r="6" fill="#457B9D" />
-                      {/* Fins */}
-                      <path d="M80 70 L65 90 L80 90 Z" fill="#E63946" stroke="#1D3557" strokeWidth="2" />
-                      <path d="M120 70 L135 90 L120 90 Z" fill="#E63946" stroke="#1D3557" strokeWidth="2" />
-                      {/* Rocket Flame */}
-                      <path d="M86 90 Q100 125 114 90 Q100 108 86 90 Z" fill="#F3B562" />
-                      <path d="M92 90 Q100 112 108 90 Z" fill="#E63946" />
-                      {/* Clouds */}
-                      <path d="M15 125 Q30 105 50 125 Q65 110 85 125 Z" fill="#EBF4F6" stroke="#B8D5E5" strokeWidth="1.5" />
-                      <path d="M130 130 Q150 110 175 130 Q190 115 200 130 Z" fill="#EBF4F6" stroke="#B8D5E5" strokeWidth="1.5" />
-                    </svg>
-                  </div>
-
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.86rem', color: '#718096', textAlign: 'center', fontStyle: 'italic' }}>
-                    Nourishing everyday dreams, one meal at a time.
-                  </div>
+              <div className="open-book-grid">
+                {/* Left Page: Children Reading Photo / Illustration */}
+                <div className="book-page-left">
+                  <img
+                    src="/children_reading.png"
+                    alt="Children reading books with big dreams"
+                    className="book-cover-photo"
+                  />
                 </div>
 
+                {/* Right Page: Minimalist Clean Cause Story */}
+                <div className="book-page-right">
+                  <div className="book-story-content">
+                    <h3 className="book-story-title">
+                      Every Bar Gives Back !!
+                    </h3>
+
+                    <div className="book-stat-highlight">
+                      <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
+                    </div>
+
+                    <p className="book-story-p bold-lead">
+                      A child's future shouldn't be limited by the circumstances they're born into.
+                    </p>
+
+                    <p className="book-story-p">
+                      We believe good nutrition should do more than fuel your day and hence a share of our profits goes towards supporting child education in India — helping more children get the chance to learn, grow and dream bigger.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

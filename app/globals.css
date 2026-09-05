@@ -522,179 +522,120 @@ body {
 }
 
 /* Dream Story Card - Pure White Lined Notebook Sketch (PC & Mobile) */
-.dream-story-card {
+/* Open Book Child Education Story Card */
+.open-book-card {
   background: #FFFFFF;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: var(--shadow-modal);
-  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.15);
   position: relative;
+  overflow: hidden;
   width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dream-story-card:hover {
+.open-book-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 32px 68px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 30px 65px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.3);
 }
 
-.dream-card-inner {
-  display: block;
-  width: 100%;
+.book-spine-fold {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 48%;
+  width: 22px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.02) 100%);
+  pointer-events: none;
+  z-index: 5;
 }
 
-.dream-sketch-side {
-  background: #FFFFFF;
-  padding: 24px 22px;
+.open-book-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  min-height: 380px;
+}
+
+.book-page-left {
+  background: #0E2218;
+  position: relative;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-image: linear-gradient(#E8EEF2 1px, transparent 1px);
-  background-size: 100% 24px;
-  width: 100%;
 }
 
-.sketch-header {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.35rem;
-  color: #2D4059;
-  border-bottom: 2px solid #E27D60;
-  display: inline-block;
-  padding-bottom: 2px;
-}
-
-.sketch-sub {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.92rem;
-  color: #486581;
-  margin-top: 4px;
-}
-
-.sketch-illustration {
-  margin: 12px 0;
-  text-align: center;
-}
-
-.sketch-rocket-svg {
-  width: 100%;
-  max-height: 150px;
-}
-
-.dream-copy-side {
-  background: #DDF1F5;
-  padding: 24px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: #1A3644;
-}
-
-.dream-copy-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
-.dream-headline {
-  font-family: var(--font-display);
-  font-size: clamp(1.2rem, 3.2vw, 1.45rem);
-  font-weight: 800;
-  line-height: 1.25;
-  color: #1A3644;
-  margin-bottom: 0;
-  flex: 1;
-}
-
-.dream-ingredients-seal {
-  flex-shrink: 0;
-  width: 72px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: drop-shadow(0 4px 10px rgba(26, 54, 68, 0.2));
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
-}
-
-.dream-ingredients-seal:hover {
-  transform: rotate(12deg) scale(1.1);
-}
-
-.dream-ingredients-seal-img {
+.book-cover-photo {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-}
-
-@media (max-width: 480px) {
-  .dream-ingredients-seal {
-    width: 58px;
-    height: 58px;
-  }
-}
-
-.dream-headline strong {
-  color: #0E5A73;
-}
-
-.dream-badge-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-}
-
-.dream-tag-badge {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  background: rgba(26, 54, 68, 0.08);
-  color: #1A3644;
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid rgba(26, 54, 68, 0.18);
-}
-
-/* Card Background HumblBar Product Watermark */
-.card-bg-bar-watermark {
-  position: absolute;
-  top: 50%;
-  right: -5%;
-  transform: translateY(-50%) rotate(-10deg);
-  width: 320px;
-  max-width: 55%;
-  opacity: 0.12;
-  pointer-events: none;
-  z-index: 1;
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-}
-
-.terracotta-card:hover .card-bg-bar-watermark {
-  transform: translateY(-50%) rotate(-8deg) scale(1.06);
-  opacity: 0.16;
-}
-
-.watermark-bar-img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
 }
 
-@media (max-width: 640px) {
-  .card-bg-bar-watermark {
-    width: 200px;
-    right: -10%;
-    opacity: 0.08;
+.book-page-right {
+  background: #FFFFFF;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-story-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.book-story-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 1.65rem);
+  font-weight: 900;
+  color: #1A0D08;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+}
+
+.book-stat-highlight {
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: #C85A32;
+  background: rgba(200, 90, 50, 0.08);
+  border-left: 3.5px solid #C85A32;
+  padding: 8px 12px;
+  border-radius: 0 8px 8px 0;
+  line-height: 1.4;
+}
+
+.book-stat-highlight strong {
+  font-size: 1.06rem;
+  font-weight: 900;
+  color: #A83812;
+}
+
+.book-story-p {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: #4A3A34;
+  line-height: 1.55;
+}
+
+.book-story-p.bold-lead {
+  font-weight: 700;
+  color: #1F120C;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 960px) {
+  .open-book-grid {
+    grid-template-columns: 1fr;
+  }
+  .book-spine-fold {
+    display: none;
+  }
+  .book-page-left {
+    height: 250px;
+  }
+  .book-page-right {
+    padding: 24px 20px;
   }
 }
 
