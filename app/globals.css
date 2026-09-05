@@ -709,21 +709,21 @@ body {
   margin: 0;
 }
 
-/* Front Frosted Glassmorphic Book Cover (Flips Open on Click) */
+/* Front Pure Frosted Glassmorphic Cover (No Brown - Pure Frosted Glass) */
 .book-front-cover {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(10px) saturate(1.1);
-  background: linear-gradient(135deg, rgba(22, 11, 7, 0.65) 0%, rgba(14, 7, 4, 0.78) 100%);
+  backdrop-filter: blur(16px) saturate(1.2);
+  background: rgba(255, 255, 255, 0.18);
   border-radius: 16px;
-  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   transform-origin: left center;
   transform-style: preserve-3d;
   backface-visibility: hidden;
   z-index: 30;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
   transition: transform 1.2s cubic-bezier(0.2, 0.85, 0.25, 1), opacity 0.6s ease 0.3s;
   overflow: hidden;
   display: flex;
@@ -741,23 +741,10 @@ body {
   transform: rotateY(-180deg);
   opacity: 0;
   pointer-events: none;
-  box-shadow: -26px 26px 50px rgba(0, 0, 0, 0.65);
+  box-shadow: -26px 26px 50px rgba(0, 0, 0, 0.4);
 }
 
-/* Book Left Spine Binding Strip */
-.book-cover-spine {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 32px;
-  background: linear-gradient(to right, #120704 0%, #24110A 70%, rgba(0, 0, 0, 0.4) 100%);
-  border-right: 1.5px solid rgba(255, 255, 255, 0.25);
-  border-radius: 16px 0 0 16px;
-  z-index: 2;
-}
-
-/* Book Cover Center Plate (Elevated Above Frosted Background) */
+/* Book Cover Center Plate */
 .book-cover-plate {
   display: flex;
   flex-direction: column;
@@ -765,7 +752,7 @@ body {
   justify-content: center;
   text-align: center;
   gap: 16px;
-  padding: 20px;
+  padding: 24px 20px;
   z-index: 3;
 }
 
@@ -788,7 +775,7 @@ body {
   color: #FFFFFF;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65), 0 0 20px rgba(0, 0, 0, 0.4);
   line-height: 1.1;
 }
 
@@ -800,7 +787,7 @@ body {
   color: #E27D60;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.9), 0 0 20px rgba(226, 125, 96, 0.35);
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.65), 0 0 20px rgba(226, 125, 96, 0.4);
   line-height: 1.15;
 }
 
@@ -814,14 +801,14 @@ body {
   letter-spacing: 0.02em;
   padding: 6px 20px;
   border-radius: 20px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
   white-space: nowrap;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .book-wrapper:hover .book-tap-badge {
   transform: scale(1.06);
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
 }
 
 @media (max-width: 640px) {

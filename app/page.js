@@ -280,10 +280,8 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Translucent Frosted Book Cover with Headline (Flips Open on Click) */}
+              {/* Translucent Frosted Glass Cover with Headline (Flips Open on Click) */}
               <div className="book-front-cover">
-                <div className="book-cover-spine" />
-                
                 <div className="book-cover-plate">
                   <h3 className="book-cover-title decorative-heading">
                     <span className="title-top">EVERY BAR</span>
@@ -294,9 +292,6 @@ export default function HomePage() {
                     <span>Tap to open</span>
                   </div>
                 </div>
-
-                {/* Right Paper Edge Layer for Closed Book */}
-                <div className="book-closed-pages-edge" />
               </div>
 
             </div>
