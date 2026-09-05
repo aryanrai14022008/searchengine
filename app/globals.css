@@ -260,12 +260,11 @@ body {
   filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.65));
 }
 
-/* Custom SVG Thought Bubble matching uploaded art */
+/* Custom SVG Thought Bubble matching uploaded art (Stable) */
 .hero-thought-bubble {
   width: 140px;
   max-width: 100%;
   margin-bottom: -8px;
-  animation: floatCloud 2.8s ease-in-out infinite;
   filter: drop-shadow(0 6px 14px rgba(211, 108, 82, 0.4));
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
@@ -274,7 +273,7 @@ body {
 }
 
 .hero-bar-sticker-large:hover .hero-thought-bubble {
-  transform: scale(1.08) translateY(-2px);
+  transform: scale(1.05);
 }
 
 .thought-cloud-svg {
