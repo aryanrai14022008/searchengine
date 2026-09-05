@@ -746,14 +746,26 @@ body {
   box-shadow: var(--shadow-card);
   transition: all 0.2s var(--ease-smooth);
   text-align: left;
-  user-select: none;
-  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  touch-action: manipulation;
 }
 
-.option-pill:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
-  background: #FFFDFB;
+.option-pill:focus,
+.option-pill:focus-visible {
+  outline: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .option-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background: #FFFDFB;
+  }
+  .option-pill:hover .opt-num {
+    background: var(--color-terracotta);
+    color: #FFF;
+  }
 }
 
 .option-pill:active {
@@ -761,9 +773,9 @@ body {
 }
 
 .option-pill.selected {
-  background: #FFFFFF;
-  border-color: #20130E;
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(255, 255, 255, 0.9);
+  background: #FFFFFF !important;
+  border-color: #20130E !important;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(255, 255, 255, 0.9) !important;
   transform: translateY(-2px) scale(1.01);
 }
 
@@ -782,10 +794,9 @@ body {
   transition: all 0.2s ease;
 }
 
-.option-pill:hover .opt-num,
 .option-pill.selected .opt-num {
-  background: var(--color-terracotta);
-  color: #FFF;
+  background: var(--color-terracotta) !important;
+  color: #FFF !important;
 }
 
 .opt-icon {

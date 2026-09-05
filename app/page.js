@@ -30,72 +30,46 @@ export default function HomePage() {
   // 0 = closed ball -> 1 = half-open shell -> 2 = wider open shell -> 3 = main open storybook (remains open)
   const [paperStage, setPaperStage] = useState(0);
   const paperStageRef = useRef(null);
-  const hasAnimatedRef = useRef(false);
+  const timersRef = useRef([]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimatedRef.current) {
-            hasAnimatedRef.current = true;
-            
-            // Step 1: Slowly transition into half-open origami paper shell
-            setTimeout(() => {
-              setPaperStage(1);
-            }, 1000);
+  const clearAllTimers = () => {
+    timersRef.current.forEach(t => clearTimeout(t));
+    timersRef.current = [];
+  };
 
-            // Step 2: Slowly transition into wider open origami paper shell
-            setTimeout(() => {
-              setPaperStage(2);
-            }, 2200);
+  const startSequence = () => {
+    clearAllTimers();
+    setPaperStage(0);
 
-            // Step 3: Slowly blossom into the main open storybook and remain open
-            setTimeout(() => {
-              setPaperStage(3);
-            }, 3600);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    if (paperStageRef.current) {
-      observer.observe(paperStageRef.current);
-    }
-
-    // Immediate fallback trigger
     const t1 = setTimeout(() => {
-      setPaperStage(prev => (prev === 0 ? 1 : prev));
+      setPaperStage(1);
     }, 1000);
 
     const t2 = setTimeout(() => {
-      setPaperStage(prev => (prev === 1 || prev === 0 ? 2 : prev));
+      setPaperStage(2);
     }, 2200);
 
     const t3 = setTimeout(() => {
-      setPaperStage(prev => (prev === 2 || prev === 1 || prev === 0 ? 3 : prev));
+      setPaperStage(3);
     }, 3600);
 
+    timersRef.current = [t1, t2, t3];
+  };
+
+  useEffect(() => {
+    const t0 = setTimeout(() => {
+      startSequence();
+    }, 200);
+
     return () => {
-      observer.disconnect();
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
+      clearTimeout(t0);
+      clearAllTimers();
     };
   }, []);
 
   const replayPaperSequence = () => {
     playSound('pop');
-    setPaperStage(0);
-    setTimeout(() => {
-      setPaperStage(1);
-    }, 1000);
-    setTimeout(() => {
-      setPaperStage(2);
-    }, 2200);
-    setTimeout(() => {
-      setPaperStage(3);
-    }, 3600);
+    startSequence();
   };
 
   // Web Audio FX Engine
