@@ -280,19 +280,19 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Front Hardbound Book Cover (3D Flips Open on Click) */}
+              {/* Translucent Frosted Book Cover with Headline (Flips Open on Click) */}
               <div className="book-front-cover">
-                <div className="book-cover-spine">
-                  <div className="spine-stitch" />
-                  <div className="spine-stitch" />
-                  <div className="spine-stitch" />
-                </div>
+                <div className="book-cover-spine" />
                 
                 <div className="book-cover-plate">
                   <h3 className="book-cover-title decorative-heading">
                     <span className="title-top">EVERY BAR</span>
                     <span className="title-bottom">GIVES BACK</span>
                   </h3>
+
+                  <div className="book-tap-badge">
+                    <span>Tap to open</span>
+                  </div>
                 </div>
 
                 {/* Right Paper Edge Layer for Closed Book */}
