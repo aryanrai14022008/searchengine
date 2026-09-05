@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 
 export default function HomePage() {
-  // 0-8: MCQ Questions (1 to 9), 9: Contact Details (Name, Email, Phone), 10: Thank You Screen
+  // 0-5: MCQ Questions (1 to 6), 6: Contact Details (Question 7), 7: Thank You Screen
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
   const [answers, setAnswers] = useState({});
@@ -68,7 +68,7 @@ export default function HomePage() {
     }
   };
 
-  // MCQ Option Select (Steps 0 to 8)
+  // MCQ Option Select (Steps 0 to 5)
   const handleSelectOption = (questionId, value) => {
     playSound('pop');
     const updatedAnswers = { ...answers, [questionId]: value };
@@ -79,14 +79,14 @@ export default function HomePage() {
         setCurrentStep(prev => prev + 1);
       }, 200);
     } else {
-      // 9th question answered -> Advance to Contact Form (Step 9)
+      // 6th question answered -> Advance to Contact Form (Step 6)
       setTimeout(() => {
-        setCurrentStep(9);
+        setCurrentStep(6);
       }, 200);
     }
   };
 
-  // Step 9: Contact Form Submit -> Save to MongoDB & Show Thank You
+  // Step 6: Contact Form Submit -> Save to MongoDB & Show Thank You (Step 7)
   const handleContactSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) return;
@@ -112,7 +112,7 @@ export default function HomePage() {
       console.error('Quiz save error:', err);
     } finally {
       setIsSubmitting(false);
-      setCurrentStep(10); // Thank You Step
+      setCurrentStep(7); // Thank You Step
       playSound('fanfare');
       confetti({
         particleCount: 120,
@@ -135,7 +135,7 @@ export default function HomePage() {
       <header className="site-header">
         <div className="header-inner">
           <a href="#" className="brand-logo">
-            <span className="logo-text">HUMBL<span>BAR</span></span>
+            <span className="logo-text">Humbl<span>Bar</span></span>
           </a>
         </div>
       </header>
@@ -310,7 +310,7 @@ export default function HomePage() {
               {/* Card Header & Only Percentage Completion */}
               <div className="card-header">
                 <div className="card-header-top">
-                  {currentStep > 0 && currentStep <= 9 ? (
+                  {currentStep > 0 && currentStep <= 6 ? (
                     <button
                       type="button"
                       onClick={() => setCurrentStep(prev => prev - 1)}
@@ -324,7 +324,7 @@ export default function HomePage() {
                   )}
 
                   <div className="percentage-completion-label">
-                    {currentStep <= 9 ? `${Math.round((currentStep / 9) * 100)}% Complete` : '100% Complete'}
+                    {currentStep <= 6 ? `${Math.round((currentStep / 6) * 100)}% Complete` : '100% Complete'}
                   </div>
                 </div>
 
@@ -332,7 +332,7 @@ export default function HomePage() {
                 <div className="progress-track">
                   <div
                     className="progress-fill"
-                    style={{ width: `${Math.min(100, Math.round((currentStep / 9) * 100))}%` }}
+                    style={{ width: `${Math.min(100, Math.round((currentStep / 6) * 100))}%` }}
                   />
                 </div>
               </div>
@@ -340,8 +340,8 @@ export default function HomePage() {
               {/* Steps Viewport */}
               <div className="steps-viewport">
                 
-                {/* STEPS 0 to 8: Clean MCQ Questions (No category tags, no subtitles) */}
-                {currentStep >= 0 && currentStep <= 8 && (
+                {/* STEPS 0 to 5: Clean MCQ Questions (Questions 1 to 6) */}
+                {currentStep >= 0 && currentStep <= 5 && (
                   <div>
                     <h2 className="step-question">{QUIZ_QUESTIONS[currentStep].question}</h2>
 
@@ -364,18 +364,22 @@ export default function HomePage() {
                   </div>
                 )}
 
-                {/* STEP 9: VIP Registration Form (No headers / subtitles) */}
-                {currentStep === 9 && (
+                {/* STEP 6: Question 7 (Final Step): Secure Your Founding Spot */}
+                {currentStep === 6 && (
                   <div>
+                    <h2 className="step-question" style={{ marginBottom: '18px' }}>
+                      Secure Your Founding Spot
+                    </h2>
+
                     <form onSubmit={handleContactSubmit} className="waitlist-card-form">
                       <div className="form-row">
-                        <label className="field-label">Your Full Name *</label>
+                        <label className="field-label">First Name *</label>
                         <div className="input-container">
                           <User size={16} className="input-icon" />
                           <input
                             type="text"
                             required
-                            placeholder="e.g. Aryan Rai"
+                            placeholder="e.g. Aryan"
                             className="input-field"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -399,7 +403,7 @@ export default function HomePage() {
                       </div>
 
                       <div className="form-row">
-                        <label className="field-label">Phone / WhatsApp *</label>
+                        <label className="field-label">Mobile Number *</label>
                         <div className="input-container">
                           <Phone size={16} className="input-icon" />
                           <input
@@ -414,15 +418,15 @@ export default function HomePage() {
                       </div>
 
                       <button type="submit" disabled={isSubmitting} className="submit-waitlist-btn">
-                        <span>{isSubmitting ? 'Submitting...' : 'Submit'}</span>
+                        <span>{isSubmitting ? 'Joining...' : 'Join the Movement'}</span>
                         <ArrowRight size={16} />
                       </button>
                     </form>
                   </div>
                 )}
 
-                {/* STEP 10: Clean Thank You Screen */}
-                {currentStep === 10 && (
+                {/* STEP 7: Clean Thank You Screen */}
+                {currentStep === 7 && (
                   <div style={{ textAlign: 'center', padding: '12px 6px' }}>
                     <div style={{
                       width: '60px',
@@ -471,15 +475,9 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="site-footer">
         <div className="footer-container">
-          <div className="footer-inner">
+          <div className="footer-inner" style={{ justifyContent: 'center', textAlign: 'center' }}>
             <div>
-              <div className="logo-text">HUMBL<span>BAR</span></div>
-              <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.84rem', marginTop: '4px' }}>
-                Clean fuel for you &bull; Wholesome hope for a child.
-              </p>
-            </div>
-            <div>
-              <a href="#quiz" style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem' }}>Snack Quiz</a>
+              <div className="logo-text">Humbl<span>Bar</span></div>
             </div>
           </div>
           <div className="footer-copy">
