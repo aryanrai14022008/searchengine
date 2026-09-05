@@ -160,9 +160,15 @@ body {
 
 /* Hero Section */
 .hero-section {
-  padding: 40px 16px 60px;
+  padding: 40px 16px 50px;
   position: relative;
   z-index: 10;
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding: 20px 14px 12px;
+  }
 }
 
 .hero-container {
@@ -177,7 +183,13 @@ body {
 @media (max-width: 960px) {
   .hero-container {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-container {
+    gap: 20px;
   }
 }
 
@@ -673,9 +685,15 @@ body {
 
 /* Terracotta Card & Quiz Section - Fluid on Mobile */
 .quiz-section, .quiz-section-wrap {
-  padding: 54px 18px 76px;
+  padding: 44px 18px 76px;
   position: relative;
   z-index: 10;
+}
+
+@media (max-width: 640px) {
+  .quiz-section, .quiz-section-wrap {
+    padding: 10px 14px 44px;
+  }
 }
 
 .quiz-container {
@@ -686,7 +704,13 @@ body {
 .section-title-center {
   text-align: center;
   max-width: 680px;
-  margin: 0 auto 30px;
+  margin: 0 auto 26px;
+}
+
+@media (max-width: 640px) {
+  .section-title-center {
+    margin: 0 auto 14px;
+  }
 }
 
 .sub-badge {
