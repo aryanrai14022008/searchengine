@@ -38,6 +38,7 @@ export default function HomePage() {
   const [assignedPassId, setAssignedPassId] = useState('HBL-VIP-8821');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [isBarOpened, setIsBarOpened] = useState(false);
 
   // Web Audio FX Engine
   const playSound = (type = 'pop') => {
@@ -184,8 +185,38 @@ export default function HomePage() {
                 Snack for you.<br />
                 <span className="hero-highlight">Hope for a child.</span>
               </h1>
-              <div className="headline-bar-sticker" title="HumblBar Clean Snack">
-                <img src="/sticker_bar.png" alt="HumblBar Clean Protein Bar" className="headline-bar-img" />
+              
+              <div
+                className={`headline-bar-sticker ${isBarOpened ? 'opened' : ''}`}
+                onClick={() => {
+                  playSound('pop');
+                  const nextState = !isBarOpened;
+                  setIsBarOpened(nextState);
+                  if (nextState) {
+                    confetti({
+                      particleCount: 25,
+                      spread: 50,
+                      origin: { y: 0.28, x: 0.65 }
+                    });
+                  }
+                }}
+                title={isBarOpened ? "Click to close" : "Tap to open HumblBar!"}
+              >
+                {/* Revealed message above bar */}
+                <div className={`bar-reveal-tag ${isBarOpened ? 'visible' : ''}`}>
+                  <span>Built for ordinary days ✨</span>
+                </div>
+
+                {/* Hint chip when closed */}
+                {!isBarOpened && (
+                  <div className="bar-hint-pill">
+                    <span>Open me ✨</span>
+                  </div>
+                )}
+
+                <div className="bar-wrapper-visual">
+                  <img src="/sticker_bar.png" alt="HumblBar Clean Protein Bar" className="headline-bar-img" />
+                </div>
               </div>
             </div>
 
