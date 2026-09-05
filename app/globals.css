@@ -607,9 +607,24 @@ body {
 
 .cause-story-body {
   font-family: var(--font-body);
-  font-size: clamp(0.88rem, 1.5vw, 0.96rem);
+  font-size: clamp(0.86rem, 1.5vw, 0.94rem);
   color: #1E464A;
   line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cause-story-body p {
+  margin: 0;
+}
+
+.cause-movement-tagline {
+  font-family: var(--font-display);
+  font-weight: 900;
+  color: #0E3539;
+  font-size: 1.02em;
+  letter-spacing: -0.01em;
 }
 
 @media (max-width: 640px) {
@@ -637,8 +652,13 @@ body {
     font-size: 0.74rem;
   }
   .cause-story-body {
+    font-size: 0.66rem;
+    line-height: 1.26;
+    gap: 4px;
+  }
+  .cause-movement-tagline {
     font-size: 0.68rem;
-    line-height: 1.28;
+    line-height: 1.25;
   }
 }
 

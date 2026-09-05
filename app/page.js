@@ -249,9 +249,18 @@ export default function HomePage() {
 
                 <h3 className="cause-story-title">EVERY BAR GIVES BACK !!</h3>
 
-                <p className="cause-story-body">
-                  We believe good nutrition should do more than fuel your day and hence a share of our profits goes towards supporting child education in India — helping more children get the chance to learn, grow and dream bigger.
-                </p>
+                <div className="cause-story-body">
+                  <p>
+                    A childhood belongs in a classroom, not a cycle of survival.
+                    Your pin code should never decide your potential.
+                    Somewhere right now, a brilliant mind faces a closed door.
+                    With every bar you enjoy, you personally open that door.
+                    You bring education to their life and hope to their heart.
+                  </p>
+                  <p className="cause-movement-tagline">
+                    This is More Than a Snack. It’s a Movement.
+                  </p>
+                </div>
               </div>
 
             </div>
