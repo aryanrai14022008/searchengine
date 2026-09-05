@@ -228,43 +228,38 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Directed Visual: Open Book Child Education & Cause Story */}
+          {/* Directed Visual: Cause Story Card (Stacked Vertical: Full Image on Top + Light Blue Story Below) */}
           <div style={{ position: 'relative', width: '100%' }}>
-            <div className="open-book-card">
-              {/* Book spine middle fold shadow */}
-              <div className="book-spine-fold" aria-hidden="true"></div>
-
-              <div className="open-book-grid">
-                {/* Left Page: Children Reading Photo / Illustration */}
-                <div className="book-page-left">
-                  <img
-                    src="/children_reading.png"
-                    alt="Children reading books with big dreams"
-                    className="book-cover-photo"
-                  />
-                </div>
-
-                {/* Right Page: Minimalist Clean Cause Story */}
-                <div className="book-page-right">
-                  <div className="book-story-content">
-                    <h3 className="book-story-title">
-                      Every Bar Gives Back !!
-                    </h3>
-
-                    <div className="book-stat-highlight">
-                      <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
-                    </div>
-
-                    <p className="book-story-p bold-lead">
-                      A child's future shouldn't be limited by the circumstances they're born into.
-                    </p>
-
-                    <p className="book-story-p">
-                      We believe good nutrition should do more than fuel your day and hence a share of our profits goes towards supporting child education in India — helping more children get the chance to learn, grow and dream bigger.
-                    </p>
-                  </div>
+            <div className="cause-story-card">
+              
+              {/* Top Section: Full Image with Headline */}
+              <div className="cause-image-wrapper">
+                <img
+                  src="/children_reading.png"
+                  alt="Children reading books with big dreams"
+                  className="cause-story-photo"
+                />
+                <div className="cause-image-headline-overlay">
+                  <span className="cause-image-badge">HUMBLBAR IMPACT</span>
+                  <h3 className="cause-image-title">Every Bar Gives Back !!</h3>
                 </div>
               </div>
+
+              {/* Bottom Section: Light Blue Cause Story Text */}
+              <div className="cause-text-container">
+                <div className="cause-stat-highlight">
+                  <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
+                </div>
+
+                <p className="cause-story-lead">
+                  A child's future shouldn't be limited by the circumstances they're born into.
+                </p>
+
+                <p className="cause-story-body">
+                  We believe good nutrition should do more than fuel your day and hence a share of our profits goes towards supporting child education in India — helping more children get the chance to learn, grow and dream bigger.
+                </p>
+              </div>
+
             </div>
           </div>
 

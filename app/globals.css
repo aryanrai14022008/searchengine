@@ -522,204 +522,160 @@ body {
 }
 
 /* Dream Story Card - Pure White Lined Notebook Sketch (PC & Mobile) */
-/* Open Book Child Education Story Card (Always 2-Page Horizontal Spread) */
-.open-book-card {
-  background: #FFFFFF;
-  border-radius: 14px;
+/* Cause Story Card (Stacked Vertical: Full Image on Top + Light Blue Story Below) */
+.cause-story-card {
+  background: #EAF3F9;
+  border-radius: 18px;
   box-shadow: 
-    0 18px 45px rgba(0, 0, 0, 0.5),
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 4px 14px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
   position: relative;
   overflow: hidden;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Subtle stacked book pages depth effect at bottom and sides */
-.open-book-card::before {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 8px;
-  right: 8px;
-  height: 6px;
-  background: repeating-linear-gradient(
-    to bottom,
-    #ECE5DB,
-    #ECE5DB 1px,
-    #DFD5C6 1px,
-    #DFD5C6 2px
-  );
-  border-radius: 0 0 6px 6px;
-  z-index: 1;
-  opacity: 0.85;
-}
-
-.open-book-card:hover {
+.cause-story-card:hover {
   transform: translateY(-4px);
   box-shadow: 
-    0 28px 60px rgba(0, 0, 0, 0.6),
-    0 6px 18px rgba(0, 0, 0, 0.35),
+    0 30px 65px rgba(0, 0, 0, 0.6),
+    0 6px 20px rgba(0, 0, 0, 0.35),
     0 0 0 1px rgba(255, 255, 255, 0.25);
 }
 
-/* Book spine middle fold deep shadow and seam */
-.book-spine-fold {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 32px;
-  transform: translateX(-50%);
-  background: linear-gradient(
-    90deg, 
-    rgba(0, 0, 0, 0.18) 0%, 
-    rgba(0, 0, 0, 0.05) 35%, 
-    rgba(0, 0, 0, 0.28) 50%, 
-    rgba(0, 0, 0, 0.05) 65%, 
-    rgba(0, 0, 0, 0.18) 100%
-  );
-  pointer-events: none;
-  z-index: 6;
+/* Image on top - displays fully without cropping */
+.cause-image-wrapper {
+  position: relative;
+  width: 100%;
+  background: #0E2218;
+  overflow: hidden;
 }
 
-.open-book-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 380px;
-  position: relative;
+.cause-story-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Headline overlay on top of the image */
+.cause-image-headline-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 20px 28px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
   z-index: 2;
 }
 
-.book-page-left {
-  background: #0E2218;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  box-shadow: inset -12px 0 20px -8px rgba(0, 0, 0, 0.35);
-}
-
-.book-page-left::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 25px;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.25), transparent);
-  pointer-events: none;
-}
-
-.book-cover-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-.book-page-right {
-  background: #FCFAF7;
-  background-image: linear-gradient(
-    to right, 
-    rgba(0, 0, 0, 0.09) 0%, 
-    rgba(0, 0, 0, 0.02) 8%, 
-    transparent 18%, 
-    transparent 85%, 
-    rgba(0, 0, 0, 0.03) 100%
-  );
-  padding: 30px 24px 30px 26px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
-
-.book-story-content {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.book-story-title {
+.cause-image-badge {
+  background: #E27D60;
+  color: #FFFFFF;
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.cause-image-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.8vw, 1.65rem);
   font-weight: 900;
-  color: #1A0D08;
-  letter-spacing: -0.02em;
-  line-height: 1.18;
+  color: #FFFFFF;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+  margin: 0;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
 }
 
-.book-stat-highlight {
+/* Light blue background for the text section with spacious, clean typography */
+.cause-text-container {
+  background: #EDF6FA;
+  background-image: linear-gradient(180deg, #F0F8FC 0%, #E3EFF7 100%);
+  padding: 26px 26px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.cause-stat-highlight {
   font-family: var(--font-body);
-  font-size: 0.92rem;
+  font-size: 0.98rem;
   font-weight: 700;
-  color: #C85A32;
-  background: rgba(200, 90, 50, 0.08);
-  border-left: 3.5px solid #C85A32;
-  padding: 7px 10px;
-  border-radius: 0 6px 6px 0;
-  line-height: 1.35;
+  color: #13334C;
+  background: rgba(200, 90, 50, 0.1);
+  border-left: 4px solid #C85A32;
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  line-height: 1.42;
 }
 
-.book-stat-highlight strong {
-  font-size: 1.02rem;
+.cause-stat-highlight strong {
+  font-size: 1.1rem;
   font-weight: 900;
   color: #A83812;
 }
 
-.book-story-p {
+.cause-story-lead {
   font-family: var(--font-body);
-  font-size: 0.86rem;
-  color: #4A3A34;
-  line-height: 1.5;
+  font-weight: 800;
+  font-size: clamp(0.96rem, 2vw, 1.05rem);
+  color: #0B2238;
+  line-height: 1.48;
 }
 
-.book-story-p.bold-lead {
-  font-weight: 700;
-  color: #1F120C;
-  font-size: 0.9rem;
+.cause-story-body {
+  font-family: var(--font-body);
+  font-size: clamp(0.88rem, 1.6vw, 0.95rem);
+  color: #2D4C63;
+  line-height: 1.65;
 }
 
 @media (max-width: 640px) {
-  .open-book-card {
-    border-radius: 12px;
+  .cause-story-card {
+    border-radius: 14px;
   }
-  .open-book-grid {
-    grid-template-columns: 1fr 1fr;
-    min-height: 290px;
+  .cause-image-headline-overlay {
+    padding: 12px 14px 22px;
   }
-  .book-spine-fold {
-    width: 20px;
+  .cause-image-badge {
+    font-size: 0.62rem;
+    padding: 2px 7px;
   }
-  .book-page-right {
-    padding: 14px 10px 14px 12px;
+  .cause-image-title {
+    font-size: 1.15rem;
   }
-  .book-story-content {
-    gap: 6px;
+  .cause-text-container {
+    padding: 18px 16px 22px;
+    gap: 12px;
   }
-  .book-story-title {
+  .cause-stat-highlight {
     font-size: 0.88rem;
-    line-height: 1.15;
+    padding: 8px 10px;
   }
-  .book-stat-highlight {
-    font-size: 0.68rem;
-    padding: 4px 6px;
-    line-height: 1.25;
-    border-left-width: 2.5px;
+  .cause-stat-highlight strong {
+    font-size: 0.98rem;
   }
-  .book-stat-highlight strong {
-    font-size: 0.76rem;
+  .cause-story-lead {
+    font-size: 0.92rem;
+    line-height: 1.42;
   }
-  .book-story-p.bold-lead {
-    font-size: 0.70rem;
-    line-height: 1.28;
-  }
-  .book-story-p {
-    font-size: 0.66rem;
-    line-height: 1.28;
+  .cause-story-body {
+    font-size: 0.85rem;
+    line-height: 1.55;
   }
 }
 
