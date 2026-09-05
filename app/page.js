@@ -27,7 +27,7 @@ export default function HomePage() {
   const [isBarOpened, setIsBarOpened] = useState(false);
   
   // Automatic slow stepped paper unfolding sequence:
-  // 0 = closed ball -> 1 = half-open shell -> 2 = main open storybook (remains open)
+  // 0 = closed ball -> 1 = half-open shell -> 2 = wider open shell -> 3 = main open storybook (remains open)
   const [paperStage, setPaperStage] = useState(0);
   const paperStageRef = useRef(null);
   const hasAnimatedRef = useRef(false);
@@ -39,15 +39,20 @@ export default function HomePage() {
           if (entry.isIntersecting && !hasAnimatedRef.current) {
             hasAnimatedRef.current = true;
             
-            // Step 1: Slowly transition into the half-open origami paper shell
+            // Step 1: Slowly transition into half-open origami paper shell
             setTimeout(() => {
               setPaperStage(1);
-            }, 1200);
+            }, 1000);
 
-            // Step 2: Slowly transition into the main open storybook and remain open
+            // Step 2: Slowly transition into wider open origami paper shell
             setTimeout(() => {
               setPaperStage(2);
-            }, 2800);
+            }, 2200);
+
+            // Step 3: Slowly blossom into the main open storybook and remain open
+            setTimeout(() => {
+              setPaperStage(3);
+            }, 3600);
           }
         });
       },
@@ -61,16 +66,21 @@ export default function HomePage() {
     // Immediate fallback trigger
     const t1 = setTimeout(() => {
       setPaperStage(prev => (prev === 0 ? 1 : prev));
-    }, 1200);
+    }, 1000);
 
     const t2 = setTimeout(() => {
       setPaperStage(prev => (prev === 1 || prev === 0 ? 2 : prev));
-    }, 2800);
+    }, 2200);
+
+    const t3 = setTimeout(() => {
+      setPaperStage(prev => (prev === 2 || prev === 1 || prev === 0 ? 3 : prev));
+    }, 3600);
 
     return () => {
       observer.disconnect();
       clearTimeout(t1);
       clearTimeout(t2);
+      clearTimeout(t3);
     };
   }, []);
 
@@ -79,10 +89,13 @@ export default function HomePage() {
     setPaperStage(0);
     setTimeout(() => {
       setPaperStage(1);
-    }, 1200);
+    }, 1000);
     setTimeout(() => {
       setPaperStage(2);
-    }, 2800);
+    }, 2200);
+    setTimeout(() => {
+      setPaperStage(3);
+    }, 3600);
   };
 
   // Web Audio FX Engine
@@ -310,6 +323,12 @@ export default function HomePage() {
                     src="/paper_half_open.png"
                     alt="Half-open crumpled origami paper shell"
                     className="crumple-ball-img stage-1-shell"
+                  />
+                  {/* Stage 2: Wider unfolded faceted origami paper shell */}
+                  <img
+                    src="/paper_stage_almost_open.png"
+                    alt="Almost open crumpled origami paper shell"
+                    className="crumple-ball-img stage-2-shell"
                   />
                 </div>
               </div>

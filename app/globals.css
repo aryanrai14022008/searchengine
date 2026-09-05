@@ -602,16 +602,24 @@ body {
               transform 1s cubic-bezier(0.25, 1, 0.4, 1);
 }
 
-/* Stage 2: Full 2-Page Storybook Spread */
+/* Stage 2: Wider unfolded origami faceted shell */
+.crumple-ball-img.stage-2-shell {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.9s cubic-bezier(0.25, 1, 0.4, 1), 
+              transform 1s cubic-bezier(0.25, 1, 0.4, 1);
+}
+
+/* Stage 3: Full 2-Page Storybook Spread */
 .paper-inside-book {
   position: relative;
   width: 100%;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.25);
-  transition: max-height 1s cubic-bezier(0.25, 1, 0.36, 1), 
-              opacity 0.9s cubic-bezier(0.25, 1, 0.36, 1), 
-              transform 1s cubic-bezier(0.25, 1, 0.36, 1);
+  transition: max-height 1.1s cubic-bezier(0.25, 1, 0.36, 1), 
+              opacity 0.95s cubic-bezier(0.25, 1, 0.36, 1), 
+              transform 1.1s cubic-bezier(0.25, 1, 0.36, 1);
 }
 
 /* --- State 0: Fully Closed Paper Ball --- */
@@ -632,6 +640,12 @@ body {
   pointer-events: none;
 }
 
+.crumple-paper-box.stage-0 .stage-2-shell {
+  opacity: 0;
+  transform: scale(0.82) rotate(-6deg);
+  pointer-events: none;
+}
+
 .crumple-paper-box.stage-0 .paper-inside-book {
   opacity: 0;
   transform: scale(0.84) translateY(24px);
@@ -643,18 +657,24 @@ body {
 /* --- State 1: Half-Open Origami Paper Shell (Visible Stage) --- */
 .crumple-paper-box.stage-1 .crumple-ball-wrapper {
   opacity: 1;
-  transform: scale(1.08) translateY(-4px);
+  transform: scale(1.06) translateY(-4px);
   pointer-events: auto;
 }
 
 .crumple-paper-box.stage-1 .stage-0-ball {
   opacity: 0;
-  transform: scale(1.18) rotate(12deg);
+  transform: scale(1.16) rotate(12deg);
 }
 
 .crumple-paper-box.stage-1 .stage-1-shell {
   opacity: 1;
-  transform: scale(1.08) rotate(0deg);
+  transform: scale(1.06) rotate(0deg);
+}
+
+.crumple-paper-box.stage-1 .stage-2-shell {
+  opacity: 0;
+  transform: scale(0.9) rotate(-4deg);
+  pointer-events: none;
 }
 
 .crumple-paper-box.stage-1 .paper-inside-book {
@@ -665,8 +685,38 @@ body {
   overflow: hidden;
 }
 
-/* --- State 2: Full Open Storybook Spread --- */
+/* --- State 2: Wider Unfolded Origami Paper Shell (Pre-Open Stage) --- */
 .crumple-paper-box.stage-2 .crumple-ball-wrapper {
+  opacity: 1;
+  transform: scale(1.12) translateY(-6px);
+  pointer-events: auto;
+}
+
+.crumple-paper-box.stage-2 .stage-0-ball {
+  opacity: 0;
+  transform: scale(1.22) rotate(14deg);
+}
+
+.crumple-paper-box.stage-2 .stage-1-shell {
+  opacity: 0;
+  transform: scale(1.14) rotate(6deg);
+}
+
+.crumple-paper-box.stage-2 .stage-2-shell {
+  opacity: 1;
+  transform: scale(1.1) rotate(0deg);
+}
+
+.crumple-paper-box.stage-2 .paper-inside-book {
+  opacity: 0;
+  transform: scale(0.9) translateY(14px);
+  max-height: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* --- State 3: Full Open Storybook Spread --- */
+.crumple-paper-box.stage-3 .crumple-ball-wrapper {
   opacity: 0;
   transform: scale(0.62) translateY(-22px);
   max-height: 0;
@@ -675,17 +725,22 @@ body {
   pointer-events: none;
 }
 
-.crumple-paper-box.stage-2 .stage-0-ball {
+.crumple-paper-box.stage-3 .stage-0-ball {
   opacity: 0;
-  transform: scale(1.22) rotate(16deg);
+  transform: scale(1.25) rotate(16deg);
 }
 
-.crumple-paper-box.stage-2 .stage-1-shell {
+.crumple-paper-box.stage-3 .stage-1-shell {
   opacity: 0;
-  transform: scale(1.16) rotate(6deg);
+  transform: scale(1.2) rotate(8deg);
 }
 
-.crumple-paper-box.stage-2 .paper-inside-book {
+.crumple-paper-box.stage-3 .stage-2-shell {
+  opacity: 0;
+  transform: scale(1.18) rotate(6deg);
+}
+
+.crumple-paper-box.stage-3 .paper-inside-book {
   opacity: 1;
   transform: scale(1) translateY(0);
   pointer-events: auto;
