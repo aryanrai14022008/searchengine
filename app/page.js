@@ -205,11 +205,11 @@ export default function HomePage() {
                 {isBarOpened && (
                   <div className="ingredients-plate-popup">
                     <img
-                      src="/ingredients_plate.png?v=1"
+                      src="/ingredients_plate.png?v=2"
                       alt="HumblBar Real Ingredients Plate"
                       className="plate-popup-img"
                     />
-                    <span className="plate-close-hint">Tap to close ↩</span>
+                    <span className="plate-close-hint">Tap to close</span>
                   </div>
                 )}
               </div>
