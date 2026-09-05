@@ -254,21 +254,21 @@ body {
 }
 
 .btn-hero-primary {
-  background: #C86D24;
+  background: linear-gradient(135deg, #C2633E 0%, #A84E2B 100%);
   color: #FFFFFF;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.96rem;
   letter-spacing: 0.02em;
-  padding: 13px 26px;
+  padding: 14px 28px;
   border-radius: 12px;
-  border: 1px solid #DF7F33;
+  border: 1px solid rgba(255, 255, 255, 0.22);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 0 #9E4F10, 0 8px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 0 #7E3518, 0 10px 24px rgba(184, 89, 53, 0.35);
   transition: all 0.15s ease;
   text-decoration: none;
   width: 100%;
@@ -276,14 +276,14 @@ body {
 }
 
 .btn-hero-primary:hover {
-  background: #D9782B;
+  background: linear-gradient(135deg, #CF6E48 0%, #B85630 100%);
   transform: translateY(-1px);
-  box-shadow: 0 5px 0 #9E4F10, 0 10px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 0 #7E3518, 0 12px 28px rgba(184, 89, 53, 0.45);
 }
 
 .btn-hero-primary:active {
   transform: translateY(3px);
-  box-shadow: 0 1px 0 #9E4F10, 0 3px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 0 #7E3518, 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 /* Dream Story Card - Fully Responsive & Non-clipping */
@@ -519,10 +519,10 @@ body {
 }
 
 .terracotta-card {
-  background: #C86D24;
-  border-radius: 16px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(165deg, #24150E 0%, #170D08 100%);
+  border-radius: 18px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(243, 181, 98, 0.16);
   overflow: hidden;
   position: relative;
   display: flex;
@@ -720,7 +720,7 @@ body {
 }
 
 .option-pill.selected .opt-num {
-  background: #C86D24;
+  background: #C2633E;
   color: #FFF;
 }
 
@@ -838,29 +838,30 @@ body {
 }
 
 .submit-waitlist-btn {
-  background: #FFFFFF;
-  color: #1A0F0A;
+  background: linear-gradient(135deg, #C2633E 0%, #A84E2B 100%);
+  color: #FFFFFF;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 0.95rem;
   letter-spacing: 0.01em;
-  padding: 13px 20px;
+  padding: 14px 20px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 0 #D0C3B5, 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 0 #7E3518, 0 8px 18px rgba(0, 0, 0, 0.3);
   transition: all 0.15s ease;
   margin-top: 6px;
   width: 100%;
 }
 
 .submit-waitlist-btn:hover {
-  background: #F8F5F2;
+  background: linear-gradient(135deg, #CF6E48 0%, #B85630 100%);
   transform: translateY(-1px);
+  box-shadow: 0 5px 0 #7E3518, 0 10px 22px rgba(0, 0, 0, 0.35);
 }
 
 .submit-waitlist-btn:active {
@@ -1092,7 +1093,7 @@ body {
 }
 
 .admin-btn-primary {
-  background: #C86D24;
+  background: linear-gradient(135deg, #C2633E 0%, #A84E2B 100%);
   color: #FFF;
   font-family: var(--font-display);
   font-weight: 700;
@@ -1100,25 +1101,25 @@ body {
   letter-spacing: 0.02em;
   padding: 13px 20px;
   border-radius: 10px;
-  border: 1px solid #DF7F33;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 3px 0 #9E4F10, 0 6px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 3px 0 #7E3518, 0 6px 14px rgba(0, 0, 0, 0.25);
   transition: all 0.15s ease;
   width: 100%;
 }
 
 .admin-btn-primary:hover {
-  background: #D9782B;
+  background: linear-gradient(135deg, #CF6E48 0%, #B85630 100%);
   transform: translateY(-1px);
 }
 
 .admin-btn-primary:active {
   transform: translateY(2px);
-  box-shadow: 0 1px 0 #9E4F10;
+  box-shadow: 0 1px 0 #7E3518;
 }
 
 .admin-login-footer {
