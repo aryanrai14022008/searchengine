@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server';
 export async function POST(request) {
   try {
     const { password, email } = await request.json();
-    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
-    const adminEmail = process.env.ADMIN_EMAIL || 'admin@humblbar.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || process.env.ADMINPASSWORD || 'admin123';
+    const adminEmail = process.env.ADMIN_EMAIL || process.env.ADMINEMAIL || 'admin@humblbar.com';
 
     if (password === adminPassword || password === 'admin123' || password === 'humbladmin2026') {
       const response = NextResponse.json({
