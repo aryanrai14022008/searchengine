@@ -188,29 +188,38 @@ export default function HomePage() {
                 )}
 
                 <div className="bar-wrapper-visual">
-                  <img
-                    src="/sticker_bar_clean.png?v=8"
-                    srcSet="/sticker_bar_clean.png?v=8 1x, /sticker_bar_hd.png?v=8 2x"
-                    alt="HumblBar Clean Protein Bar"
-                    className="headline-bar-img"
-                    loading="eager"
-                    decoding="async"
-                  />
-                </div>
+                  {/* Outer Wrapper Layer */}
+                  <div className={`bar-outer-layer ${isBarOpened ? 'opened' : ''}`}>
+                    <img
+                      src="/sticker_bar_clean.png?v=8"
+                      srcSet="/sticker_bar_clean.png?v=8 1x, /sticker_bar_hd.png?v=8 2x"
+                      alt="HumblBar Clean Protein Bar"
+                      className="headline-bar-img"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </div>
 
-                {/* Clean Interactive Ingredients Reveal Card */}
-                <div className={`bar-ingredients-reveal ${isBarOpened ? 'visible' : ''}`}>
-                  <div className="ingredients-reveal-inner">
-                    <div className="ingredients-reveal-title">
-                      <span>✨ 100% Real Whole Ingredients</span>
-                    </div>
-                    <div className="ingredients-chip-list">
-                      <span className="ingredient-chip">Dates</span>
-                      <span className="ingredient-chip">Almonds</span>
-                      <span className="ingredient-chip">Protein Blend</span>
-                      <span className="ingredient-chip">Cocoa</span>
-                      <span className="ingredient-chip">Peanuts</span>
-                      <span className="ingredient-chip">Coffee</span>
+                  {/* Inner Bar Core Revealed directly ON the bar */}
+                  <div className={`bar-inner-core ${isBarOpened ? 'revealed' : ''}`}>
+                    <div className="inner-bar-chocolate-texture">
+                      <div className="inner-bar-header">
+                        <span className="built-with-text">Built with</span>
+                      </div>
+                      <div className="inner-bar-ingredients-list">
+                        <span className="inner-ing">Dates</span>
+                        <span className="inner-dot">•</span>
+                        <span className="inner-ing">Almonds</span>
+                        <span className="inner-dot">•</span>
+                        <span className="inner-ing">Cocoa</span>
+                        <span className="inner-dot">•</span>
+                        <span className="inner-ing">Protein Blend</span>
+                        <span className="inner-dot">•</span>
+                        <span className="inner-ing">Peanuts</span>
+                        <span className="inner-dot">•</span>
+                        <span className="inner-ing">Coffee</span>
+                      </div>
+                      <span className="inner-bar-close-hint">Tap to close ↩</span>
                     </div>
                   </div>
                 </div>
