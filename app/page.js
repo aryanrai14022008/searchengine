@@ -43,15 +43,15 @@ export default function HomePage() {
 
     const t1 = setTimeout(() => {
       setPaperStage(1);
-    }, 1000);
+    }, 500);
 
     const t2 = setTimeout(() => {
       setPaperStage(2);
-    }, 2200);
+    }, 1100);
 
     const t3 = setTimeout(() => {
       setPaperStage(3);
-    }, 3600);
+    }, 1750);
 
     timersRef.current = [t1, t2, t3];
   };
