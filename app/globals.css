@@ -533,13 +533,20 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Dream Story Card - Pure White Lined Notebook Sketch (PC & Mobile) */
-/* Cause Story Card (Horizontal: Image on Left, Light Blue Story Text on Right) */
+/* Dream Story Card - 3D Animated Open Book (PC & Mobile) */
+.book-perspective-container {
+  position: relative;
+  width: 100%;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  padding: 4px 0;
+}
+
 .cause-horizontal-card {
   background: #EDF6FA;
   border-radius: 18px;
   box-shadow: 
-    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 24px 60px rgba(0, 0, 0, 0.55),
     0 4px 14px rgba(0, 0, 0, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.15);
   position: relative;
@@ -548,15 +555,48 @@ body {
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   align-items: stretch;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  transition: transform 1.25s cubic-bezier(0.25, 1, 0.35, 1), box-shadow 1.25s ease;
+  cursor: pointer;
+}
+
+.cause-horizontal-card.book-closed {
+  transform: scale(0.92) rotateX(16deg) rotateY(-3deg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+.cause-horizontal-card.book-opened {
+  transform: scale(1) rotateX(0deg) rotateY(0deg);
+  box-shadow: 
+    0 30px 70px rgba(0, 0, 0, 0.6),
+    0 6px 20px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.25);
 }
 
 .cause-horizontal-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.01);
   box-shadow: 
-    0 30px 65px rgba(0, 0, 0, 0.6),
-    0 6px 20px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.25);
+    0 34px 75px rgba(0, 0, 0, 0.65),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Center Spine Fold Seam */
+.book-spine-seam {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0.32) 0%, 
+    rgba(0, 0, 0, 0.05) 40%, 
+    rgba(255, 255, 255, 0.25) 50%, 
+    rgba(0, 0, 0, 0.05) 60%, 
+    rgba(0, 0, 0, 0.32) 100%);
+  z-index: 15;
+  pointer-events: none;
 }
 
 /* Left Side: Horizontal Image Column (HD Full-Bleed Lined Notebook) */
@@ -567,6 +607,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transform-origin: right center;
+  transition: transform 1.25s cubic-bezier(0.34, 1.25, 0.64, 1), filter 1.0s ease;
+}
+
+.book-closed .cause-card-image-col {
+  transform: rotateY(40deg);
+  filter: brightness(0.88);
+}
+
+.book-opened .cause-card-image-col {
+  transform: rotateY(0deg);
+  filter: brightness(1);
 }
 
 .cause-card-photo {
@@ -586,6 +638,49 @@ body {
   flex-direction: column;
   justify-content: center;
   gap: 11px;
+  transform-origin: left center;
+  transition: transform 1.25s cubic-bezier(0.34, 1.25, 0.64, 1) 0.08s, filter 1.0s ease;
+}
+
+.book-closed .cause-card-text-col {
+  transform: rotateY(-40deg);
+  filter: brightness(0.88);
+}
+
+.book-opened .cause-card-text-col {
+  transform: rotateY(0deg);
+  filter: brightness(1);
+}
+
+/* Page Curvature Shadow Overlays */
+.page-shadow-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 45px;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 1.2s ease;
+}
+
+.left-shadow {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent);
+}
+
+.right-shadow {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent);
+}
+
+.book-closed .left-shadow,
+.book-closed .right-shadow {
+  opacity: 1;
+}
+
+.book-opened .left-shadow,
+.book-opened .right-shadow {
+  opacity: 0.5;
 }
 
 .cause-story-title {

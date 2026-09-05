@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { QUIZ_QUESTIONS, ARCHETYPES, calculateArchetype } from '@/lib/quizData';
 import {
@@ -25,6 +25,25 @@ export default function HomePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
+  const [isBookOpen, setIsBookOpen] = useState(false);
+  const bookRef = useRef(null);
+
+  // Auto open book when scrolled into view
+  useEffect(() => {
+    if (!bookRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsBookOpen(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(bookRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   // Web Audio FX Engine
   const playSound = (type = 'pop') => {
@@ -230,12 +249,22 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story Card (Horizontal: Image on Left, Story Text on Right) */}
-          <div style={{ position: 'relative', width: '100%' }}>
-            <div className="cause-horizontal-card">
-              
-              {/* Left Side: Full Horizontal Image */}
-              <div className="cause-card-image-col">
+          {/* Cause Story Card (3D Open Book Animation) */}
+          <div className="book-perspective-container" ref={bookRef}>
+            <div 
+              className={`cause-horizontal-card book-3d-wrapper ${isBookOpen ? 'book-opened' : 'book-closed'}`}
+              onClick={() => {
+                playSound('pop');
+                setIsBookOpen(prev => !prev);
+              }}
+              title={isBookOpen ? "Click to fold book" : "Click to open book"}
+            >
+              {/* Center Spine Seam for Real Notebook Depth */}
+              <div className="book-spine-seam" />
+
+              {/* Left Page: Full Horizontal Notebook Image */}
+              <div className="cause-card-image-col book-page-left">
+                <div className="page-shadow-overlay left-shadow" />
                 <img
                   src="/dream_rocket_sketch.png?v=snug_1"
                   alt="My Dream child rocket drawing"
@@ -243,8 +272,9 @@ export default function HomePage() {
                 />
               </div>
 
-              {/* Right Side: Clean Story Text */}
-              <div className="cause-card-text-col">
+              {/* Right Page: Story Text */}
+              <div className="cause-card-text-col book-page-right">
+                <div className="page-shadow-overlay right-shadow" />
                 <div className="cause-stat-highlight">
                   <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
                 </div>
