@@ -95,15 +95,16 @@ body {
   }
 }
 
-/* Header Navbar - Fully Responsive */
+/* Header Navbar - Clean Minimalist with Exact Bar Purple Background */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(20, 12, 8, 0.92);
+  background: #B9AFC6;
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 10px 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.14);
 }
 
 .header-inner {
@@ -116,32 +117,24 @@ body {
 }
 
 .brand-logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   text-decoration: none;
-  color: #FFF;
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.brand-logo:hover {
-  transform: translateY(-1px) scale(1.02);
+.brand-logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.logo-text {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
-}
-
-.logo-text span {
-  color: #E27D60;
-  transition: opacity 0.2s ease;
-}
-
-.brand-logo:hover .logo-text span {
-  opacity: 0.9;
+.brand-logo:hover .brand-logo-img {
+  transform: scale(1.04);
 }
 
 .header-tagline {
@@ -1449,12 +1442,12 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-/* Footer */
+/* Footer - Exact Bar Purple Background */
 .site-footer {
-  background: #0D0704;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 40px 16px 24px;
-  color: #FFF;
+  background: #B9AFC6;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 36px 16px 26px;
+  color: #382418;
 }
 
 .footer-container {
@@ -1464,19 +1457,30 @@ body {
 
 .footer-inner {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.footer-logo-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
 }
 
 .footer-copy {
   text-align: center;
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.45);
-  margin-top: 16px;
+  font-size: 0.82rem;
+  color: #4A3324;
+  font-weight: 600;
+  margin-top: 14px;
 }
 
 /* ===================================================

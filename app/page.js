@@ -173,7 +173,7 @@ export default function HomePage() {
       <header className="site-header">
         <div className="header-inner">
           <a href="#" className="brand-logo">
-            <span className="logo-text">Humbl<span>Bar</span></span>
+            <img src="/humblbar_logo.png" alt="HumblBar Logo" className="brand-logo-img" />
           </a>
         </div>
       </header>
@@ -534,8 +534,8 @@ export default function HomePage() {
       <footer className="site-footer">
         <div className="footer-container">
           <div className="footer-inner" style={{ justifyContent: 'center', textAlign: 'center' }}>
-            <div>
-              <div className="logo-text">Humbl<span>Bar</span></div>
+            <div className="footer-logo-wrap">
+              <img src="/humblbar_logo.png" alt="HumblBar Logo" className="brand-logo-img footer-logo-img" />
             </div>
           </div>
           <div className="footer-copy">
