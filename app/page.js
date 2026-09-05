@@ -309,11 +309,6 @@ export default function HomePage() {
                   <p className="dream-p">
                     Made with organic Medjool dates, California almonds, and pure cocoa. Every time you snack clean, we deliver a balanced meal to a classroom in need.
                   </p>
-                  <div className="dream-badge-row">
-                    <span className="dream-tag-badge">MEDJOOL DATES</span>
-                    <span className="dream-tag-badge">CALIFORNIA ALMONDS</span>
-                    <span className="dream-tag-badge">NO REFINED SUGAR</span>
-                  </div>
                 </div>
               </div>
             </div>
