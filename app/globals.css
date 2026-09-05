@@ -166,10 +166,10 @@ body {
 }
 
 .hero-container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 0.92fr 1.08fr;
   gap: 40px;
   align-items: center;
 }
@@ -535,7 +535,7 @@ body {
   width: 100%;
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  min-height: 395px;
+  min-height: 350px;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
