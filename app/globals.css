@@ -712,6 +712,32 @@ body {
   color: #FFFFFF;
 }
 
+.quiz-movement-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 5.2vw, 2.75rem);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.quiz-movement-line1 {
+  color: #FFFFFF;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.quiz-movement-line2 {
+  background: linear-gradient(135deg, #E27D60 0%, #F59C7A 45%, #FFD166 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 2px 8px rgba(226, 125, 96, 0.35));
+}
+
 .section-sub {
   font-size: clamp(0.9rem, 2vw, 1rem);
   color: var(--color-text-subtle);

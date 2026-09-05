@@ -261,10 +261,6 @@ export default function HomePage() {
                     With every bar you enjoy, you personally open that door.
                     You bring education to their life and hope to their heart.
                   </p>
-                  <p className="cause-movement-tagline">
-                    <span>This is More Than a Snack.</span>
-                    <span className="movement-highlight">It’s a Movement.</span>
-                  </p>
                 </div>
               </div>
 
@@ -279,8 +275,9 @@ export default function HomePage() {
         <div className="quiz-container">
           
           <div className="section-title-center">
-            <h2 className="section-heading">
-              8 quick questions to uncover your ideal flavor profile.
+            <h2 className="quiz-movement-heading">
+              <span className="quiz-movement-line1">This is More Than a Snack.</span>
+              <span className="quiz-movement-line2">It’s a Movement.</span>
             </h2>
           </div>
 
