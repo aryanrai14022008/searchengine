@@ -394,75 +394,33 @@ body {
   border: 1px solid rgba(26, 54, 68, 0.18);
 }
 
-/* Symmetrical Product & Ingredients Sticker Showcase Dock */
-.hero-stickers-dock {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 16px;
+/* Card Background HumblBar Product Watermark */
+.card-bg-bar-watermark {
+  position: absolute;
+  top: 50%;
+  right: -5%;
+  transform: translateY(-50%) rotate(-10deg);
+  width: 320px;
+  max-width: 55%;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
+  transition: all 0.3s ease;
+}
+
+.watermark-bar-img {
   width: 100%;
-}
-
-.sticker-item {
-  position: relative;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1.5px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  padding: 8px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  transition: all 0.2s ease;
-  flex: 1;
-  max-width: 220px;
-  height: 80px;
-}
-
-.sticker-item:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(243, 181, 98, 0.35);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-}
-
-.sticker-bar-item .sticker-img {
-  max-width: 140px;
-  max-height: 64px;
-  width: auto;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
-}
-
-.sticker-ingredients-item .sticker-img {
-  max-width: 76px;
-  max-height: 68px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
+  display: block;
 }
 
 @media (max-width: 640px) {
-  .hero-stickers-dock {
-    gap: 10px;
-    margin-top: 12px;
-  }
-  .sticker-item {
-    height: 70px;
-    padding: 6px 10px;
-    border-radius: 12px;
-  }
-  .sticker-bar-item .sticker-img {
-    max-width: 110px;
-    max-height: 52px;
-  }
-  .sticker-ingredients-item .sticker-img {
-    max-width: 60px;
-    max-height: 56px;
+  .card-bg-bar-watermark {
+    width: 200px;
+    right: -10%;
+    opacity: 0.08;
   }
 }
 
@@ -531,6 +489,8 @@ body {
 
 /* Card Header */
 .card-header {
+  position: relative;
+  z-index: 2;
   padding: 22px 24px 16px;
   background: rgba(0, 0, 0, 0.18);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
@@ -624,6 +584,8 @@ body {
 
 /* Steps Viewport with generous padding */
 .steps-viewport {
+  position: relative;
+  z-index: 2;
   padding: 32px 28px;
   min-height: 360px;
 }

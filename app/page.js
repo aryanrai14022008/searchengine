@@ -272,16 +272,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-
-            {/* Symmetrical Product & Ingredients Showcase Dock */}
-            <div className="hero-stickers-dock">
-              <div className="sticker-item sticker-bar-item" title="HumblBar Clean Snack">
-                <img src="/sticker_bar.png" alt="HumblBar Snack" className="sticker-img" />
-              </div>
-              <div className="sticker-item sticker-ingredients-item" title="Whole Medjool Dates, Almonds & Peanuts">
-                <img src="/sticker_ingredients.png" alt="Whole Clean Ingredients" className="sticker-img" />
-              </div>
-            </div>
           </div>
 
         </div>
@@ -300,6 +290,10 @@ export default function HomePage() {
 
           <div className="terracotta-card-container">
             <div className="terracotta-card">
+              {/* Elegant HumblBar Product Background Watermark */}
+              <div className="card-bg-bar-watermark" aria-hidden="true">
+                <img src="/sticker_bar.png" alt="" className="watermark-bar-img" />
+              </div>
               
               {/* Card Header & Liquid Progress */}
               <div className="card-header">
