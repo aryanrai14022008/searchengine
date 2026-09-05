@@ -142,14 +142,11 @@ export default function HomePage() {
         <div className="hero-container">
           
           <div className="hero-copy">
-            <div className="headline-sticker-wrap">
-              <h1 className="hero-headline">
-                Snack for you.<br />
-                <span className="hero-highlight">Hope for a child.</span>
-              </h1>
-              
+            
+            {/* High-Resolution Large HumblBar Product Sticker */}
+            <div className="hero-bar-top-container">
               <div
-                className={`headline-bar-sticker ${isBarOpened ? 'opened' : ''}`}
+                className={`hero-bar-sticker-large ${isBarOpened ? 'opened' : ''}`}
                 onClick={() => {
                   playSound('pop');
                   const nextState = !isBarOpened;
@@ -158,7 +155,7 @@ export default function HomePage() {
                     confetti({
                       particleCount: 20,
                       spread: 45,
-                      origin: { y: 0.3, x: 0.65 }
+                      origin: { y: 0.3, x: 0.35 }
                     });
                   }
                 }}
@@ -171,7 +168,7 @@ export default function HomePage() {
                 )}
 
                 <div className="bar-wrapper-visual">
-                  <img src="/sticker_bar_clean.png?v=5" alt="HumblBar Clean Protein Bar" className="headline-bar-img" />
+                  <img src="/sticker_bar_hd.png?v=6" alt="HumblBar Clean Protein Bar" className="headline-bar-img" />
                 </div>
 
                 {/* Pure text tagline revealed below the bar - NO BOX, no overlap */}
@@ -181,24 +178,10 @@ export default function HomePage() {
               </div>
             </div>
 
-            <p className="hero-subtext">
-              Take our quick 15-second snack quiz to discover your clean nutrition match. Every completed quiz reserves a warm, wholesome meal for a child in school.
-            </p>
-
-            <div className="hero-stats-row">
-              <div className="stat-pill">
-                <span className="stat-value">15s</span>
-                <span className="stat-label">Snack Match</span>
-              </div>
-              <div className="stat-pill">
-                <span className="stat-value">1 : 1</span>
-                <span className="stat-label">School Meal Pledged</span>
-              </div>
-              <div className="stat-pill">
-                <span className="stat-value">100%</span>
-                <span className="stat-label">Whole Food</span>
-              </div>
-            </div>
+            <h1 className="hero-headline">
+              Snack for you.<br />
+              <span className="hero-highlight">Hope for a child.</span>
+            </h1>
 
             <div className="hero-cta-group">
               <a href="#quiz" className="btn-hero-primary">
