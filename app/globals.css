@@ -533,93 +533,154 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Dream Story Card - Authentic 3D Auto-Opening Book (PC & Mobile) */
-.book-perspective-container {
+/* Cause Story Card - Envelope Opening Animation (PC & Mobile) */
+.envelope-stage {
   position: relative;
   width: 100%;
-  perspective: 2000px;
-  perspective-origin: 50% 50%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 6px 0;
+  justify-content: center;
+  perspective: 1200px;
+  padding: 8px 0 4px;
 }
 
-.storybook-card-3d {
-  background: #EDF6FA;
+.envelope-box {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Envelope Back Shell */
+.envelope-back-pocket {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #C26B4E 0%, #A45237 100%);
   border-radius: 18px;
-  box-shadow: 
-    0 28px 65px rgba(0, 0, 0, 0.6),
-    0 4px 16px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.18);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+
+/* The Inner Story Card Letter */
+.envelope-story-letter {
   position: relative;
   width: 100%;
   display: grid;
   grid-template-columns: 1.05fr 1fr;
-  align-items: stretch;
-  transform-style: preserve-3d;
-  transition: transform 1.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 1.3s ease;
-  cursor: pointer;
-  user-select: none;
+  background: #EDF6FA;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease, box-shadow 0.9s ease;
 }
 
-.storybook-card-3d.book-closed {
-  transform: scale(0.92) rotateX(12deg) rotateY(-4deg);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75);
-}
-
-.storybook-card-3d.book-opened {
-  transform: scale(1) rotateX(0deg) rotateY(0deg);
-  box-shadow: 
-    0 32px 75px rgba(0, 0, 0, 0.65),
-    0 6px 22px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.25);
-}
-
-.storybook-card-3d:hover {
-  transform: translateY(-4px) scale(1.01);
-}
-
-/* Center Spine Fold Crease */
-.book-spine-crease {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 16px;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, 
-    rgba(0, 0, 0, 0.35) 0%, 
-    rgba(0, 0, 0, 0.06) 40%, 
-    rgba(255, 255, 255, 0.3) 50%, 
-    rgba(0, 0, 0, 0.06) 60%, 
-    rgba(0, 0, 0, 0.35) 100%);
-  z-index: 25;
+.is-closed .envelope-story-letter {
+  transform: translateY(28px) scale(0.94);
+  opacity: 0.25;
   pointer-events: none;
+  z-index: 2;
 }
 
-/* Base Pages */
-.book-page {
+.is-opened .envelope-story-letter {
+  transform: translateY(-6px) scale(1.01);
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 20;
+}
+
+.envelope-box:hover .is-opened.envelope-story-letter,
+.is-opened:hover .envelope-story-letter {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 65px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Envelope Front Pocket Fold */
+.envelope-front-fold {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 52%;
+  background: linear-gradient(to top, #BA6144, #9E4B31);
+  clip-path: polygon(0 100%, 50% 22%, 100% 100%);
+  border-radius: 0 0 18px 18px;
+  z-index: 12;
+  pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.8s ease;
+}
+
+.is-opened .envelope-front-fold {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Envelope Top Flap */
+.envelope-top-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56%;
+  background: linear-gradient(160deg, #D4785A 0%, #BA5F42 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-radius: 18px 18px 0 0;
+  transform-origin: top center;
+  z-index: 15;
+  pointer-events: none;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.35, 1), opacity 0.5s ease;
+}
+
+.is-closed .envelope-top-flap {
+  transform: rotateX(0deg);
+  opacity: 1;
+}
+
+.is-opened .envelope-top-flap {
+  transform: rotateX(180deg);
+  opacity: 0;
+}
+
+/* Envelope Wax Seal */
+.envelope-seal {
+  position: absolute;
+  top: 78%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #E74C3C 0%, #96281B 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 1.15rem;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.is-opened .envelope-seal {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+.seal-heart {
+  line-height: 1;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+/* Left Side: Photo Column */
+.cause-card-image-col {
+  background: #FFFFFF;
   position: relative;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
-}
-
-.book-page-left {
-  background: #FFFFFF;
-  border-radius: 18px 0 0 18px;
-  justify-content: center;
   align-items: center;
-}
-
-.book-page-right {
-  background: #DDF2F6;
-  background-image: linear-gradient(180deg, #E5F6F9 0%, #D6EFF4 100%);
-  border-radius: 0 18px 18px 0;
-  padding: 22px 22px;
   justify-content: center;
-  gap: 11px;
 }
 
 .cause-card-photo {
@@ -630,165 +691,15 @@ body {
   display: block;
 }
 
-/* 3D Flipping Front Cover Leaf */
-.book-flipping-leaf {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 50%;
-  transform-origin: left center;
-  transform-style: preserve-3d;
-  z-index: 30;
-  transition: transform 1.4s cubic-bezier(0.25, 1, 0.35, 1);
-  pointer-events: none;
-}
-
-.book-closed .book-flipping-leaf {
-  transform: rotateY(0deg);
-}
-
-.book-opened .book-flipping-leaf {
-  transform: rotateY(-180deg);
-}
-
-.leaf-face {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  overflow: hidden;
-}
-
-.leaf-front {
-  border-radius: 0 18px 18px 0;
-  background: linear-gradient(145deg, #2A150D 0%, #150904 100%);
-  border: 2px solid rgba(226, 125, 96, 0.4);
-  border-left: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6), 0 12px 30px rgba(0, 0, 0, 0.5);
-}
-
-.leaf-back {
-  transform: rotateY(180deg);
-  border-radius: 0 18px 18px 0;
-  background: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Notebook Cover Content & Typography */
-.notebook-cover-content {
-  text-align: center;
-  padding: 20px 18px;
-  color: #FFFFFF;
+/* Right Side: Clean Story Text */
+.cause-card-text-col {
+  background: #DDF2F6;
+  background-image: linear-gradient(180deg, #E5F6F9 0%, #D6EFF4 100%);
+  padding: 22px 22px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.cover-ribbon {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  background: #C85A32;
-  color: #FFF;
-  padding: 3px 10px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-}
-
-.cover-gold-badge {
-  font-family: var(--font-display);
-  font-size: clamp(0.95rem, 2.2vw, 1.25rem);
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  color: #F8B195;
-  text-transform: uppercase;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-.cover-illustration-circle {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px dashed rgba(226, 125, 96, 0.5);
-  display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
-  margin: 2px 0;
-}
-
-.cover-tagline {
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.9);
-  margin: 0;
-  line-height: 1.35;
-}
-
-.cover-sub-hint {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 600;
-  margin: 0;
-}
-
-/* Page Curvature Shadow Overlays */
-.page-shadow-overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 45px;
-  pointer-events: none;
-  z-index: 5;
-  transition: opacity 1.2s ease;
-}
-
-.left-shadow {
-  right: 0;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent);
-}
-
-.right-shadow {
-  left: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent);
-}
-
-/* Interactive Hint Bar Underneath */
-.book-interactive-bar {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.book-pill-hint {
-  font-family: var(--font-body);
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.75);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 4px 14px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
-}
-
-.book-pill-hint:hover {
-  background: rgba(226, 125, 96, 0.2);
-  border-color: rgba(226, 125, 96, 0.4);
-  color: #FFF;
+  gap: 11px;
 }
 
 .cause-story-title {
@@ -835,42 +746,13 @@ body {
 }
 
 @media (max-width: 640px) {
-  .storybook-card-3d {
+  .envelope-story-letter {
     border-radius: 14px;
     grid-template-columns: 1fr 1fr;
   }
-  .book-page-left {
-    border-radius: 14px 0 0 14px;
-  }
-  .book-page-right {
-    border-radius: 0 14px 14px 0;
+  .cause-card-text-col {
     padding: 10px 8px 10px 10px;
     gap: 6px;
-  }
-  .leaf-front, .leaf-back {
-    border-radius: 0 14px 14px 0;
-  }
-  .notebook-cover-content {
-    padding: 10px 6px;
-    gap: 4px;
-  }
-  .cover-ribbon {
-    font-size: 0.58rem;
-    padding: 2px 6px;
-  }
-  .cover-gold-badge {
-    font-size: 0.72rem;
-  }
-  .cover-illustration-circle {
-    width: 32px;
-    height: 32px;
-    font-size: 0.95rem;
-  }
-  .cover-tagline {
-    font-size: 0.64rem;
-  }
-  .cover-sub-hint {
-    font-size: 0.58rem;
   }
   .cause-story-title {
     font-size: clamp(0.68rem, 2.6vw, 0.80rem);

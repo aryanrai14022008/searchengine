@@ -25,29 +25,29 @@ export default function HomePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
-  const [isBookOpen, setIsBookOpen] = useState(false);
-  const bookRef = useRef(null);
+  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
+  const envelopeRef = useRef(null);
 
-  // Auto open book when scrolled into view
+  // Auto open envelope when scrolled into view
   useEffect(() => {
-    if (!bookRef.current) return;
+    if (!envelopeRef.current) return;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setTimeout(() => {
-              setIsBookOpen(true);
+              setIsEnvelopeOpen(true);
             }, 300);
           } else {
             if (entry.boundingClientRect.top > window.innerHeight) {
-              setIsBookOpen(false);
+              setIsEnvelopeOpen(false);
             }
           }
         });
       },
       { threshold: 0.25 }
     );
-    observer.observe(bookRef.current);
+    observer.observe(envelopeRef.current);
     return () => observer.disconnect();
   }, []);
 
@@ -255,84 +255,59 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story Card (Authentic 3D Auto-Opening Book) */}
-          <div className="book-perspective-container" ref={bookRef}>
+          {/* Cause Story Card (Envelope Opening Animation) */}
+          <div className="envelope-stage" ref={envelopeRef}>
             <div 
-              className={`storybook-card-3d ${isBookOpen ? 'book-opened' : 'book-closed'}`}
+              className={`envelope-box ${isEnvelopeOpen ? 'is-opened' : 'is-closed'}`}
               onClick={() => {
                 playSound('pop');
-                setIsBookOpen(prev => !prev);
+                setIsEnvelopeOpen(prev => !prev);
               }}
-              title={isBookOpen ? "Tap to close storybook" : "Tap to open storybook"}
             >
-              {/* Center Spine Crease */}
-              <div className="book-spine-crease" />
+              {/* Envelope Back Shell */}
+              <div className="envelope-back-pocket" />
 
-              {/* Left Page (Visible under flipped cover) */}
-              <div className="book-page book-page-left">
-                <div className="page-shadow-overlay left-shadow" />
-                <img
-                  src="/dream_rocket_sketch.png?v=snug_1"
-                  alt="My Dream child rocket drawing"
-                  className="cause-card-photo"
-                />
-              </div>
-
-              {/* Right Page (Story Text) */}
-              <div className="book-page book-page-right">
-                <div className="page-shadow-overlay right-shadow" />
-                <div className="cause-stat-highlight">
-                  <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
-                </div>
-
-                <h3 className="cause-story-title">EVERY BAR GIVES BACK !!</h3>
-
-                <div className="cause-story-body">
-                  <p>
-                    A childhood belongs in a classroom, not a cycle of survival.<br />
-                    Your pin code should never decide your potential.
-                  </p>
-                  <p>
-                    Somewhere right now, a brilliant mind faces a closed door.
-                    With every bar you enjoy, you personally open that door.
-                    You bring education to their life and hope to their heart.
-                  </p>
-                </div>
-              </div>
-
-              {/* 3D Flipping Front Cover Leaf */}
-              <div className="book-flipping-leaf">
-                {/* Outside: Hardbound Leather Notebook Cover */}
-                <div className="leaf-face leaf-front">
-                  <div className="notebook-cover-content">
-                    <div className="cover-ribbon">1 BAR = 1 MEAL</div>
-                    <div className="cover-gold-badge">THE HUMBL NOTEBOOK</div>
-                    <div className="cover-illustration-circle">
-                      <span className="cover-rocket-emoji">🚀</span>
-                    </div>
-                    <h4 className="cover-tagline">A Childhood Belongs In A Classroom</h4>
-                    <p className="cover-sub-hint">Scroll or tap to open story</p>
-                  </div>
-                </div>
-
-                {/* Inside: Mirror of Child Rocket Sketch */}
-                <div className="leaf-face leaf-back">
-                  <div className="page-shadow-overlay left-shadow" />
+              {/* The Inner Story Card Letter */}
+              <div className="envelope-story-letter">
+                {/* Left Side: Child Rocket Sketch */}
+                <div className="cause-card-image-col">
                   <img
                     src="/dream_rocket_sketch.png?v=snug_1"
                     alt="My Dream child rocket drawing"
                     className="cause-card-photo"
                   />
                 </div>
+
+                {/* Right Side: Clean Story Text */}
+                <div className="cause-card-text-col">
+                  <div className="cause-stat-highlight">
+                    <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
+                  </div>
+
+                  <h3 className="cause-story-title">EVERY BAR GIVES BACK !!</h3>
+
+                  <div className="cause-story-body">
+                    <p>
+                      A childhood belongs in a classroom, not a cycle of survival.<br />
+                      Your pin code should never decide your potential.
+                    </p>
+                    <p>
+                      Somewhere right now, a brilliant mind faces a closed door.
+                      With every bar you enjoy, you personally open that door.
+                      You bring education to their life and hope to their heart.
+                    </p>
+                  </div>
+                </div>
               </div>
 
-            </div>
+              {/* Envelope Front Flap & Seal */}
+              <div className="envelope-front-fold" />
+              <div className="envelope-top-flap">
+                <div className="envelope-seal">
+                  <span className="seal-heart">♥</span>
+                </div>
+              </div>
 
-            {/* Interactive hint button */}
-            <div className="book-interactive-bar">
-              <span className="book-pill-hint">
-                {isBookOpen ? '📖 Storybook Opened • Tap to Fold' : '📕 Tap to Open Storybook'}
-              </span>
             </div>
           </div>
 
