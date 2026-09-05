@@ -521,50 +521,39 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Dream Story Card - Fully Responsive & Non-clipping */
+/* Dream Story Card - Pure White Lined Notebook Sketch (PC & Mobile) */
 .dream-story-card {
-  background: #E8F4F8;
+  background: #FFFFFF;
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: var(--shadow-modal);
   overflow: hidden;
   position: relative;
   width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dream-story-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 32px 68px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 32px 68px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.4);
 }
 
 .dream-card-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-@media (max-width: 768px) {
-  .dream-card-inner {
-    grid-template-columns: 1fr;
-  }
+  display: block;
+  width: 100%;
 }
 
 .dream-sketch-side {
   background: #FFFFFF;
-  padding: 20px 18px;
-  border-right: 1.5px dashed #B8D5E5;
+  padding: 24px 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-image: linear-gradient(#E8EEF2 1px, transparent 1px);
   background-size: 100% 24px;
-}
-
-@media (max-width: 768px) {
-  .dream-sketch-side {
-    border-right: none;
-    border-bottom: 1.5px dashed #B8D5E5;
-  }
+  width: 100%;
 }
 
 .sketch-header {

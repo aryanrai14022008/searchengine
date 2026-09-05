@@ -274,24 +274,6 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Right: Cause Card */}
-                <div className="dream-copy-side">
-                  <div className="dream-copy-header">
-                    <h3 className="dream-headline">
-                      Every clean bite fuels your day — and a child's future.
-                    </h3>
-                    <div className="dream-ingredients-seal" title="Whole Food Ingredients: Dates, Almonds, Cocoa, Coffee, Peanuts">
-                      <img
-                        src="/sticker_ingredients.png"
-                        alt="Whole Food Ingredients"
-                        className="dream-ingredients-seal-img"
-                      />
-                    </div>
-                  </div>
-                  <p className="dream-p">
-                    Made with organic Medjool dates, California almonds, and pure cocoa. Every time you snack clean, we deliver a balanced meal to a classroom in need.
-                  </p>
-                </div>
               </div>
             </div>
           </div>
@@ -299,8 +281,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Main Interactive Questionnaire Section */}
-      <section id="quiz" className="quiz-section-wrap">
+      {/* Main Interactive Archetype Quiz Flow (8 Questions) */}
+      <section id="quiz" className="quiz-section">
         <div className="quiz-container">
           
           <div className="section-title-center">
@@ -312,10 +294,6 @@ export default function HomePage() {
 
           <div className="terracotta-card-container">
             <div className="terracotta-card">
-              {/* Elegant HumblBar Product Background Watermark */}
-              <div className="card-bg-bar-watermark" aria-hidden="true">
-                <img src="/sticker_bar_clean.png?v=5" alt="" className="watermark-bar-img" />
-              </div>
               
               {/* Card Header & Liquid Progress */}
               <div className="card-header">
