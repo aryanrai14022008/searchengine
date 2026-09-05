@@ -242,47 +242,104 @@ body {
   filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.65));
 }
 
-/* Pure clean text hint (no box) */
-.bar-hint-text {
-  font-family: var(--font-hand);
-  font-size: 1rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 8px;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  animation: pulseHint 2s ease-in-out infinite;
+/* Custom SVG Thought Bubble matching uploaded art */
+.hero-thought-bubble {
+  width: 140px;
+  max-width: 100%;
+  margin-bottom: 4px;
+  animation: floatCloud 2.8s ease-in-out infinite;
+  filter: drop-shadow(0 6px 14px rgba(211, 108, 82, 0.4));
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  justify-content: center;
 }
 
-@keyframes pulseHint {
+.hero-bar-sticker-large:hover .hero-thought-bubble {
+  transform: scale(1.08) translateY(-2px);
+}
+
+.thought-cloud-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes floatCloud {
   0%, 100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
   }
 }
 
-/* Pure clean text tagline revealed below the bar (NO BOX, zero overlap) */
-.bar-reveal-text {
-  font-family: var(--font-hand);
-  font-size: 1.02rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  margin-top: 10px;
-  letter-spacing: 0.01em;
-  opacity: 0;
+/* Pure Clean Interactive Ingredients Reveal Card (No overlap, perfectly clean) */
+.bar-ingredients-reveal {
   max-height: 0;
+  opacity: 0;
   overflow: hidden;
-  transition: all 0.35s ease;
-  text-align: center;
-  line-height: 1.25;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
+  margin-top: 0;
 }
 
-.bar-reveal-text.visible {
+.bar-ingredients-reveal.visible {
+  max-height: 220px;
   opacity: 1;
-  max-height: 60px;
+  margin-top: 14px;
+}
+
+.ingredients-reveal-inner {
+  background: rgba(26, 14, 10, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 125, 96, 0.35);
+  border-radius: 16px;
+  padding: 12px 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.ingredients-reveal-title {
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #E27D60;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ingredients-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ingredient-chip {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.01em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ingredient-chip:hover {
+  background: rgba(226, 125, 96, 0.25);
+  border-color: rgba(226, 125, 96, 0.6);
+  color: #FFFFFF;
+  transform: translateY(-2px) scale(1.05);
 }
 
 .headline-bar-img {
@@ -303,13 +360,12 @@ body {
   .hero-bar-sticker-large {
     width: min(290px, 86vw);
   }
-  .bar-hint-text {
-    font-size: 0.92rem;
-    margin-bottom: 6px;
+  .hero-thought-bubble {
+    width: 125px;
   }
-  .bar-reveal-text {
-    font-size: 0.95rem;
-    margin-top: 8px;
+  .ingredient-chip {
+    font-size: 0.74rem;
+    padding: 3px 8px;
   }
 }
 

@@ -162,9 +162,29 @@ export default function HomePage() {
                 title={isBarOpened ? "Click to close" : "Tap to open HumblBar!"}
               >
                 {!isBarOpened && (
-                  <span className="bar-hint-text">
-                    Open me ✨
-                  </span>
+                  <div className="hero-thought-bubble">
+                    <svg viewBox="0 0 170 85" className="thought-cloud-svg" aria-hidden="true">
+                      <g fill="#D36C52">
+                        <ellipse cx="85" cy="36" rx="64" ry="22" />
+                        <circle cx="38" cy="34" r="20" />
+                        <circle cx="62" cy="20" r="20" />
+                        <circle cx="108" cy="20" r="20" />
+                        <circle cx="132" cy="34" r="20" />
+                        <circle cx="85" cy="48" r="17" />
+                        <circle cx="56" cy="46" r="17" />
+                        <circle cx="114" cy="46" r="17" />
+                        {/* Thought dots leading to the bar */}
+                        <circle cx="76" cy="68" r="4.5" />
+                        <circle cx="71" cy="77" r="2.8" />
+                      </g>
+                      <text x="85" y="30" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="800" fontFamily="var(--font-hand), cursive" letterSpacing="0.06em">
+                        TAP TO SEE
+                      </text>
+                      <text x="85" y="47" textAnchor="middle" fill="#FFFFFF" fontSize="13.5" fontWeight="900" fontFamily="var(--font-hand), cursive" letterSpacing="0.02em">
+                        WHAT'S INSIDE?
+                      </text>
+                    </svg>
+                  </div>
                 )}
 
                 <div className="bar-wrapper-visual">
@@ -178,9 +198,21 @@ export default function HomePage() {
                   />
                 </div>
 
-                {/* Pure text tagline revealed below the bar - NO BOX, no overlap */}
-                <div className={`bar-reveal-text ${isBarOpened ? 'visible' : ''}`}>
-                  Built for ordinary days ✨
+                {/* Clean Interactive Ingredients Reveal Card */}
+                <div className={`bar-ingredients-reveal ${isBarOpened ? 'visible' : ''}`}>
+                  <div className="ingredients-reveal-inner">
+                    <div className="ingredients-reveal-title">
+                      <span>✨ 100% Real Whole Ingredients</span>
+                    </div>
+                    <div className="ingredients-chip-list">
+                      <span className="ingredient-chip">Dates</span>
+                      <span className="ingredient-chip">Almonds</span>
+                      <span className="ingredient-chip">Protein Blend</span>
+                      <span className="ingredient-chip">Cocoa</span>
+                      <span className="ingredient-chip">Peanuts</span>
+                      <span className="ingredient-chip">Coffee</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
