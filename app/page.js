@@ -393,7 +393,7 @@ export default function HomePage() {
                         Where should we send your results?
                       </h2>
                       <p className="step-sub">
-                        Enter your details to begin the quiz and receive your VIP Founder Pass.
+                        Enter your details below to start your quick 8-question quiz.
                       </p>
                     </div>
 
@@ -498,23 +498,9 @@ export default function HomePage() {
                       Thank You for Attempting the Quiz{formData.name ? `, ${formData.name.split(' ')[0]}` : ''}!
                     </h2>
 
-                    <p style={{ fontSize: '1rem', color: 'rgba(255, 255, 255, 0.9)', maxWidth: '440px', margin: '0 auto 18px', lineHeight: 1.55 }}>
+                    <p style={{ fontSize: '1rem', color: 'rgba(255, 255, 255, 0.9)', maxWidth: '440px', margin: '0 auto 24px', lineHeight: 1.55 }}>
                       Your response has been successfully recorded. 1 nutritious meal has been reserved for a child in need on your behalf.
                     </p>
-
-                    <div style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      background: 'rgba(255, 255, 255, 0.1)',
-                      border: '1px solid rgba(255, 255, 255, 0.22)',
-                      padding: '8px 18px',
-                      borderRadius: '10px',
-                      marginBottom: '26px'
-                    }}>
-                      <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>VIP Pass:</span>
-                      <strong style={{ color: '#FFFFFF', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>{assignedPassId}</strong>
-                    </div>
 
                     <div>
                       <button
