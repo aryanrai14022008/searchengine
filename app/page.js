@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { QUIZ_QUESTIONS, ARCHETYPES, calculateArchetype } from '@/lib/quizData';
 import {
@@ -26,30 +26,6 @@ export default function HomePage() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
-  const envelopeRef = useRef(null);
-
-  // Auto open envelope when scrolled into view
-  useEffect(() => {
-    if (!envelopeRef.current) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              setIsEnvelopeOpen(true);
-            }, 300);
-          } else {
-            if (entry.boundingClientRect.top > window.innerHeight) {
-              setIsEnvelopeOpen(false);
-            }
-          }
-        });
-      },
-      { threshold: 0.25 }
-    );
-    observer.observe(envelopeRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   // Web Audio FX Engine
   const playSound = (type = 'pop') => {
@@ -255,8 +231,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story Card (Envelope Opening Animation) */}
-          <div className="envelope-stage" ref={envelopeRef}>
+          {/* Cause Story Card (Envelope Opening Animation on Click) */}
+          <div className="envelope-stage">
             <div 
               className={`envelope-box ${isEnvelopeOpen ? 'is-opened' : 'is-closed'}`}
               onClick={() => {
