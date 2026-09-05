@@ -424,28 +424,24 @@ body {
   color: #0E5A73;
 }
 
-.dream-desc {
-  font-size: 0.92rem;
-  line-height: 1.5;
-  color: #33596B;
+.dream-badge-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
 }
 
-/* Sticky Desk Notes - Clean & Constrained */
-.sticky-tag {
-  position: absolute;
-  background: #FFF9E6;
-  color: #2B1B13;
-  padding: 4px 10px;
-  border-radius: 4px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-  font-family: var(--font-hand);
-  font-size: 0.95rem;
+.dream-tag-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 700;
-  z-index: 5;
+  letter-spacing: 0.05em;
+  background: rgba(26, 54, 68, 0.08);
+  color: #1A3644;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(26, 54, 68, 0.18);
 }
-
-.tag-water { top: -10px; right: 12px; transform: rotate(3deg); }
-.tag-protein { bottom: -8px; left: 16px; transform: rotate(-2deg); }
 
 /* Symmetrical Product & Ingredients Sticker Showcase Dock */
 .hero-stickers-dock {

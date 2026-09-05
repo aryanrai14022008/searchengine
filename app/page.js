@@ -160,30 +160,12 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* Header Bar */}
+      {/* Header Bar - Clean Minimalist Brand Header */}
       <header className="site-header">
         <div className="header-inner">
           <a href="#" className="brand-logo">
             <span className="logo-text">HUMBL<span>BAR</span></span>
           </a>
-
-          <div className="header-center-pill">
-            <span>Clean Nutrition &bull; 1 Bar = 1 Meal for a Child</span>
-          </div>
-
-          <div className="header-actions">
-            <button
-              onClick={() => setSoundEnabled(!soundEnabled)}
-              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.18)', width: '34px', height: '34px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF', cursor: 'pointer' }}
-              title={soundEnabled ? 'Mute Audio' : 'Enable Audio'}
-            >
-              {soundEnabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
-            </button>
-            <a href="#quiz" className="btn-nav-quiz">
-              <span>Take Quiz</span>
-              <ArrowRight size={13} />
-            </a>
-          </div>
         </div>
       </header>
 
@@ -192,10 +174,6 @@ export default function HomePage() {
         <div className="hero-container">
           
           <div className="hero-copy">
-            <div className="hero-badge">
-              <span>CLEAN SNACKING &bull; REAL SOCIAL IMPACT</span>
-            </div>
-
             <h1 className="hero-headline">
               Snack for you.<br />
               <span className="hero-highlight">Hope for a child.</span>
@@ -230,9 +208,6 @@ export default function HomePage() {
 
           {/* Directed Visual: Classroom Dream & Cause Story Card */}
           <div style={{ position: 'relative', width: '100%' }}>
-            <div className="sticky-tag tag-water">Drink 3L water</div>
-            <div className="sticky-tag tag-protein">Eating 50g protein</div>
-
             <div className="dream-story-card">
               <div className="dream-card-inner">
                 {/* Left: Notebook Sketch */}
@@ -312,7 +287,6 @@ export default function HomePage() {
         <div className="quiz-container">
           
           <div className="section-title-center">
-            <span className="sub-badge">INTERACTIVE DISCOVERY</span>
             <h2 className="section-heading">Discover Your Snack Personality</h2>
             <p className="section-sub">
               Answer 8 quick questions to unlock your custom profile & pledge your meal donation.
