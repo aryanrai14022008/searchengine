@@ -235,7 +235,7 @@ export default function HomePage() {
               {/* Left Side: Full Horizontal Image */}
               <div className="cause-card-image-col">
                 <img
-                  src="/dream_rocket_sketch.png?v=hd_10"
+                  src="/dream_rocket_sketch.png?v=portrait_1"
                   alt="My Dream child rocket drawing"
                   className="cause-card-photo"
                 />
