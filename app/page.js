@@ -35,11 +35,17 @@ export default function HomePage() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsBookOpen(true);
+            setTimeout(() => {
+              setIsBookOpen(true);
+            }, 300);
+          } else {
+            if (entry.boundingClientRect.top > window.innerHeight) {
+              setIsBookOpen(false);
+            }
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.25 }
     );
     observer.observe(bookRef.current);
     return () => observer.disconnect();
@@ -249,21 +255,21 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story Card (3D Open Book Animation) */}
+          {/* Cause Story Card (Authentic 3D Auto-Opening Book) */}
           <div className="book-perspective-container" ref={bookRef}>
             <div 
-              className={`cause-horizontal-card book-3d-wrapper ${isBookOpen ? 'book-opened' : 'book-closed'}`}
+              className={`storybook-card-3d ${isBookOpen ? 'book-opened' : 'book-closed'}`}
               onClick={() => {
                 playSound('pop');
                 setIsBookOpen(prev => !prev);
               }}
-              title={isBookOpen ? "Click to fold book" : "Click to open book"}
+              title={isBookOpen ? "Tap to close storybook" : "Tap to open storybook"}
             >
-              {/* Center Spine Seam for Real Notebook Depth */}
-              <div className="book-spine-seam" />
+              {/* Center Spine Crease */}
+              <div className="book-spine-crease" />
 
-              {/* Left Page: Full Horizontal Notebook Image */}
-              <div className="cause-card-image-col book-page-left">
+              {/* Left Page (Visible under flipped cover) */}
+              <div className="book-page book-page-left">
                 <div className="page-shadow-overlay left-shadow" />
                 <img
                   src="/dream_rocket_sketch.png?v=snug_1"
@@ -272,8 +278,8 @@ export default function HomePage() {
                 />
               </div>
 
-              {/* Right Page: Story Text */}
-              <div className="cause-card-text-col book-page-right">
+              {/* Right Page (Story Text) */}
+              <div className="book-page book-page-right">
                 <div className="page-shadow-overlay right-shadow" />
                 <div className="cause-stat-highlight">
                   <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
@@ -294,6 +300,39 @@ export default function HomePage() {
                 </div>
               </div>
 
+              {/* 3D Flipping Front Cover Leaf */}
+              <div className="book-flipping-leaf">
+                {/* Outside: Hardbound Leather Notebook Cover */}
+                <div className="leaf-face leaf-front">
+                  <div className="notebook-cover-content">
+                    <div className="cover-ribbon">1 BAR = 1 MEAL</div>
+                    <div className="cover-gold-badge">THE HUMBL NOTEBOOK</div>
+                    <div className="cover-illustration-circle">
+                      <span className="cover-rocket-emoji">🚀</span>
+                    </div>
+                    <h4 className="cover-tagline">A Childhood Belongs In A Classroom</h4>
+                    <p className="cover-sub-hint">Scroll or tap to open story</p>
+                  </div>
+                </div>
+
+                {/* Inside: Mirror of Child Rocket Sketch */}
+                <div className="leaf-face leaf-back">
+                  <div className="page-shadow-overlay left-shadow" />
+                  <img
+                    src="/dream_rocket_sketch.png?v=snug_1"
+                    alt="My Dream child rocket drawing"
+                    className="cause-card-photo"
+                  />
+                </div>
+              </div>
+
+            </div>
+
+            {/* Interactive hint button */}
+            <div className="book-interactive-bar">
+              <span className="book-pill-hint">
+                {isBookOpen ? '📖 Storybook Opened • Tap to Fold' : '📕 Tap to Open Storybook'}
+              </span>
             </div>
           </div>
 
