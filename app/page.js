@@ -231,19 +231,37 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story (Artisanal Paper Wrapped Parcel that Unfolds in 3D into an Open Storybook) */}
-          <div className="paper-unwrap-stage">
+          {/* Cause Story (Artisanal Origami Crumpled Paper Ball that Unfolds into Open Storybook) */}
+          <div className="crumple-paper-stage">
             <div 
-              className={`paper-parcel-box ${isParcelOpen ? 'is-opened' : 'is-closed'}`}
+              className={`crumple-paper-box ${isParcelOpen ? 'is-opened' : 'is-closed'}`}
               onClick={() => {
                 playSound('pop');
                 setIsParcelOpen(prev => !prev);
               }}
             >
-              {/* Paper Parcel Base / Back Shell */}
-              <div className="paper-back-base" />
+              {/* Closed State: Hand-Drawn Crumpled Paper Ball Unfolding Stages */}
+              <div className="crumple-ball-wrapper">
+                <div className="crumple-ball-container">
+                  <img
+                    src="/paper_ball_closed.png"
+                    alt="Crumpled paper ball"
+                    className="crumple-ball-img closed-ball"
+                  />
+                  <img
+                    src="/paper_crumple_stage.png"
+                    alt="Paper ball unfolding stage"
+                    className="crumple-ball-img opening-shell"
+                  />
+                </div>
 
-              {/* The Inner Storybook (Elevates and expands open as wrapper unfolds) */}
+                {/* Tap to Unfold Badge */}
+                <div className="crumple-tap-badge">
+                  <span>Tap to unfold story</span>
+                </div>
+              </div>
+
+              {/* Opened State: Full 2-Page Storybook Spread */}
               <div className="paper-inside-book">
                 <div className="book-pages-spread">
                   {/* Left Page: Child Rocket Sketch */}
@@ -282,41 +300,6 @@ export default function HomePage() {
                     </div>
                     <div className="book-page-gutter-shadow right-gutter" />
                   </div>
-                </div>
-              </div>
-
-              {/* 4 Multi-Flap 3D Paper Wrapper Folders */}
-              {/* Top Flap */}
-              <div className="paper-flap flap-top">
-                <div className="paper-texture-overlay" />
-                <div className="paper-crease-highlight" />
-              </div>
-
-              {/* Bottom Flap */}
-              <div className="paper-flap flap-bottom">
-                <div className="paper-texture-overlay" />
-                <div className="paper-crease-highlight" />
-              </div>
-
-              {/* Left Flap */}
-              <div className="paper-flap flap-left">
-                <div className="paper-texture-overlay" />
-                <div className="paper-crease-highlight" />
-              </div>
-
-              {/* Right Flap (Front Cover Flap) */}
-              <div className="paper-flap flap-right">
-                <div className="paper-texture-overlay" />
-                <div className="paper-crease-highlight" />
-              </div>
-
-              {/* Paper Parcel Center Seal & Stamp (Fades away when unfolded) */}
-              <div className="paper-seal-unit">
-                <div className="parcel-stamp-badge">
-                  <span className="stamp-title">EVERY BAR GIVES BACK</span>
-                </div>
-                <div className="paper-tap-badge">
-                  <span>Tap to unwrap</span>
                 </div>
               </div>
 

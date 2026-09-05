@@ -533,65 +533,150 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Cause Story - Artisanal 3D Paper Wrapped Parcel that Unfolds in Stages into an Open Storybook */
-.paper-unwrap-stage {
+/* Cause Story - Artisanal Crumpled Origami Paper Ball Unfolding into Storybook Spread */
+.crumple-paper-stage {
   position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
-  perspective: 1400px;
-  padding: 10px 0 6px;
+  align-items: center;
+  padding: 14px 0 8px;
 }
 
-.paper-parcel-box {
+.crumple-paper-box {
   position: relative;
   width: 100%;
   max-width: 720px;
-  transform-style: preserve-3d;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Paper Parcel Back Base Shell */
-.paper-back-base {
+/* Closed State: Hand-Drawn Crumpled Paper Ball Container */
+.crumple-ball-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
+}
+
+.is-closed .crumple-ball-wrapper {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+.is-opened .crumple-ball-wrapper {
+  opacity: 0;
+  transform: scale(0.7) translateY(-20px);
+  pointer-events: none;
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+  gap: 0;
+}
+
+.crumple-ball-container {
+  position: relative;
+  width: min(290px, 72vw);
+  height: min(240px, 60vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease;
+}
+
+.crumple-paper-box:hover .crumple-ball-container {
+  transform: scale(1.04) translateY(-3px);
+}
+
+.crumple-ball-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.45));
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.crumple-ball-img.closed-ball {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.crumple-ball-img.opening-shell {
   position: absolute;
   inset: 0;
-  background: linear-gradient(145deg, #DFCEB0 0%, #CBB694 100%);
-  border-radius: 16px;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(210, 185, 145, 0.4);
-  z-index: 1;
+  opacity: 0;
+  transform: scale(0.92);
+  border-radius: 20px;
 }
 
-/* The Inside Storybook (Elevates, zooms, and expands into 2-page spread) */
+/* On Hover: Smoothly teases the opening origami shell stage */
+.crumple-paper-box:hover .is-closed .closed-ball {
+  opacity: 0.15;
+  transform: scale(1.05);
+}
+
+.crumple-paper-box:hover .is-closed .opening-shell {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Tap to Unfold Badge */
+.crumple-tap-badge {
+  background: #FFFFFF;
+  color: #1A0D08;
+  font-family: var(--font-body);
+  font-size: clamp(0.78rem, 2vw, 0.86rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  padding: 6px 20px;
+  border-radius: 24px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.crumple-paper-box:hover .crumple-tap-badge {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Opened State: Full 2-Page Storybook Spread */
 .paper-inside-book {
   position: relative;
   width: 100%;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.25);
-  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease, box-shadow 0.9s ease;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.25);
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
 }
 
 .is-closed .paper-inside-book {
-  transform: translateY(16px) scale(0.95);
-  opacity: 0.15;
+  transform: scale(0.92) translateY(20px);
+  opacity: 0;
   pointer-events: none;
-  z-index: 2;
+  height: 0;
+  overflow: hidden;
 }
 
 .is-opened .paper-inside-book {
-  transform: translateY(-6px) scale(1.01);
+  transform: scale(1) translateY(0);
   opacity: 1;
   pointer-events: auto;
-  z-index: 20;
+  height: auto;
 }
 
-.paper-parcel-box:hover .is-opened.paper-inside-book,
-.is-opened:hover .paper-inside-book {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 32px 70px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.35);
+.crumple-paper-box:hover .is-opened .paper-inside-book {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 30px 68px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.35);
 }
 
 /* Book 2-Page Spread Layout */
@@ -670,179 +755,6 @@ body {
 .right-gutter {
   left: 0;
   background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.08));
-}
-
-/* 4 Multi-Flap 3D Paper Wrapper Folders */
-.paper-flap {
-  position: absolute;
-  transform-style: preserve-3d;
-  pointer-events: none;
-  background: #E8DCB8;
-  border: 1px solid rgba(200, 175, 135, 0.5);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.35, 1), opacity 0.5s ease;
-}
-
-.paper-texture-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.25) 0%, rgba(0, 0, 0, 0.05) 100%);
-  pointer-events: none;
-}
-
-.paper-crease-highlight {
-  position: absolute;
-  inset: 0;
-  box-shadow: inset 0 0 16px rgba(160, 130, 90, 0.25);
-  pointer-events: none;
-}
-
-/* Top Flap (Folds Vertically from Top) */
-.paper-flap.flap-top {
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 52%;
-  background: linear-gradient(180deg, #EFE3CC 0%, #DFCBA6 100%);
-  clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
-  border-radius: 16px 16px 0 0;
-  transform-origin: top center;
-  z-index: 12;
-}
-
-.is-closed .paper-flap.flap-top {
-  transform: rotateX(0deg);
-  opacity: 1;
-}
-
-.is-opened .paper-flap.flap-top {
-  transform: rotateX(175deg);
-  opacity: 0;
-  transition: transform 0.75s cubic-bezier(0.25, 1, 0.35, 1) 0.1s, opacity 0.4s ease 0.35s;
-}
-
-/* Bottom Flap (Folds Vertically from Bottom) */
-.paper-flap.flap-bottom {
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 52%;
-  background: linear-gradient(0deg, #E5D5B8 0%, #D6BF97 100%);
-  clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%);
-  border-radius: 0 0 16px 16px;
-  transform-origin: bottom center;
-  z-index: 13;
-}
-
-.is-closed .paper-flap.flap-bottom {
-  transform: rotateX(0deg);
-  opacity: 1;
-}
-
-.is-opened .paper-flap.flap-bottom {
-  transform: rotateX(-175deg);
-  opacity: 0;
-  transition: transform 0.75s cubic-bezier(0.25, 1, 0.35, 1) 0.1s, opacity 0.4s ease 0.35s;
-}
-
-/* Left Flap (Folds Horizontally from Left) */
-.paper-flap.flap-left {
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 52%;
-  background: linear-gradient(90deg, #EAE0C7 0%, #DAC49D 100%);
-  clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
-  border-radius: 16px 0 0 16px;
-  transform-origin: left center;
-  z-index: 14;
-}
-
-.is-closed .paper-flap.flap-left {
-  transform: rotateY(0deg);
-  opacity: 1;
-}
-
-.is-opened .paper-flap.flap-left {
-  transform: rotateY(-175deg);
-  opacity: 0;
-  transition: transform 0.85s cubic-bezier(0.25, 1, 0.35, 1) 0.3s, opacity 0.45s ease 0.55s;
-}
-
-/* Right Flap (Front Main Cover Flap - Folds Horizontally from Right) */
-.paper-flap.flap-right {
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 58%;
-  background: linear-gradient(270deg, #F0E5CF 0%, #DECBA7 100%);
-  clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%);
-  border-radius: 0 16px 16px 0;
-  transform-origin: right center;
-  z-index: 15;
-  filter: drop-shadow(-4px 0 12px rgba(0, 0, 0, 0.3));
-}
-
-.is-closed .paper-flap.flap-right {
-  transform: rotateY(0deg);
-  opacity: 1;
-}
-
-.is-opened .paper-flap.flap-right {
-  transform: rotateY(175deg);
-  opacity: 0;
-  transition: transform 0.85s cubic-bezier(0.25, 1, 0.35, 1) 0.3s, opacity 0.45s ease 0.55s;
-}
-
-/* Center Seal & Stamp on Wrapped Parcel */
-.paper-seal-unit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 25;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 9px;
-  pointer-events: none;
-  transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.is-opened .paper-seal-unit {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.35);
-}
-
-/* Stamp Badge on Parcel */
-.parcel-stamp-badge {
-  background: #C85A32;
-  background: linear-gradient(135deg, #D46944 0%, #B84B25 100%);
-  color: #FFFFFF;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(0.78rem, 2.2vw, 0.94rem);
-  letter-spacing: 0.12em;
-  padding: 6px 16px;
-  border-radius: 8px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-  border: 1.5px dashed rgba(255, 255, 255, 0.5);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-}
-
-/* Simple Clean White Tap to Unwrap Badge */
-.paper-tap-badge {
-  background: #FFFFFF;
-  color: #24160E;
-  font-family: var(--font-body);
-  font-size: clamp(0.76rem, 2vw, 0.84rem);
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  padding: 5px 18px;
-  border-radius: 20px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  white-space: nowrap;
 }
 
 /* Left Side: Photo Column */
