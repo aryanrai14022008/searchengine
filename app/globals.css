@@ -143,6 +143,84 @@ body {
   transform: scale(1.04);
 }
 
+/* Responsive Navbar Waitlist Button (Desktop: Hidden) */
+.nav-waitlist-btn {
+  display: none;
+}
+
+/* Phone & Tablet View: Show button on right of navbar, replacing from hero section */
+@media (max-width: 1024px) {
+  .nav-waitlist-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: #FFFFFF;
+    color: #160B06;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.86rem;
+    line-height: 1;
+    padding: 7px 15px;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(226, 125, 96, 0.2);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+    flex-shrink: 0;
+  }
+
+  .nav-waitlist-btn svg {
+    color: #E27D60;
+    transition: transform 0.2s ease;
+  }
+
+  .nav-waitlist-btn:hover,
+  .nav-waitlist-btn:active {
+    background: #FFF9F5;
+    color: #000000;
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-waitlist-btn:hover svg {
+    transform: translateX(3px);
+  }
+
+  /* Replace / remove from hero on all mobile phone and tablet views */
+  .hero-cta-group {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    padding: 8px 12px;
+  }
+
+  .nav-waitlist-btn {
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    gap: 5px;
+  }
+
+  .nav-waitlist-btn svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav-waitlist-btn {
+    font-size: 0.72rem;
+    padding: 5px 9px;
+    gap: 4px;
+  }
+}
+
 .header-tagline {
   font-size: 0.84rem;
   color: rgba(255, 255, 255, 0.72);

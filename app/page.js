@@ -175,6 +175,10 @@ export default function HomePage() {
           <a href="#" className="brand-logo">
             <img src="/humblbar_logo.png?v=7" alt="HumblBar Logo" className="brand-logo-img" />
           </a>
+          <a href="#quiz" className="nav-waitlist-btn">
+            <span>Join the waitlist</span>
+            <ArrowRight size={14} />
+          </a>
         </div>
       </header>
 
