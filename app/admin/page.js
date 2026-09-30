@@ -149,23 +149,32 @@ export default function AdminPage() {
       return;
     }
 
-    const headers = ['Type', 'Candidate Name', 'Email', 'Phone', 'Pass ID / Reference', 'Submission Date', 'Details / Answers'];
+    const questionHeaders = QUIZ_QUESTIONS.map(q => `"${q.question.replace(/"/g, '""')}"`);
+    const headers = ['Type', 'Candidate Name', 'Email', 'Phone', 'Pass ID / Reference', 'Submission Date', ...questionHeaders, 'All Answers Summary'];
+
     const rows = items.map(item => {
       const isQuiz = item.type === 'quiz';
       const type = isQuiz ? 'Quiz Waitlist' : 'Inquiry';
-      const name = `"${item.name || ''}"`;
-      const email = `"${item.email || ''}"`;
-      const phone = `"${item.phone || ''}"`;
+      const name = `"${(item.name || '').replace(/"/g, '""')}"`;
+      const email = `"${(item.email || '').replace(/"/g, '""')}"`;
+      const phone = `"${(item.phone || '').replace(/"/g, '""')}"`;
       const passId = isQuiz ? (item.passId || '') : 'Direct Inquiry';
       const date = item.createdAt ? new Date(item.createdAt).toLocaleString() : '';
+      
+      const questionCols = QUIZ_QUESTIONS.map(q => {
+        if (!isQuiz || !item.answers) return '""';
+        const val = item.answers[q.id] || '';
+        return `"${String(val).replace(/"/g, '""')}"`;
+      });
+
       const details = isQuiz 
-        ? `"${Object.entries(item.answers || {}).map(([k, v]) => `${k}: ${v}`).join('; ')}"`
+        ? `"${Object.entries(item.answers || {}).map(([k, v]) => `${questionMap[k]?.question || k}: ${v}`).join('; ').replace(/"/g, '""')}"`
         : `"${(item.message || '').replace(/"/g, '""')}"`;
 
-      return [type, name, email, phone, passId, `"${date}"`, details].join(',');
+      return [type, name, email, phone, passId, `"${date}"`, ...questionCols, details].join(',');
     });
 
-    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows].join('\n');
+    const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows].join('\n');
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
@@ -619,14 +628,15 @@ export default function AdminPage() {
 
                 {selectedResponse.type === 'quiz' && selectedResponse.answers ? (
                   <div className="modal-answers-list">
-                    {Object.entries(selectedResponse.answers).map(([key, val]) => {
-                      const qMeta = questionMap[key];
-                      const matchedOpt = qMeta?.options?.find(o => o.val === val);
+                    {QUIZ_QUESTIONS.map(q => {
+                      const val = selectedResponse.answers[q.id];
+                      if (val === undefined || val === null || val === '') return null;
+                      const matchedOpt = q.options?.find(o => o.val === val);
                       const displayVal = matchedOpt ? matchedOpt.label : String(val);
                       return (
-                        <div key={key} className="modal-answer-item">
+                        <div key={q.id} className="modal-answer-item">
                           <div className="answer-question-text">
-                            {qMeta ? qMeta.question : key}
+                            {q.question}
                           </div>
                           <div className="answer-value-badge">
                             {displayVal}
@@ -634,6 +644,19 @@ export default function AdminPage() {
                         </div>
                       );
                     })}
+                    {/* Any unmapped / legacy answers */}
+                    {Object.entries(selectedResponse.answers)
+                      .filter(([key]) => !questionMap[key])
+                      .map(([key, val]) => (
+                        <div key={key} className="modal-answer-item">
+                          <div className="answer-question-text">
+                            {key}
+                          </div>
+                          <div className="answer-value-badge">
+                            {String(val)}
+                          </div>
+                        </div>
+                      ))}
                   </div>
                 ) : (
                   <div className="modal-message-box">

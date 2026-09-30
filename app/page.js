@@ -431,13 +431,13 @@ export default function HomePage() {
 
                     <form onSubmit={handleContactSubmit} className="waitlist-card-form">
                       <div className="form-row">
-                        <label className="field-label">First Name *</label>
+                        <label className="field-label">Full Name *</label>
                         <div className="input-container">
                           <User size={16} className="input-icon" />
                           <input
                             type="text"
                             required
-                            placeholder="e.g. Aryan"
+                            placeholder="e.g. Aryan Rai"
                             className="input-field"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
