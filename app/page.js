@@ -260,31 +260,59 @@ export default function HomePage() {
                 }
               }}
             >
-              {/* Front Cover Card (Visible when closed) */}
-              <div className="book-cover-card-wrap">
-                <div className="book-cover-leather">
-                  <div className="cover-spine-edge" />
-                  <div className="cover-stitched-frame">
-                    <div className="cover-top-badge">
-                      <span>1 BAR = 1 MEAL</span>
-                    </div>
+              {/* Underneath Base Spread (Right Page with Story) */}
+              <div className="book-spread-base">
+                {/* Left Base Page (Archival backing under the opened cover) */}
+                <div className="book-base-left-page" />
 
-                    <div className="cover-heading-wrap">
-                      <h2 className="cover-main-heading vertical-cover-heading">
-                        <span className="vert-word vert-word-1">EVERY</span>
-                        <span className="vert-word vert-word-2">BAR</span>
-                        <span className="vert-word vert-word-3">GIVES</span>
-                        <span className="vert-word vert-word-4">BACK</span>
-                      </h2>
-                    </div>
+                {/* Right Inside Page with Story Content */}
+                <div className="book-page-half right-page-half">
+                  <div className="cause-stat-highlight">
+                    <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
                   </div>
+
+                  <div className="cause-story-body">
+                    <p>
+                      A childhood belongs in a classroom, not a cycle of survival.<br />
+                      Your pin code should never decide your potential.
+                    </p>
+                    <p>
+                      Somewhere right now, a brilliant mind faces a closed door.
+                      With every bar you enjoy, you personally open that door.
+                      You bring education to their life and hope to their heart.
+                    </p>
+                  </div>
+
+                  <div className="book-gutter-shadow right-gutter" />
+                </div>
+
+                {/* Center Spine Crease */}
+                <div className="book-spine-divider">
+                  <div className="spine-crease-line" />
                 </div>
               </div>
 
-              {/* Inside 2-Page Spread (Visible when opened) */}
-              <div className="book-spread-card-wrap">
-                <div className="book-spread-grid">
-                  {/* Left Page: Rocket Drawing */}
+              {/* 3D Flipping Leaf / Front Cover (Hinged at Center Spine) */}
+              <div className="book-cover-leaf">
+                {/* Front Face: Rich Espresso Leather with Vertical 4 Words */}
+                <div className="leaf-face leaf-front-face">
+                  <div className="book-cover-leather">
+                    <div className="cover-spine-edge" />
+                    <div className="cover-stitched-frame">
+                      <div className="cover-heading-wrap">
+                        <h2 className="cover-main-heading vertical-cover-heading">
+                          <span className="vert-word vert-word-1">EVERY</span>
+                          <span className="vert-word vert-word-2">BAR</span>
+                          <span className="vert-word vert-word-3">GIVES</span>
+                          <span className="vert-word vert-word-4">BACK</span>
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Back Face: Turns into Left Inside Page with Child Rocket Drawing */}
+                <div className="leaf-face leaf-back-face">
                   <div className="book-page-half left-page-half">
                     <img
                       src="/dream_rocket_sketch.png?v=snug_1"
@@ -292,32 +320,6 @@ export default function HomePage() {
                       className="cause-card-photo"
                     />
                     <div className="book-gutter-shadow left-gutter" />
-                  </div>
-
-                  {/* Center Spine Crease */}
-                  <div className="book-spine-divider">
-                    <div className="spine-crease-line" />
-                  </div>
-
-                  {/* Right Page: Story Content */}
-                  <div className="book-page-half right-page-half">
-                    <div className="cause-stat-highlight">
-                      <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
-                    </div>
-
-                    <div className="cause-story-body">
-                      <p>
-                        A childhood belongs in a classroom, not a cycle of survival.<br />
-                        Your pin code should never decide your potential.
-                      </p>
-                      <p>
-                        Somewhere right now, a brilliant mind faces a closed door.
-                        With every bar you enjoy, you personally open that door.
-                        You bring education to their life and hope to their heart.
-                      </p>
-                    </div>
-
-                    <div className="book-gutter-shadow right-gutter" />
                   </div>
                 </div>
               </div>

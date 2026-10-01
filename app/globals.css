@@ -614,7 +614,7 @@ body {
    INTERACTIVE 3D STORYBOOK (Front Cover -> Open 2-Page Spread)
    ========================================================================== */
 /* ==========================================================================
-   CONSTANT-SIZE REALISTIC 3D STORYBOOK (Bulletproof Smooth Opening)
+   CONSTANT-SIZE REALISTIC 3D STORYBOOK (Authentic 3D Flipping Book Opening)
    ========================================================================== */
 .story-book-stage {
   --book-w: 330px;
@@ -628,6 +628,7 @@ body {
   padding: 14px 0 10px;
   min-height: calc(var(--book-h) + 20px);
   perspective: 2000px;
+  perspective-origin: center center;
 }
 
 /* 3D Book Shell Container */
@@ -636,13 +637,10 @@ body {
   height: var(--book-h);
   cursor: pointer;
   user-select: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   transform-style: preserve-3d;
-  transition: width 0.65s cubic-bezier(0.25, 1, 0.35, 1),
-              transform 0.65s cubic-bezier(0.25, 1, 0.35, 1);
-  will-change: width, transform;
+  transition: width 1.15s cubic-bezier(0.25, 1, 0.35, 1);
+  will-change: width;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -652,135 +650,33 @@ body {
 
 .story-book-shell.book-closed {
   width: var(--book-w);
-  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.65));
 }
 
 .story-book-shell.book-open {
   width: calc(var(--book-w) * 2);
-  filter: drop-shadow(0 22px 50px rgba(0, 0, 0, 0.75));
 }
 
-/* --- Front Cover Card Wrap (Closed State) --- */
-.book-cover-card-wrap {
+/* --- Underneath Base Spread (Base Pages & Crease) --- */
+.book-spread-base {
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: var(--book-w);
-  height: var(--book-h);
-  border-radius: var(--book-rad);
-  transform-origin: left center;
-  transition: transform 0.65s cubic-bezier(0.25, 1, 0.35, 1),
-              opacity 0.45s ease;
-  z-index: 10;
-  display: flex;
-}
-
-.book-cover-leather {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  background: #190E08;
-  background-image: radial-gradient(circle at 60% 20%, #2B160E 0%, #140904 100%);
-  border-radius: var(--book-rad);
-  padding: 14px 14px 14px 20px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.5);
-}
-
-.cover-spine-edge {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 14px;
-  background: linear-gradient(to right, #0D0502 0%, #30160C 50%, #150A05 100%);
-  border-radius: var(--book-rad) 0 0 var(--book-rad);
-  box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.5);
-}
-
-.cover-stitched-frame {
-  border: 1.5px dashed rgba(226, 125, 96, 0.4);
-  border-radius: calc(var(--book-rad) - 4px);
-  padding: 24px 16px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  text-align: center;
-  position: relative;
-}
-
-.cover-top-badge {
-  background: #C85A32;
-  color: #FFFFFF;
-  font-family: var(--font-body);
-  font-weight: 800;
-  font-size: clamp(0.7rem, 1.8vw, 0.78rem);
-  letter-spacing: 0.08em;
-  padding: 5px 14px;
-  border-radius: 999px;
-  box-shadow: 0 4px 12px rgba(200, 90, 50, 0.4);
-  text-transform: uppercase;
-}
-
-.cover-heading-wrap {
-  flex: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 12px 0 4px;
-}
-
-.cover-main-heading.vertical-cover-heading {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  gap: 8px;
-}
-
-.vert-word {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(2.3rem, 5.8vw, 3.4rem);
-  font-weight: 900;
-  color: #FFF2E2;
-  letter-spacing: 0.05em;
-  line-height: 0.95;
-  text-transform: uppercase;
-  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.75), 0 0 24px rgba(226, 125, 96, 0.35);
-  text-align: center;
-}
-
-/* --- Inside 2-Page Spread Wrap (Open State) --- */
-.book-spread-card-wrap {
-  width: 100%;
+  right: 0;
+  width: calc(var(--book-w) * 2);
   height: var(--book-h);
   border-radius: var(--book-rad);
   overflow: hidden;
-  position: relative;
-  z-index: 5;
-  transform-origin: center center;
-  transition: transform 0.65s cubic-bezier(0.25, 1, 0.35, 1),
-              opacity 0.45s ease;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
-}
-
-.book-spread-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.65);
+  background: #FFFFFF;
+}
+
+.book-base-left-page {
+  background: #FFFFFF;
+  border-radius: var(--book-rad) 0 0 var(--book-rad);
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
 }
 
 .book-page-half {
@@ -863,33 +759,124 @@ body {
   background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.1));
 }
 
-/* Visibility / Transforms for Open & Closed States */
-.story-book-shell.book-closed .book-cover-card-wrap {
-  opacity: 1;
-  transform: translateX(-50%) rotateY(0deg) scale(1);
-  pointer-events: auto;
-  z-index: 10;
+/* --- 3D Flipping Leaf / Front Cover --- */
+.book-cover-leaf {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--book-w);
+  height: var(--book-h);
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 1.15s cubic-bezier(0.25, 1, 0.35, 1),
+              box-shadow 1.15s ease;
+  z-index: 20;
 }
 
-.story-book-shell.book-closed .book-spread-card-wrap {
-  opacity: 0;
-  transform: scale(0.94);
-  pointer-events: none;
-  z-index: 1;
+.story-book-shell.book-closed .book-cover-leaf {
+  transform: rotateY(0deg);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
 }
 
-.story-book-shell.book-open .book-cover-card-wrap {
-  opacity: 0;
-  transform: translateX(-80%) rotateY(-110deg) scale(0.9);
-  pointer-events: none;
-  z-index: 1;
+.story-book-shell.book-open .book-cover-leaf {
+  transform: rotateY(-180deg);
+  box-shadow: -10px 16px 36px rgba(0, 0, 0, 0.45);
 }
 
-.story-book-shell.book-open .book-spread-card-wrap {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
-  z-index: 10;
+.leaf-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.leaf-front-face {
+  transform: rotateY(0deg);
+  border-radius: 0 var(--book-rad) var(--book-rad) 0;
+}
+
+.story-book-shell.book-closed .leaf-front-face {
+  border-radius: var(--book-rad);
+}
+
+.leaf-back-face {
+  transform: rotateY(180deg);
+  border-radius: var(--book-rad) 0 0 var(--book-rad);
+}
+
+.book-cover-leather {
+  width: 100%;
+  height: 100%;
+  background: #190E08;
+  background-image: radial-gradient(circle at 60% 20%, #2B160E 0%, #140904 100%);
+  border-radius: inherit;
+  padding: 18px 16px 18px 22px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.65);
+}
+
+.cover-spine-edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 14px;
+  background: linear-gradient(to right, #0D0502 0%, #30160C 50%, #150A05 100%);
+  border-radius: var(--book-rad) 0 0 var(--book-rad);
+  box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.cover-stitched-frame {
+  border: 1.5px dashed rgba(226, 125, 96, 0.4);
+  border-radius: calc(var(--book-rad) - 4px);
+  padding: 24px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.cover-heading-wrap {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0;
+}
+
+.cover-main-heading.vertical-cover-heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  gap: 12px;
+}
+
+.vert-word {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 900;
+  color: #FFF2E2;
+  letter-spacing: 0.06em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8), 0 0 24px rgba(226, 125, 96, 0.4);
+  text-align: center;
 }
 
 .cause-stat-highlight {
@@ -960,21 +947,12 @@ body {
     padding: 14px 8px 12px 10px;
   }
 
-  .cover-top-badge {
-    font-size: 0.62rem;
-    padding: 3px 10px;
-  }
-
-  .cover-heading-wrap {
-    margin: 8px 0 2px;
-  }
-
   .cover-main-heading.vertical-cover-heading {
-    gap: 4px;
+    gap: 6px;
   }
 
   .vert-word {
-    font-size: clamp(1.4rem, 4.4vw, 1.85rem);
+    font-size: clamp(1.45rem, 4.5vw, 1.95rem);
     line-height: 0.95;
     letter-spacing: 0.04em;
   }
