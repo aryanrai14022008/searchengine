@@ -26,50 +26,13 @@ export default function HomePage() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
   
-  // Automatic slow stepped paper unfolding sequence:
-  // 0 = closed ball -> 1 = half-open shell -> 2 = wider open shell -> 3 = main open storybook (remains open)
-  const [paperStage, setPaperStage] = useState(0);
-  const paperStageRef = useRef(null);
-  const timersRef = useRef([]);
+  // Interactive 3D Storybook Open/Close State (Starts closed so user can tap to open)
+  const [isBookOpen, setIsBookOpen] = useState(false);
 
-  const clearAllTimers = () => {
-    timersRef.current.forEach(t => clearTimeout(t));
-    timersRef.current = [];
-  };
-
-  const startSequence = () => {
-    clearAllTimers();
-    setPaperStage(0);
-
-    const t1 = setTimeout(() => {
-      setPaperStage(1);
-    }, 500);
-
-    const t2 = setTimeout(() => {
-      setPaperStage(2);
-    }, 1100);
-
-    const t3 = setTimeout(() => {
-      setPaperStage(3);
-    }, 1750);
-
-    timersRef.current = [t1, t2, t3];
-  };
-
-  useEffect(() => {
-    const t0 = setTimeout(() => {
-      startSequence();
-    }, 200);
-
-    return () => {
-      clearTimeout(t0);
-      clearAllTimers();
-    };
-  }, []);
-
-  const replayPaperSequence = () => {
+  const toggleBook = (e) => {
+    if (e) e.stopPropagation();
     playSound('pop');
-    startSequence();
+    setIsBookOpen(prev => !prev);
   };
 
   // Web Audio FX Engine
@@ -273,62 +236,65 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Cause Story (Origami Crumpled Paper Ball that Unfolds automatically in 3 slow stages into Open Storybook) */}
-          <div className="crumple-paper-stage" ref={paperStageRef}>
+          {/* Interactive 3D Story Book */}
+          <div className="story-book-stage">
             <div 
-              className={`crumple-paper-box stage-${paperStage}`}
-              onClick={replayPaperSequence}
-              title="Click to replay unfolding animation"
+              className={`story-book-shell ${isBookOpen ? 'book-open' : 'book-closed'}`}
+              onClick={toggleBook}
+              title={isBookOpen ? "Tap to close book" : "Tap to open book"}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  toggleBook();
+                }
+              }}
             >
-              {/* Closed State: Hand-Drawn Crumpled Paper Ball & Half-Open Origami Shell */}
-              <div className="crumple-ball-wrapper">
-                <div className="crumple-ball-container">
-                  {/* Stage 0: Tight closed crumpled ball */}
-                  <img
-                    src="/paper_ball_closed.png"
-                    alt="Closed crumpled paper ball"
-                    className="crumple-ball-img stage-0-ball"
-                  />
-                  {/* Stage 1: Half-open faceted origami paper shell */}
-                  <img
-                    src="/paper_half_open.png"
-                    alt="Half-open crumpled origami paper shell"
-                    className="crumple-ball-img stage-1-shell"
-                  />
-                  {/* Stage 2: Wider unfolded faceted origami paper shell */}
-                  <img
-                    src="/paper_stage_almost_open.png"
-                    alt="Almost open crumpled origami paper shell"
-                    className="crumple-ball-img stage-2-shell"
-                  />
+              {/* Front Cover Card (Visible when closed) */}
+              <div className="book-cover-card-wrap">
+                <div className="book-cover-leather">
+                  <div className="cover-spine-edge" />
+                  <div className="cover-stitched-frame">
+                    <div className="cover-top-badge">
+                      <span>1 BAR = 1 MEAL</span>
+                    </div>
+
+                    <div className="cover-heading-wrap">
+                      <h2 className="cover-main-heading">EVERY BAR GIVES BACK</h2>
+                    </div>
+
+                    <div className="cover-footer-prompt">
+                      <span className="cover-prompt-dot" />
+                      <span>Tap to open story</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Stage 2: Full 2-Page Storybook Spread */}
-              <div className="paper-inside-book">
-                <div className="book-pages-spread">
-                  {/* Left Page: Child Rocket Sketch */}
-                  <div className="book-page book-left-page">
+              {/* Inside 2-Page Spread (Visible when opened) */}
+              <div className="book-spread-card-wrap">
+                <div className="book-spread-grid">
+                  {/* Left Page: Rocket Drawing */}
+                  <div className="book-page-half left-page-half">
                     <img
                       src="/dream_rocket_sketch.png?v=snug_1"
                       alt="My Dream child rocket drawing"
                       className="cause-card-photo"
                     />
-                    <div className="book-page-gutter-shadow left-gutter" />
+                    <div className="book-gutter-shadow left-gutter" />
                   </div>
 
                   {/* Center Spine Crease */}
-                  <div className="book-center-crease">
+                  <div className="book-spine-divider">
                     <div className="spine-crease-line" />
                   </div>
 
-                  {/* Right Page: Story Text */}
-                  <div className="book-page book-right-page">
+                  {/* Right Page: Story Content */}
+                  <div className="book-page-half right-page-half">
                     <div className="cause-stat-highlight">
                       <strong>1 in 4</strong> adolescents in India isn't enrolled in school.
                     </div>
-
-                    <h3 className="cause-story-title">EVERY BAR GIVES BACK !!</h3>
 
                     <div className="cause-story-body">
                       <p>
@@ -341,7 +307,13 @@ export default function HomePage() {
                         You bring education to their life and hope to their heart.
                       </p>
                     </div>
-                    <div className="book-page-gutter-shadow right-gutter" />
+
+                    <div className="book-interactive-tag">
+                      <span className="tag-pulse-indicator" />
+                      <span>Tap to close</span>
+                    </div>
+
+                    <div className="book-gutter-shadow right-gutter" />
                   </div>
                 </div>
               </div>

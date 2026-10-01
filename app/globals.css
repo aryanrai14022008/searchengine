@@ -610,276 +610,236 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Cause Story - Origami Crumpled Paper Ball that Unfolds slowly in 3 stages */
-.crumple-paper-stage {
+/* ==========================================================================
+   INTERACTIVE 3D STORYBOOK (Front Cover -> Open 2-Page Spread)
+   ========================================================================== */
+/* ==========================================================================
+   CONSTANT-SIZE REALISTIC 3D STORYBOOK (Bulletproof Smooth Opening)
+   ========================================================================== */
+.story-book-stage {
+  --book-w: 330px;
+  --book-h: 440px;
+  --book-rad: 14px;
   position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 14px 0 8px;
-  min-height: 280px;
-  perspective: 1200px;
+  padding: 14px 0 10px;
+  min-height: calc(var(--book-h) + 20px);
+  perspective: 2000px;
 }
 
-.crumple-paper-box {
+/* 3D Book Shell Container */
+.story-book-shell {
   position: relative;
-  width: 100%;
-  max-width: 720px;
+  height: var(--book-h);
   cursor: pointer;
   user-select: none;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  place-items: center;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  justify-items: center;
   transform-style: preserve-3d;
+  transition: width 0.65s cubic-bezier(0.25, 1, 0.35, 1),
+              transform 0.65s cubic-bezier(0.25, 1, 0.35, 1);
+  will-change: width, transform;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Crumpled Paper Ball Wrapper */
-.crumple-ball-wrapper {
-  grid-column: 1 / -1;
-  grid-row: 1 / -1;
+.story-book-shell:hover {
+  transform: translateY(-2px);
+}
+
+.story-book-shell.book-closed {
+  width: var(--book-w);
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.65));
+}
+
+.story-book-shell.book-open {
+  width: calc(var(--book-w) * 2);
+  filter: drop-shadow(0 22px 50px rgba(0, 0, 0, 0.75));
+}
+
+/* --- Front Cover Card Wrap (Closed State) --- */
+.book-cover-card-wrap {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--book-w);
+  height: var(--book-h);
+  border-radius: var(--book-rad);
+  transform-origin: left center;
+  transition: transform 0.65s cubic-bezier(0.25, 1, 0.35, 1),
+              opacity 0.45s ease;
+  z-index: 10;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  z-index: 2;
-  transform-origin: 50% 50%;
-  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.4, 1),
-              transform 0.55s cubic-bezier(0.25, 1, 0.4, 1);
 }
 
-.crumple-ball-container {
-  position: relative;
-  width: min(310px, 76vw);
-  height: min(260px, 64vw);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform-origin: 50% 50%;
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.4, 1);
-}
-
-.crumple-ball-img {
+.book-cover-leather {
+  flex: 1;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
-  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.45));
-  transform-origin: 50% 50%;
-}
-
-/* Stage 0: Tight closed crumpled ball */
-.crumple-ball-img.stage-0-ball {
-  position: relative;
-  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.4, 1), 
-              transform 0.55s cubic-bezier(0.25, 1, 0.4, 1);
-}
-
-/* Stage 1: Half-open origami faceted shell */
-.crumple-ball-img.stage-1-shell {
-  position: absolute;
-  inset: 0;
-  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.4, 1), 
-              transform 0.55s cubic-bezier(0.25, 1, 0.4, 1);
-}
-
-/* Stage 2: Wider unfolded origami faceted shell */
-.crumple-ball-img.stage-2-shell {
-  position: absolute;
-  inset: 0;
-  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.4, 1), 
-              transform 0.55s cubic-bezier(0.25, 1, 0.4, 1);
-}
-
-/* Stage 3: Full 2-Page Storybook Spread - Pops straight forward out of the screen */
-.paper-inside-book {
-  grid-column: 1 / -1;
-  grid-row: 1 / -1;
-  width: 100%;
-  border-radius: 16px;
-  overflow: hidden;
-  transform-origin: 50% 50%;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.25);
-  z-index: 3;
-  will-change: transform, opacity;
-  transition: opacity 0.55s cubic-bezier(0.25, 1, 0.36, 1), 
-              transform 0.65s cubic-bezier(0.25, 1, 0.36, 1),
-              visibility 0.55s ease;
-}
-
-/* --- State 0: Fully Closed Paper Ball --- */
-.crumple-paper-box.stage-0 .crumple-ball-wrapper {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-  pointer-events: auto;
-  visibility: visible;
-}
-
-.crumple-paper-box.stage-0 .stage-0-ball {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
-
-.crumple-paper-box.stage-0 .stage-1-shell {
-  opacity: 0;
-  transform: scale(0.86) rotate(-8deg);
-  pointer-events: none;
-}
-
-.crumple-paper-box.stage-0 .stage-2-shell {
-  opacity: 0;
-  transform: scale(0.82) rotate(-6deg);
-  pointer-events: none;
-}
-
-.crumple-paper-box.stage-0 .paper-inside-book {
-  opacity: 0;
-  transform: translate3d(0, 0, -80px) scale(0.82);
-  pointer-events: none;
-  visibility: hidden;
-}
-
-/* --- State 1: Half-Open Origami Paper Shell (Visible Stage) --- */
-.crumple-paper-box.stage-1 .crumple-ball-wrapper {
-  opacity: 1;
-  transform: translate3d(0, 0, 15px) scale(1.04);
-  pointer-events: auto;
-  visibility: visible;
-}
-
-.crumple-paper-box.stage-1 .stage-0-ball {
-  opacity: 0;
-  transform: scale(1.16) rotate(12deg);
-}
-
-.crumple-paper-box.stage-1 .stage-1-shell {
-  opacity: 1;
-  transform: scale(1.04) rotate(0deg);
-}
-
-.crumple-paper-box.stage-1 .stage-2-shell {
-  opacity: 0;
-  transform: scale(0.9) rotate(-4deg);
-  pointer-events: none;
-}
-
-.crumple-paper-box.stage-1 .paper-inside-book {
-  opacity: 0;
-  transform: translate3d(0, 0, -50px) scale(0.88);
-  pointer-events: none;
-  visibility: hidden;
-}
-
-/* --- State 2: Wider Unfolded Origami Paper Shell (Pre-Open Stage) --- */
-.crumple-paper-box.stage-2 .crumple-ball-wrapper {
-  opacity: 1;
-  transform: translate3d(0, 0, 30px) scale(1.08);
-  pointer-events: auto;
-  visibility: visible;
-}
-
-.crumple-paper-box.stage-2 .stage-0-ball {
-  opacity: 0;
-  transform: scale(1.22) rotate(14deg);
-}
-
-.crumple-paper-box.stage-2 .stage-1-shell {
-  opacity: 0;
-  transform: scale(1.14) rotate(6deg);
-}
-
-.crumple-paper-box.stage-2 .stage-2-shell {
-  opacity: 1;
-  transform: scale(1.06) rotate(0deg);
-}
-
-.crumple-paper-box.stage-2 .paper-inside-book {
-  opacity: 0;
-  transform: translate3d(0, 0, -25px) scale(0.93);
-  pointer-events: none;
-  visibility: hidden;
-}
-
-/* --- State 3: Full Open Storybook Spread (Zooms straight out towards viewer) --- */
-.crumple-paper-box.stage-3 .crumple-ball-wrapper {
-  opacity: 0;
-  transform: translate3d(0, 0, 60px) scale(1.16);
-  pointer-events: none;
-  visibility: hidden;
-}
-
-.crumple-paper-box.stage-3 .stage-0-ball {
-  opacity: 0;
-  transform: scale(1.25) rotate(16deg);
-}
-
-.crumple-paper-box.stage-3 .stage-1-shell {
-  opacity: 0;
-  transform: scale(1.2) rotate(8deg);
-}
-
-.crumple-paper-box.stage-3 .stage-2-shell {
-  opacity: 0;
-  transform: scale(1.16) rotate(6deg);
-}
-
-.crumple-paper-box.stage-3 .paper-inside-book {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-  pointer-events: auto;
-  visibility: visible;
-}
-
-/* Book 2-Page Spread Layout */
-.book-pages-spread {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  background: #FCFAF6;
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-}
-
-.book-page {
-  position: relative;
+  background: #190E08;
+  background-image: radial-gradient(circle at 60% 20%, #2B160E 0%, #140904 100%);
+  border-radius: var(--book-rad);
+  padding: 14px 14px 14px 20px;
   display: flex;
-  overflow: hidden;
-}
-
-.book-left-page {
-  background: #FFFFFF;
-  align-items: center;
-  justify-content: center;
-}
-
-.book-right-page {
-  background: #DDF2F6;
-  background-image: linear-gradient(180deg, #E6F7FA 0%, #D4EEF4 100%);
-  padding: 24px 22px;
   flex-direction: column;
-  justify-content: center;
-  gap: 11px;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-/* Center Spine Crease & Shadow */
-.book-center-crease {
+.cover-spine-edge {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 51.2%;
+  left: 0;
+  width: 14px;
+  background: linear-gradient(to right, #0D0502 0%, #30160C 50%, #150A05 100%);
+  border-radius: var(--book-rad) 0 0 var(--book-rad);
+  box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.cover-stitched-frame {
+  border: 1.5px dashed rgba(226, 125, 96, 0.4);
+  border-radius: calc(var(--book-rad) - 4px);
+  padding: 24px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.cover-top-badge {
+  background: #C85A32;
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(0.7rem, 1.8vw, 0.78rem);
+  letter-spacing: 0.08em;
+  padding: 5px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(200, 90, 50, 0.4);
+  text-transform: uppercase;
+}
+
+.cover-heading-wrap {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-main-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+  font-weight: 900;
+  color: #FFF2E2;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(226, 125, 96, 0.25);
+  margin: 0;
+}
+
+.cover-footer-prompt {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: clamp(0.72rem, 1.8vw, 0.8rem);
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 5px 14px;
+  border-radius: 999px;
+}
+
+.cover-prompt-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2ECC71;
+  box-shadow: 0 0 8px #2ECC71;
+  animation: pulseDot 1.8s infinite;
+}
+
+/* --- Inside 2-Page Spread Wrap (Open State) --- */
+.book-spread-card-wrap {
+  width: 100%;
+  height: var(--book-h);
+  border-radius: var(--book-rad);
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+  transform-origin: center center;
+  transition: transform 0.65s cubic-bezier(0.25, 1, 0.35, 1),
+              opacity 0.45s ease;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+
+.book-spread-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.book-page-half {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.book-page-half.left-page-half {
+  background: #FFFFFF;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--book-rad) 0 0 var(--book-rad);
+}
+
+.book-page-half.left-page-half .cause-card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.book-page-half.right-page-half {
+  background: #DDF2F6;
+  background-image: linear-gradient(180deg, #EAF7F9 0%, #D2EDF3 100%);
+  padding: 24px 20px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 0 var(--book-rad) var(--book-rad) 0;
+  text-align: left;
+}
+
+.book-spine-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
   width: 20px;
   transform: translateX(-50%);
   z-index: 10;
   pointer-events: none;
   background: linear-gradient(
     to right,
-    rgba(0, 0, 0, 0.08) 0%,
-    rgba(0, 0, 0, 0.22) 50%,
-    rgba(0, 0, 0, 0.08) 100%
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0.05) 100%
   );
 }
 
@@ -890,11 +850,11 @@ body {
   left: 50%;
   width: 1.5px;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.38);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
 
-.book-page-gutter-shadow {
+.book-gutter-shadow {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -904,52 +864,68 @@ body {
 
 .left-gutter {
   right: 0;
-  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.12));
 }
 
 .right-gutter {
   left: 0;
-  background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.08));
+  background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.1));
 }
 
-/* Left Side: Photo Column */
-.cause-card-image-col {
-  background: #FFFFFF;
-  position: relative;
-  overflow: hidden;
-  display: flex;
+/* Visibility / Transforms for Open & Closed States */
+.story-book-shell.book-closed .book-cover-card-wrap {
+  opacity: 1;
+  transform: translateX(-50%) rotateY(0deg) scale(1);
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.story-book-shell.book-closed .book-spread-card-wrap {
+  opacity: 0;
+  transform: scale(0.94);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.story-book-shell.book-open .book-cover-card-wrap {
+  opacity: 0;
+  transform: translateX(-80%) rotateY(-110deg) scale(0.9);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.story-book-shell.book-open .book-spread-card-wrap {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.book-interactive-tag {
+  align-self: flex-start;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+  font-size: clamp(0.66rem, 1.6vw, 0.74rem);
+  color: #17484D;
+  font-weight: 700;
+  background: rgba(23, 72, 77, 0.08);
+  border: 1px solid rgba(23, 72, 77, 0.16);
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-top: 2px;
 }
 
-.cause-card-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
+.tag-pulse-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #C85A32;
 }
 
-/* Right Side: Clean Story Text */
-.cause-card-text-col {
-  background: #DDF2F6;
-  background-image: linear-gradient(180deg, #E5F6F9 0%, #D6EFF4 100%);
-  padding: 22px 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 11px;
-}
-
-.cause-story-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
-  font-weight: 900;
-  color: #123C40;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  line-height: 1.2;
-  margin: 0;
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
 }
 
 .cause-stat-highlight {
@@ -984,45 +960,107 @@ body {
   margin: 0;
 }
 
+/* Media Queries for Constant Book Sizing on Mobile */
+@media (max-width: 768px) {
+  .story-book-stage {
+    --book-w: min(44vw, 230px);
+    --book-h: clamp(285px, 64vw, 335px);
+  }
+}
+
+@media (max-width: 480px) {
+  .story-book-stage {
+    --book-w: min(45vw, 175px);
+    --book-h: clamp(265px, 68vw, 295px);
+    --book-rad: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .story-book-stage {
+    --book-w: 150px;
+    --book-h: 255px;
+  }
+}
+
 @media (max-width: 640px) {
-  .book-pages-spread {
-    border-radius: 14px;
-    grid-template-columns: 1fr 1fr;
+  .book-cover-leather {
+    padding: 10px 10px 10px 14px;
   }
-  .paper-back-base {
-    border-radius: 14px;
+
+  .cover-spine-edge {
+    width: 10px;
   }
-  .book-right-page {
-    padding: 10px 8px 10px 10px;
-    gap: 6px;
+
+  .cover-stitched-frame {
+    padding: 14px 8px 12px 10px;
   }
-  .parcel-stamp-badge {
-    font-size: 0.68rem;
-    padding: 4px 12px;
+
+  .cover-top-badge {
+    font-size: 0.62rem;
+    padding: 3px 10px;
   }
-  .paper-tap-badge {
-    font-size: 0.68rem;
-    padding: 4px 14px;
+
+  .cover-main-heading {
+    font-size: 0.98rem;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    max-width: 130px;
   }
-  .cause-story-title {
-    font-size: clamp(0.68rem, 2.6vw, 0.80rem);
-    white-space: nowrap;
-    letter-spacing: 0.01em;
-    line-height: 1.15;
+
+  .cover-footer-prompt {
+    font-size: 0.64rem;
+    padding: 3px 9px;
+    gap: 4px;
   }
+
+  .book-page-half.right-page-half {
+    padding: 10px 8px 8px 13px;
+    gap: 5px;
+    justify-content: space-evenly;
+  }
+
   .cause-stat-highlight {
-    font-size: 0.66rem;
-    padding: 3px 5px;
-    line-height: 1.22;
-    border-left-width: 2.5px;
+    font-size: 0.67rem;
+    padding: 4px 6px;
+    line-height: 1.25;
+    border-left-width: 3px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 1px;
+    text-align: left;
   }
+
   .cause-stat-highlight strong {
     font-size: 0.74rem;
+    display: inline;
   }
+
   .cause-story-body {
-    font-size: 0.66rem;
-    line-height: 1.26;
+    font-size: 0.63rem;
+    line-height: 1.3;
     gap: 4px;
+    text-align: left;
+    color: #163B3F;
+  }
+
+  .book-interactive-tag {
+    font-size: 0.58rem;
+    padding: 2px 7px;
+    gap: 4px;
+    margin-top: 1px;
+  }
+
+  .tag-pulse-indicator {
+    width: 5px;
+    height: 5px;
+  }
+
+  .book-gutter-shadow {
+    width: 12px;
+  }
+
+  .book-spine-divider {
+    width: 12px;
   }
 }
 
