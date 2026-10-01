@@ -30,6 +30,14 @@ export default function HomePage() {
   const [isBookOpen, setIsBookOpen] = useState(false);
 
   useEffect(() => {
+    // Ensure viewport defaults strictly to the top on page load/refresh
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      if (window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    }
+
     // Book smoothly opens on its own shortly after initial load
     const t = setTimeout(() => {
       setIsBookOpen(true);

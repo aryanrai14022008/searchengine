@@ -660,8 +660,8 @@ body {
 .book-spread-base {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  right: 0;
+  width: calc(var(--book-w) * 2);
   height: var(--book-h);
   border-radius: var(--book-rad);
   overflow: hidden;
@@ -669,7 +669,7 @@ body {
   grid-template-columns: 1fr 1fr;
   box-shadow: 0 16px 44px rgba(0, 0, 0, 0.65);
   background: transparent;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.45s ease 0.1s;
 }
 
 .story-book-shell.book-closed .book-spread-base {
@@ -776,27 +776,22 @@ body {
 .book-cover-leaf {
   position: absolute;
   top: 0;
+  right: 0;
+  width: var(--book-w);
   height: var(--book-h);
+  transform-origin: left center;
   transform-style: preserve-3d;
   transition: transform 1.15s cubic-bezier(0.25, 1, 0.35, 1),
-              left 1.15s cubic-bezier(0.25, 1, 0.35, 1),
-              width 1.15s cubic-bezier(0.25, 1, 0.35, 1),
               box-shadow 1.15s ease;
   z-index: 20;
 }
 
 .story-book-shell.book-closed .book-cover-leaf {
-  left: 0;
-  width: 100%;
-  transform-origin: left center;
   transform: rotateY(0deg);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
 }
 
 .story-book-shell.book-open .book-cover-leaf {
-  left: 50%;
-  width: 50%;
-  transform-origin: left center;
   transform: rotateY(-180deg);
   box-shadow: -10px 16px 36px rgba(0, 0, 0, 0.45);
 }
