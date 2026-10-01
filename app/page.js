@@ -26,8 +26,17 @@ export default function HomePage() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
   
-  // Interactive 3D Storybook Open/Close State (Starts closed so user can tap to open)
+  // 3D Storybook Open State (Auto-opens on load + toggleable)
   const [isBookOpen, setIsBookOpen] = useState(false);
+
+  useEffect(() => {
+    // Book smoothly opens on its own shortly after initial load
+    const t = setTimeout(() => {
+      setIsBookOpen(true);
+    }, 850);
+
+    return () => clearTimeout(t);
+  }, []);
 
   const toggleBook = (e) => {
     if (e) e.stopPropagation();
@@ -261,12 +270,12 @@ export default function HomePage() {
                     </div>
 
                     <div className="cover-heading-wrap">
-                      <h2 className="cover-main-heading">EVERY BAR GIVES BACK</h2>
-                    </div>
-
-                    <div className="cover-footer-prompt">
-                      <span className="cover-prompt-dot" />
-                      <span>Tap to open story</span>
+                      <h2 className="cover-main-heading vertical-cover-heading">
+                        <span className="vert-word vert-word-1">EVERY</span>
+                        <span className="vert-word vert-word-2">BAR</span>
+                        <span className="vert-word vert-word-3">GIVES</span>
+                        <span className="vert-word vert-word-4">BACK</span>
+                      </h2>
                     </div>
                   </div>
                 </div>
@@ -306,11 +315,6 @@ export default function HomePage() {
                         With every bar you enjoy, you personally open that door.
                         You bring education to their life and hope to their heart.
                       </p>
-                    </div>
-
-                    <div className="book-interactive-tag">
-                      <span className="tag-pulse-indicator" />
-                      <span>Tap to close</span>
                     </div>
 
                     <div className="book-gutter-shadow right-gutter" />
