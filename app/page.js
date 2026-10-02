@@ -38,10 +38,10 @@ export default function HomePage() {
       }
     }
 
-    // Book smoothly opens on its own shortly after initial load
+    // Book smoothly opens on its own after allowing user time to read the cover
     const t = setTimeout(() => {
       setIsBookOpen(true);
-    }, 850);
+    }, 2400);
 
     return () => clearTimeout(t);
   }, []);
