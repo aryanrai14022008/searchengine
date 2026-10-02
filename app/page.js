@@ -449,13 +449,6 @@ export default function HomePage() {
               Snack for you.<br />
               <span className="hero-highlight">Hope for a child.</span>
             </h1>
-
-            <div className="hero-cta-group">
-              <button type="button" onClick={handleOpenWaitlistModal} className="btn-hero-primary">
-                <span>Join the waitlist</span>
-                <ArrowRight size={16} />
-              </button>
-            </div>
           </div>
 
           {/* Interactive 3D Story Book */}
