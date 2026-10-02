@@ -1203,6 +1203,89 @@ body {
   margin: 0 auto;
 }
 
+/* Pop-up Waitlist Modal for Phones & Pop-up Mode */
+.quiz-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: rgba(10, 5, 3, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.quiz-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(226, 125, 96, 0.35);
+  animation: modalSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  -webkit-overflow-scrolling: touch;
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.quiz-modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 100;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-modal-close-btn:hover {
+  background: rgba(226, 125, 96, 0.8);
+  border-color: #E27D60;
+  transform: scale(1.08);
+}
+
+.modal-card-theme {
+  border-radius: 20px;
+  border: 1.5px solid rgba(226, 125, 96, 0.3);
+}
+
+/* Hide static embedded quiz form on mobile phones so it only pops up on click */
+@media (max-width: 768px) {
+  .desktop-only-quiz {
+    display: none !important;
+  }
+  
+  .quiz-section {
+    padding-bottom: 24px;
+  }
+}
+
 .terracotta-card {
   background: linear-gradient(165deg, #24150E 0%, #170D08 100%);
   border-radius: 18px;

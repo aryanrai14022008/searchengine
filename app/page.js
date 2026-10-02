@@ -12,7 +12,8 @@ import {
   User,
   Mail,
   Phone,
-  Sparkles
+  Sparkles,
+  X
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -29,6 +30,9 @@ export default function HomePage() {
   // 3D Storybook Open State (Starts closed; opens on tap)
   const [isBookOpen, setIsBookOpen] = useState(false);
 
+  // Pop-up Quiz Modal State for mobile / instant overlay
+  const [isQuizModalOpen, setIsQuizModalOpen] = useState(false);
+
   useEffect(() => {
     // Ensure viewport defaults strictly to the top on page load/refresh
     if (typeof window !== 'undefined') {
@@ -43,6 +47,12 @@ export default function HomePage() {
     if (e) e.stopPropagation();
     playSound('pop');
     setIsBookOpen(prev => !prev);
+  };
+
+  const handleOpenWaitlistModal = (e) => {
+    if (e) e.preventDefault();
+    playSound('pop');
+    setIsQuizModalOpen(true);
   };
 
   // Web Audio FX Engine
@@ -140,6 +150,170 @@ export default function HomePage() {
     setComputedArchetype(null);
   };
 
+  const renderQuizCard = (isModal = false) => (
+    <div className={`terracotta-card ${isModal ? 'modal-card-theme' : ''}`}>
+      {/* Card Header & Only Percentage Completion */}
+      <div className="card-header">
+        <div className="card-header-top">
+          {currentStep > 0 && currentStep <= QUIZ_QUESTIONS.length ? (
+            <button
+              type="button"
+              onClick={() => setCurrentStep(prev => prev - 1)}
+              className="back-btn"
+            >
+              <ArrowLeft size={14} />
+              <span>Back</span>
+            </button>
+          ) : (
+            <div style={{ width: '1px' }}></div>
+          )}
+
+          <div className="percentage-completion-label">
+            {currentStep <= QUIZ_QUESTIONS.length ? `${Math.round((currentStep / QUIZ_QUESTIONS.length) * 100)}% Complete` : '100% Complete'}
+          </div>
+        </div>
+
+        {/* Progress Track */}
+        <div className="progress-track">
+          <div
+            className="progress-fill"
+            style={{ width: `${Math.min(100, Math.round((currentStep / QUIZ_QUESTIONS.length) * 100))}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Steps Viewport */}
+      <div className="steps-viewport">
+        {/* STEPS 0 to 6: Clean MCQ Questions (Questions 1 to 7) */}
+        {currentStep >= 0 && currentStep < QUIZ_QUESTIONS.length && (
+          <div key={QUIZ_QUESTIONS[currentStep].id}>
+            <h2 className="step-question">{QUIZ_QUESTIONS[currentStep].question}</h2>
+
+            <div className="options-container">
+              {QUIZ_QUESTIONS[currentStep].options.map((opt, idx) => {
+                const isSelected = answers[QUIZ_QUESTIONS[currentStep].id] === opt.val;
+                return (
+                  <button
+                    key={`${QUIZ_QUESTIONS[currentStep].id}_${opt.val}`}
+                    type="button"
+                    className={`option-pill ${isSelected ? 'selected' : ''}`}
+                    onClick={(e) => {
+                      e.currentTarget.blur();
+                      handleSelectOption(QUIZ_QUESTIONS[currentStep].id, opt.val);
+                    }}
+                  >
+                    <span className="opt-num">{idx + 1}</span>
+                    <span>{opt.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Final Step: Contact Details (Question 8: Secure Your Founding Spot) */}
+        {currentStep === QUIZ_QUESTIONS.length && (
+          <div>
+            <h2 className="step-question" style={{ marginBottom: '18px' }}>
+              Secure Your Founding Spot
+            </h2>
+
+            <form onSubmit={handleContactSubmit} className="waitlist-card-form">
+              <div className="form-row">
+                <label className="field-label">Full Name *</label>
+                <div className="input-container">
+                  <User size={16} className="input-icon" />
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Aryan Rai"
+                    className="input-field"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <label className="field-label">Email Address *</label>
+                <div className="input-container">
+                  <Mail size={16} className="input-icon" />
+                  <input
+                    type="email"
+                    required
+                    placeholder="e.g. aryan@example.com"
+                    className="input-field"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <label className="field-label">Mobile Number *</label>
+                <div className="input-container">
+                  <Phone size={16} className="input-icon" />
+                  <input
+                    type="tel"
+                    required
+                    placeholder="e.g. 9876543210"
+                    className="input-field"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <button type="submit" disabled={isSubmitting} className="submit-waitlist-btn">
+                <span>{isSubmitting ? 'Joining...' : 'Join the Movement'}</span>
+                <ArrowRight size={16} />
+              </button>
+            </form>
+          </div>
+        )}
+
+        {/* Clean Thank You Screen */}
+        {currentStep === QUIZ_QUESTIONS.length + 1 && (
+          <div style={{ textAlign: 'center', padding: '12px 6px' }}>
+            <div style={{
+              width: '60px',
+              height: '60px',
+              borderRadius: '50%',
+              background: 'rgba(46, 204, 113, 0.16)',
+              border: '2px solid #2ECC71',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 14px'
+            }}>
+              <CheckCircle size={32} color="#2ECC71" />
+            </div>
+
+            <h2 className="step-question" style={{ fontSize: 'clamp(1.4rem, 4.5vw, 1.9rem)', margin: '0 0 10px', color: '#FFF' }}>
+              Thank You for Attempting the Quiz{formData.name ? `, ${formData.name.split(' ')[0]}` : ''}!
+            </h2>
+
+            <p style={{ fontSize: '0.95rem', color: 'rgba(255, 255, 255, 0.9)', maxWidth: '440px', margin: '0 auto 20px', lineHeight: 1.55 }}>
+              Your response has been successfully recorded. 1 nutritious meal has been reserved for a child in need on your behalf.
+            </p>
+
+            <div>
+              <button
+                type="button"
+                onClick={handleRetake}
+                className="btn-hero-primary"
+                style={{ margin: '0 auto', display: 'inline-flex' }}
+              >
+                <span>Retake Quiz</span>
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <div>
       {/* Header Bar - Clean Minimalist Brand Header */}
@@ -148,10 +322,10 @@ export default function HomePage() {
           <a href="#" className="brand-logo">
             <img src="/humblbar_logo.png?v=7" alt="HumblBar Logo" className="brand-logo-img" />
           </a>
-          <a href="#quiz" className="nav-waitlist-btn">
+          <button type="button" onClick={handleOpenWaitlistModal} className="nav-waitlist-btn">
             <span>Join the waitlist</span>
             <ArrowRight size={14} />
-          </a>
+          </button>
         </div>
       </header>
 
@@ -239,10 +413,10 @@ export default function HomePage() {
             </h1>
 
             <div className="hero-cta-group">
-              <a href="#quiz" className="btn-hero-primary">
+              <button type="button" onClick={handleOpenWaitlistModal} className="btn-hero-primary">
                 <span>Join the waitlist</span>
                 <ArrowRight size={16} />
-              </a>
+              </button>
             </div>
           </div>
 
@@ -337,6 +511,7 @@ export default function HomePage() {
       </section>
 
       {/* Main Interactive Archetype Quiz Flow (8 Questions) */}
+      {/* Main Interactive Archetype Quiz Flow */}
       <section id="quiz" className="quiz-section">
         <div className="quiz-container">
           
@@ -347,193 +522,47 @@ export default function HomePage() {
             </h2>
 
             <div className="movement-cta-wrap">
-              <a
-                href="#quiz-card"
+              <button
+                type="button"
+                onClick={handleOpenWaitlistModal}
                 className="btn-hero-primary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.querySelector('.terracotta-card-container');
-                  if (el) {
-                    el.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
               >
                 <span>Join the waitlist</span>
                 <ArrowRight size={16} />
-              </a>
+              </button>
             </div>
           </div>
 
-          <div className="terracotta-card-container">
-            <div className="terracotta-card">
-              
-              {/* Card Header & Only Percentage Completion */}
-              <div className="card-header">
-                <div className="card-header-top">
-                  {currentStep > 0 && currentStep <= QUIZ_QUESTIONS.length ? (
-                    <button
-                      type="button"
-                      onClick={() => setCurrentStep(prev => prev - 1)}
-                      className="back-btn"
-                    >
-                      <ArrowLeft size={14} />
-                      <span>Back</span>
-                    </button>
-                  ) : (
-                    <div style={{ width: '1px' }}></div>
-                  )}
-
-                  <div className="percentage-completion-label">
-                    {currentStep <= QUIZ_QUESTIONS.length ? `${Math.round((currentStep / QUIZ_QUESTIONS.length) * 100)}% Complete` : '100% Complete'}
-                  </div>
-                </div>
-
-                {/* Progress Track */}
-                <div className="progress-track">
-                  <div
-                    className="progress-fill"
-                    style={{ width: `${Math.min(100, Math.round((currentStep / QUIZ_QUESTIONS.length) * 100))}%` }}
-                  />
-                </div>
-              </div>
-
-              {/* Steps Viewport */}
-              <div className="steps-viewport">
-                
-                {/* STEPS 0 to 6: Clean MCQ Questions (Questions 1 to 7) */}
-                {currentStep >= 0 && currentStep < QUIZ_QUESTIONS.length && (
-                  <div key={QUIZ_QUESTIONS[currentStep].id}>
-                    <h2 className="step-question">{QUIZ_QUESTIONS[currentStep].question}</h2>
-
-                    <div className="options-container">
-                      {QUIZ_QUESTIONS[currentStep].options.map((opt, idx) => {
-                        const isSelected = answers[QUIZ_QUESTIONS[currentStep].id] === opt.val;
-                        return (
-                          <button
-                            key={`${QUIZ_QUESTIONS[currentStep].id}_${opt.val}`}
-                            type="button"
-                            className={`option-pill ${isSelected ? 'selected' : ''}`}
-                            onClick={(e) => {
-                              e.currentTarget.blur();
-                              handleSelectOption(QUIZ_QUESTIONS[currentStep].id, opt.val);
-                            }}
-                          >
-                            <span className="opt-num">{idx + 1}</span>
-                            <span>{opt.label}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {/* Final Step: Contact Details (Question 8: Secure Your Founding Spot) */}
-                {currentStep === QUIZ_QUESTIONS.length && (
-                  <div>
-                    <h2 className="step-question" style={{ marginBottom: '18px' }}>
-                      Secure Your Founding Spot
-                    </h2>
-
-                    <form onSubmit={handleContactSubmit} className="waitlist-card-form">
-                      <div className="form-row">
-                        <label className="field-label">Full Name *</label>
-                        <div className="input-container">
-                          <User size={16} className="input-icon" />
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. Aryan Rai"
-                            className="input-field"
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="form-row">
-                        <label className="field-label">Email Address *</label>
-                        <div className="input-container">
-                          <Mail size={16} className="input-icon" />
-                          <input
-                            type="email"
-                            required
-                            placeholder="e.g. aryan@example.com"
-                            className="input-field"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="form-row">
-                        <label className="field-label">Mobile Number *</label>
-                        <div className="input-container">
-                          <Phone size={16} className="input-icon" />
-                          <input
-                            type="tel"
-                            required
-                            placeholder="e.g. 9876543210"
-                            className="input-field"
-                            value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          />
-                        </div>
-                      </div>
-
-                      <button type="submit" disabled={isSubmitting} className="submit-waitlist-btn">
-                        <span>{isSubmitting ? 'Joining...' : 'Join the Movement'}</span>
-                        <ArrowRight size={16} />
-                      </button>
-                    </form>
-                  </div>
-                )}
-
-                {/* Clean Thank You Screen */}
-                {currentStep === QUIZ_QUESTIONS.length + 1 && (
-                  <div style={{ textAlign: 'center', padding: '12px 6px' }}>
-                    <div style={{
-                      width: '60px',
-                      height: '60px',
-                      borderRadius: '50%',
-                      background: 'rgba(46, 204, 113, 0.16)',
-                      border: '2px solid #2ECC71',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      margin: '0 auto 14px'
-                    }}>
-                      <CheckCircle size={32} color="#2ECC71" />
-                    </div>
-
-                    <h2 className="step-question" style={{ fontSize: 'clamp(1.4rem, 4.5vw, 1.9rem)', margin: '0 0 10px', color: '#FFF' }}>
-                      Thank You for Attempting the Quiz{formData.name ? `, ${formData.name.split(' ')[0]}` : ''}!
-                    </h2>
-
-                    <p style={{ fontSize: '0.95rem', color: 'rgba(255, 255, 255, 0.9)', maxWidth: '440px', margin: '0 auto 20px', lineHeight: 1.55 }}>
-                      Your response has been successfully recorded. 1 nutritious meal has been reserved for a child in need on your behalf.
-                    </p>
-
-                    <div>
-                      <button
-                        type="button"
-                        onClick={handleRetake}
-                        className="btn-hero-primary"
-                        style={{ margin: '0 auto', display: 'inline-flex' }}
-                      >
-                        <span>Retake Quiz</span>
-                        <ArrowRight size={16} />
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-              </div>
-
-            </div>
-
+          {/* Desktop inline flow (Hidden on mobile phones) */}
+          <div className="terracotta-card-container desktop-only-quiz">
+            {renderQuizCard(false)}
           </div>
+
         </div>
       </section>
+
+      {/* Pop-up Quiz Modal for Phones & Instant Access */}
+      {isQuizModalOpen && (
+        <div
+          className="quiz-modal-backdrop"
+          onClick={() => setIsQuizModalOpen(false)}
+        >
+          <div
+            className="quiz-modal-dialog"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="quiz-modal-close-btn"
+              onClick={() => setIsQuizModalOpen(false)}
+              aria-label="Close modal"
+            >
+              <X size={20} />
+            </button>
+            {renderQuizCard(true)}
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="site-footer">
