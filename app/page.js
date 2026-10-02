@@ -315,7 +315,6 @@ export default function HomePage() {
                       </div>
 
                       <div className="cover-tap-prompt">
-                        <span className="tap-pulse-ring" />
                         <span className="tap-prompt-text">Tap to open</span>
                         <Sparkles size={13} className="tap-sparkle-icon" />
                       </div>
