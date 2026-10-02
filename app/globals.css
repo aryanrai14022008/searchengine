@@ -1284,17 +1284,6 @@ body {
   border: 1.5px solid rgba(226, 125, 96, 0.3);
 }
 
-/* Hide static embedded quiz form on mobile phones so it only pops up on click */
-@media (max-width: 768px) {
-  .desktop-only-quiz {
-    display: none !important;
-  }
-  
-  .quiz-section {
-    padding-bottom: 24px;
-  }
-}
-
 .terracotta-card {
   background: linear-gradient(165deg, #24150E 0%, #170D08 100%);
   border-radius: 18px;

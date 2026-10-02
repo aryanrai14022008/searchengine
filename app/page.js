@@ -553,7 +553,7 @@ export default function HomePage() {
       <section id="quiz" className="quiz-section">
         <div className="quiz-container">
           
-          <div className="section-title-center">
+          <div className="section-title-center" style={{ marginBottom: 0 }}>
             <h2 className="quiz-movement-heading">
               <span className="quiz-movement-line1">This is More Than a Snack.</span>
               <span className="quiz-movement-line2">It’s a Movement.</span>
@@ -569,11 +569,6 @@ export default function HomePage() {
                 <ArrowRight size={16} />
               </button>
             </div>
-          </div>
-
-          {/* Desktop inline flow (Hidden on mobile phones) */}
-          <div className="terracotta-card-container desktop-only-quiz">
-            {renderQuizCard(false)}
           </div>
 
         </div>
