@@ -973,43 +973,6 @@ body {
   50% { transform: rotate(20deg) scale(1.15); opacity: 1; color: #FFB088; }
 }
 
-/* Inside Spread Tap to Close */
-.spread-tap-close {
-  align-self: flex-start;
-  margin-top: 4px;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 4px 12px;
-  background: rgba(23, 72, 77, 0.09);
-  border: 1px solid rgba(23, 72, 77, 0.22);
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.spread-tap-close:hover {
-  background: rgba(23, 72, 77, 0.16);
-  border-color: rgba(23, 72, 77, 0.4);
-  transform: translateY(-1px);
-}
-
-.close-pulse-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #C85A32;
-  box-shadow: 0 0 6px rgba(200, 90, 50, 0.8);
-}
-
-.close-prompt-text {
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #154246;
-  letter-spacing: 0.03em;
-}
-
 .cause-stat-highlight {
   font-family: var(--font-body);
   font-size: 0.92rem;
@@ -1134,21 +1097,6 @@ body {
   .tap-prompt-text {
     font-size: 0.64rem;
   }
-
-  .spread-tap-close {
-    margin-top: 2px;
-    padding: 3px 9px;
-    gap: 5px;
-  }
-
-  .close-pulse-dot {
-    width: 5px;
-    height: 5px;
-  }
-
-  .close-prompt-text {
-    font-size: 0.60rem;
-  }
 }
 
 /* Terracotta Card & Quiz Section - Fluid on Mobile */
@@ -1178,6 +1126,20 @@ body {
 @media (max-width: 640px) {
   .section-title-center {
     margin: 0 auto 14px;
+  }
+}
+
+.movement-cta-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 640px) {
+  .movement-cta-wrap {
+    margin-top: 14px;
   }
 }
 

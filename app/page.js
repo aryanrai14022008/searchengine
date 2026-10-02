@@ -284,11 +284,6 @@ export default function HomePage() {
                     </p>
                   </div>
 
-                  <div className="spread-tap-close">
-                    <span className="close-pulse-dot" />
-                    <span className="close-prompt-text">Tap to close</span>
-                  </div>
-
                   <div className="book-gutter-shadow right-gutter" />
                 </div>
 
@@ -350,6 +345,23 @@ export default function HomePage() {
               <span className="quiz-movement-line1">This is More Than a Snack.</span>
               <span className="quiz-movement-line2">It’s a Movement.</span>
             </h2>
+
+            <div className="movement-cta-wrap">
+              <a
+                href="#quiz-card"
+                className="btn-hero-primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.querySelector('.terracotta-card-container');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                <span>Join the waitlist</span>
+                <ArrowRight size={16} />
+              </a>
+            </div>
           </div>
 
           <div className="terracotta-card-container">
