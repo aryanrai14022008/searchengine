@@ -1246,28 +1246,37 @@ body {
   }
 }
 
-.quiz-modal-close-btn {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 100;
-  width: 36px;
-  height: 36px;
+.card-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-close-pill-btn {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  padding: 0;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.quiz-modal-close-btn:hover {
-  background: rgba(226, 125, 96, 0.8);
+.modal-close-pill-btn:hover {
+  background: rgba(226, 125, 96, 0.85);
   border-color: #E27D60;
+  color: #FFFFFF;
   transform: scale(1.08);
+}
+
+.modal-close-pill-btn:active {
+  transform: scale(0.94);
 }
 
 .modal-card-theme {

@@ -43,6 +43,22 @@ export default function HomePage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (isQuizModalOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') setIsQuizModalOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isQuizModalOpen]);
+
   const toggleBook = (e) => {
     if (e) e.stopPropagation();
     playSound('pop');
@@ -168,8 +184,20 @@ export default function HomePage() {
             <div style={{ width: '1px' }}></div>
           )}
 
-          <div className="percentage-completion-label">
-            {currentStep <= QUIZ_QUESTIONS.length ? `${Math.round((currentStep / QUIZ_QUESTIONS.length) * 100)}% Complete` : '100% Complete'}
+          <div className="card-header-right">
+            <div className="percentage-completion-label">
+              {currentStep <= QUIZ_QUESTIONS.length ? `${Math.round((currentStep / QUIZ_QUESTIONS.length) * 100)}% Complete` : '100% Complete'}
+            </div>
+            {isModal && (
+              <button
+                type="button"
+                className="modal-close-pill-btn"
+                onClick={() => setIsQuizModalOpen(false)}
+                aria-label="Close modal"
+              >
+                <X size={16} />
+              </button>
+            )}
           </div>
         </div>
 
@@ -297,16 +325,26 @@ export default function HomePage() {
               Your response has been successfully recorded. 1 nutritious meal has been reserved for a child in need on your behalf.
             </p>
 
-            <div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
               <button
                 type="button"
                 onClick={handleRetake}
                 className="btn-hero-primary"
-                style={{ margin: '0 auto', display: 'inline-flex' }}
+                style={{ margin: 0, display: 'inline-flex' }}
               >
                 <span>Retake Quiz</span>
                 <ArrowRight size={16} />
               </button>
+              {isModal && (
+                <button
+                  type="button"
+                  onClick={() => setIsQuizModalOpen(false)}
+                  className="btn-hero-secondary"
+                  style={{ margin: 0, display: 'inline-flex', padding: '12px 22px' }}
+                >
+                  <span>Close Window</span>
+                </button>
+              )}
             </div>
           </div>
         )}
@@ -551,14 +589,6 @@ export default function HomePage() {
             className="quiz-modal-dialog"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              type="button"
-              className="quiz-modal-close-btn"
-              onClick={() => setIsQuizModalOpen(false)}
-              aria-label="Close modal"
-            >
-              <X size={20} />
-            </button>
             {renderQuizCard(true)}
           </div>
         </div>
