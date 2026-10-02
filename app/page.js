@@ -26,7 +26,7 @@ export default function HomePage() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [isBarOpened, setIsBarOpened] = useState(false);
   
-  // 3D Storybook Open State (Auto-opens on load + toggleable)
+  // 3D Storybook Open State (Starts closed; opens on tap)
   const [isBookOpen, setIsBookOpen] = useState(false);
 
   useEffect(() => {
@@ -37,13 +37,6 @@ export default function HomePage() {
         window.history.replaceState(null, '', window.location.pathname);
       }
     }
-
-    // Book smoothly opens on its own after allowing user time to read the cover
-    const t = setTimeout(() => {
-      setIsBookOpen(true);
-    }, 2400);
-
-    return () => clearTimeout(t);
   }, []);
 
   const toggleBook = (e) => {
@@ -291,6 +284,11 @@ export default function HomePage() {
                     </p>
                   </div>
 
+                  <div className="spread-tap-close">
+                    <span className="close-pulse-dot" />
+                    <span className="close-prompt-text">Tap to close</span>
+                  </div>
+
                   <div className="book-gutter-shadow right-gutter" />
                 </div>
 
@@ -314,6 +312,12 @@ export default function HomePage() {
                           <span className="vert-word vert-word-3">GIVES</span>
                           <span className="vert-word vert-word-4">BACK</span>
                         </h2>
+                      </div>
+
+                      <div className="cover-tap-prompt">
+                        <span className="tap-pulse-ring" />
+                        <span className="tap-prompt-text">Tap to open</span>
+                        <Sparkles size={13} className="tap-sparkle-icon" />
                       </div>
                     </div>
                   </div>

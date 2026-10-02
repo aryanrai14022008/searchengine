@@ -920,6 +920,116 @@ body {
   text-align: center;
 }
 
+/* Sleek Interactive Tap Prompts */
+.cover-tap-prompt {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(226, 125, 96, 0.16);
+  border: 1.5px solid rgba(226, 125, 96, 0.55);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 16px rgba(226, 125, 96, 0.2);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: floatTapPrompt 2.5s ease-in-out infinite;
+}
+
+.cover-tap-prompt:hover {
+  background: rgba(226, 125, 96, 0.26);
+  border-color: rgba(226, 125, 96, 0.85);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 24px rgba(226, 125, 96, 0.45);
+}
+
+@keyframes floatTapPrompt {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.tap-pulse-ring {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2ECC71;
+  box-shadow: 0 0 8px #2ECC71, 0 0 16px rgba(46, 204, 113, 0.6);
+  animation: pulseGreen 1.8s infinite;
+}
+
+@keyframes pulseGreen {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.5;
+  }
+}
+
+.tap-prompt-text {
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #FFF0E0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tap-sparkle-icon {
+  color: #E27D60;
+  animation: sparkleTwinkle 2s infinite ease-in-out;
+}
+
+@keyframes sparkleTwinkle {
+  0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.85; }
+  50% { transform: rotate(20deg) scale(1.15); opacity: 1; color: #FFB088; }
+}
+
+/* Inside Spread Tap to Close */
+.spread-tap-close {
+  align-self: flex-start;
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  background: rgba(23, 72, 77, 0.09);
+  border: 1px solid rgba(23, 72, 77, 0.22);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.spread-tap-close:hover {
+  background: rgba(23, 72, 77, 0.16);
+  border-color: rgba(23, 72, 77, 0.4);
+  transform: translateY(-1px);
+}
+
+.close-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #C85A32;
+  box-shadow: 0 0 6px rgba(200, 90, 50, 0.8);
+}
+
+.close-prompt-text {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #154246;
+  letter-spacing: 0.03em;
+}
+
 .cause-stat-highlight {
   font-family: var(--font-body);
   font-size: 0.92rem;
@@ -1033,6 +1143,36 @@ body {
 
   .book-spine-divider {
     width: 12px;
+  }
+
+  .cover-tap-prompt {
+    margin-top: 6px;
+    padding: 4px 12px;
+    gap: 5px;
+  }
+
+  .tap-pulse-ring {
+    width: 6px;
+    height: 6px;
+  }
+
+  .tap-prompt-text {
+    font-size: 0.64rem;
+  }
+
+  .spread-tap-close {
+    margin-top: 2px;
+    padding: 3px 9px;
+    gap: 5px;
+  }
+
+  .close-pulse-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .close-prompt-text {
+    font-size: 0.60rem;
   }
 }
 
